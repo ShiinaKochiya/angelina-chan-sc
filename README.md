@@ -7,6 +7,10 @@ Installation (for testing):
 2. change the bot token in `./src/data/config.json`.
 3. `node ./src/index.js`
 
+Configuration (`./src/data/config.json`)
+- 'token': bot token
+- 'prefix': bot prefix
+
 For more info on creating a bot and obtaining a bot token, go here: https://github.com/discord-apps/bot-tutorial
 
 Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot lol
