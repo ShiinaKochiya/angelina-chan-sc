@@ -5,7 +5,7 @@ An Arknights operator stats and fun Discord bot by Sakura Kaslana, for "The W ku
 Installation (for testing):
 1. Clone this repo
 2. change the bot token in `./src/data/config.json`.
-3. `node ./src/index.js`
+3. run `npm start`
 
 Configuration (`./src/data/config.json`)
 - 'token': bot token
