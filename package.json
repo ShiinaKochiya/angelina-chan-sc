@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Build complete.\" && exit 0"
+    "start": "node ./src/index.js"
   },
   "author": "Sakura Kaslana",
   "license": "MIT",
