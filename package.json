@@ -1,7 +1,7 @@
 {
-  "name": "mudrock-san",
-  "version": "1.0.0",
-  "description": "",
+  "name": "angelina-chan",
+  "version": "0.0.1-alpha.1",
+  "description": "An Arknights operator stats and fun Discord bot",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Build completed. Dummy test script\" && exit 0"
