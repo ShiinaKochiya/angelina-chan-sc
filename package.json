@@ -1,15 +1,30 @@
 {
-  "name": "@sakurakaslana/angelina-chan",
-  "version": "0.0.1-alpha.1",
+  "name": "angelina-chan",
+  "version": "0.0.1-alpha.2",
   "description": "An Arknights operator stats and fun Discord bot",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Build completed. Dummy test script\" && exit 0"
+    "test": "echo \"Build complete.\" && exit 0"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Sakura Kaslana",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^13.4.0-dev.1636502714.b256ae1",
     "moment": "^2.29.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SakuraKaslana/angelina-chan-sc.git"
+  },
+  "keywords": [
+    "discord",
+    "bots",
+    "arknights"
+  ],
+  "bugs": {
+    "url": "https://github.com/SakuraKaslana/angelina-chan-sc/issues"
+  },
+  "homepage": "https://github.com/SakuraKaslana/angelina-chan-sc#readme"
 }
+
