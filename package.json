@@ -4,7 +4,7 @@
   "description": "An Arknights operator stats and fun Discord bot",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Build complete.\" && exit 0"
+    "test": "echo \"Build complete.\" && exit 0",
     "start": "node ./src/index.js"
   },
   "author": "Sakura Kaslana",
