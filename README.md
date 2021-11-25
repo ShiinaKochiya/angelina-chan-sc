@@ -1,9 +1,12 @@
-Also the bot is for "The W kult", it is not ready to deploy to other server, yet
+# Angelina-chan
 
-Thank you Giabao06 for the 24/7 hosting; Hyngwarus, Freelance and other for testing the bot lol
+An Arknights operator stats and fun Discord bot by Sakura Kaslana, for "The W kult". Not ready for deployment on other servers yet.
 
-Everything is written in JavaScript
+Installation (for testing):
+1. Clone this repo
+2. change the bot token in `./src/data/config.json`.
+3. `node ./src/index.js`
 
-Last note: remember to change the bot token in src/data/config.json
+For more info on creating a bot and obtaining a bot token, go here: https://github.com/discord-apps/bot-tutorial
 
-Bot start up command: node src/index.js
+Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot lol
