@@ -5,6 +5,7 @@ module.exports = new Command({
     description: "Lets see how much likely you can marry the other person",
 
     async run(message, args, client) {
+        if (message.author.bot) return;
         
         var numba = Math.floor(Math.random() * 100) + 1;
     if (args.slice(2).join(" ")==="") {

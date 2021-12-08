@@ -5,6 +5,7 @@ module.exports = new Command({
     description: "countdown le fucking time",
 
     async run(message, args, client) {
+        if (message.author.bot) return;
         var c = args.slice(1).join(" "); 
         var a = 0
         console.log(message.author.tag,"used a!countdown", c)
