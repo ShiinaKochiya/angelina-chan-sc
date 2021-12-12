@@ -377,12 +377,13 @@ module.exports = new Command({
                 } // 6 stars
                 else {var rate = Math.floor(Math.random() * 100)+1;
                     if (rate > 50){
-                        var rateup = Math.floor(Math.random() * 2)+1;
-                        switch (rateup){
-                            case rateup = 1:
-                                var result = 27;
-                            case rateup =2:
-                                var result = 19;                                                   
+                        var rateup = Math.floor(Math.random() * 100)+1;
+                        if (rateup < 50) {
+                            var result = 27
+                            console.log(`Get a rate up surtr`)
+                        } else {
+                            var result = 19
+                            console.log(`get a rateup Ceobe`)
                         }
                     } else {var result = Math.floor(Math.random() * 34)+1;}
                     switch (result){

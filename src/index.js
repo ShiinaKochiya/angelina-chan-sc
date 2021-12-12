@@ -25,7 +25,9 @@ fs.readdirSync("./src/cmd")
 
 client.on("ready", () => {
 	console.log("Angie is on")
-    client.user.setActivity(`games with Sakura`)
+	client.user.setStatus('idle');
+    client.user.setActivity({type: `WATCHING`, name:`film with Sakura`})
+	
 });
 
 client.on("messageCreate", message => {
