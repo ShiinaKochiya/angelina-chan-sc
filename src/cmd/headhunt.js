@@ -195,18 +195,16 @@ module.exports = new Command({
                 else if (numba < 98){
                     var rate = Math.floor(Math.random() * 100)+1;
                     if (rate > 50){
-                        var rateup = Math.floor(Math.random() * 3)+1;
-                        switch (rateup){
-                            case rateup = 1:
-                                var result = 2;
-                            case rateup = 2:
-                                var result = 18;
-                            case rateup = 3: 
-                                var result = 53;
-                                                   
-                        }
+                        var rateup = Math.floor(Math.random() * 100)+1;
+                        if (rateup < 33){
+                            var result = 29
+                            
+                        } else if (rateup < 66){
+                            var result = 36
+                        } else var result = 9
+                        
                     }
-                    else {var result = Math.floor(Math.random() * 55)+1;}
+                    else {var result = Math.floor(Math.random() * 56)+1;}
                     switch (result){
                         case result = 1: 
                             var newLength = op.push("[★★★★★]       Ptilopsis");
@@ -368,10 +366,10 @@ module.exports = new Command({
                             var newLength = op.push("[★★★★★]       Mr.Nothing");
                             break;
                         case result = 54:
-                            var newLength = op.push("[★★★★★]       Toddifons");
+                            var newLength = op.push("[★★★★★]       Akafuyu");
                             break;
                         default:
-                            var newLength = op.push("[★★★★★]       Akafuyu");
+                            var newLength = op.push("[★★★★★]       Kirara");
                             break;
                     }
                 } // 6 stars
@@ -379,11 +377,11 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 50) {
-                            var result = 27
-                            console.log(`Get a rate up surtr`)
+                            var result = 1
+                            
                         } else {
-                            var result = 19
-                            console.log(`get a rateup Ceobe`)
+                            var result = 16
+                            
                         }
                     } else {var result = Math.floor(Math.random() * 34)+1;}
                     switch (result){
@@ -486,8 +484,12 @@ module.exports = new Command({
                         case result = 33: 
                             var newLength = op.push("**[★★★★★★]   Passenger**");
                             break;
+                        case result = 34: 
+                            var newLength = op.push("**[★★★★★★]   Kal'tsit**");
+                            break;
                         default:
-                        var newLength = op.push("**[★★★★★★]   Kal'tsit**");
+                            var newLength = op.push("**[★★★★★★]   Carnelian**");
+                            break;
                     }}
         } else {
             message.reply('You have provided an invalid banner')
