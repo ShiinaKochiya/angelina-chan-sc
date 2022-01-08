@@ -10,10 +10,10 @@
   "author": "Sakura Kaslana",
   "license": "MIT",
   "dependencies": {
+    "cron": "^1.8.2",
     "discord.js": "^13.4.0-dev.1636502714.b256ae1",
     "moment": "^2.29.1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SakuraKaslana/angelina-chan-sc.git"
