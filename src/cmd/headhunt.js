@@ -5,7 +5,7 @@ module.exports = new Command({
     description: "headhunt time",
 
     async run(message, args, client) {
-        console.log(message.author.tag,"used a!gacha")
+        //console.log(message.author.tag,"used a!gacha")
         //var banner = args.slice(1).join(" ");
         var banner = "standard";
         var i = 1;
@@ -197,11 +197,11 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 33){
-                            var result = 29
+                            var result = 3
                             
                         } else if (rateup < 66){
-                            var result = 36
-                        } else var result = 9
+                            var result = 51
+                        } else var result = 40
                         
                     }
                     else {var result = Math.floor(Math.random() * 56)+1;}
@@ -377,10 +377,10 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 50) {
-                            var result = 1
+                            var result = 8
                             
                         } else {
-                            var result = 16
+                            var result = 15
                             
                         }
                     } else {var result = Math.floor(Math.random() * 34)+1;}
