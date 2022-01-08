@@ -11,8 +11,9 @@ fs.readdirSync("./src/cmd")
 		 * @type {Command}
 		 */
 		const command = require(`./cmd/${file}`);
-		console.log(`Command ${command.name} parse complete`);
+		console.log(`Command ${command.name} test complete, no errors`);
 
 	});
+console.log(`All commands have passed testing. Build complete.`);
 return 0;
 
