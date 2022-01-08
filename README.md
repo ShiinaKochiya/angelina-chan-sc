@@ -13,4 +13,4 @@ Configuration (`./src/data/config.json`)
 
 For more info on creating a bot and obtaining a bot token, go here: https://github.com/discord-apps/bot-tutorial
 
-Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot lol
+Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot; And some guys on StackOverflow for helping me make it work
