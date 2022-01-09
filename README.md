@@ -1,11 +1,13 @@
 # Angelina-chan
 
-An Arknights operator stats and fun Discord bot by Sakura Kaslana, for "The W kult". Not ready for deployment on other servers yet.
+An Arknights operator stats and fun Discord bot by Sakura Kaslana for "The W kult". Not ready for deployment on other servers yet.
+Requires Node v17 to run.
 
 Installation (for testing):
 1. Clone this repo
-2. Change the bot token in `./src/data/config.json`.
-3. Run `npm start`
+2. Run `npm install`
+3. Change the bot token in `./src/data/config.json`.
+4. Run `npm start`
 
 Configuration (`./src/data/config.json`)
 - 'token': bot token
