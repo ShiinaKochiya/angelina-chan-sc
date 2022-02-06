@@ -72,7 +72,7 @@ module.exports = new Command({
                 }
             } //4 stars
                 else if (numba < 90){
-                var result = Math.floor(Math.random() * 39)+1;
+                var result = Math.floor(Math.random() * 40)+1;
                 switch (result){
                     case result = 1:
                         var newLength = op.push("[★★★★]           Scavenger");
@@ -188,6 +188,9 @@ module.exports = new Command({
                     case result = 38:
                         var newLength = op.push("[★★★★]           Pinecone");
                         break;
+                    case result = 39:
+                        var newLength = op.push("[★★★★]           Indigo");
+                        break;
                     default:
                         var newLength = op.push("[★★★★]           Beanstalk");
                 }
@@ -197,11 +200,11 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 33){
-                            var result = 3
+                            var result = 11
                             
                         } else if (rateup < 66){
-                            var result = 51
-                        } else var result = 40
+                            var result = 22
+                        } else var result = 35
                         
                     }
                     else {var result = Math.floor(Math.random() * 56)+1;}
@@ -377,10 +380,10 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 50) {
-                            var result = 8
+                            var result = 33
                             
                         } else {
-                            var result = 15
+                            var result = 20
                             
                         }
                     } else {var result = Math.floor(Math.random() * 34)+1;}
@@ -486,6 +489,9 @@ module.exports = new Command({
                             break;
                         case result = 34: 
                             var newLength = op.push("**[★★★★★★]   Kal'tsit**");
+                            break;
+                        case result = 35: 
+                            var newLength = op.push("**[★★★★★★]   Pallas**");
                             break;
                         default:
                             var newLength = op.push("**[★★★★★★]   Carnelian**");
