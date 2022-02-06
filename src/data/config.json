@@ -1,5 +1,6 @@
 {
-    "token": "Bot token goes here",
-    "prefix": "a!"
+    "token": "Bot token here",
+    "prefix": "a!",
+    "adminRoles": "Admin role ID here"
     
 }

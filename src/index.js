@@ -1,7 +1,5 @@
 /** @format */
 
-console.clear();
-
 const { Permissions } = require('discord.js');
 
 const Client = require("./structures/Client.js");
