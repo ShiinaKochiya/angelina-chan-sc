@@ -14,6 +14,9 @@ Configuration (`./src/data/config.json`)
 Another configuration (`./src/cmd/lock.js` and `./src/cmd/unlock.js`)
 - Replace 'Enter ID' with server global role ID
 
+Another one (`./src/data/quiz.json`)
+- U gotta make ur own quiz, cos I don't wanna spoil the answers
+
 For more info on creating a bot and obtaining a bot token, go here: https://github.com/discord-apps/bot-tutorial
 
 Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot; And some guys on StackOverflow for helping me make it work
