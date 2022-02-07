@@ -17,8 +17,7 @@ Configuration (`./src/data/config.json`)
 - 'prefix': bot prefix
 - 'adminRoles': Admin role (implementation of an array of one planned)
 
-Another one (`./src/data/quiz.json`)
-- U gotta make ur own quiz, cos I don't wanna spoil the answers (instructions soon)
+Another one (`./src/data/quiz.json`): make your own quiz lol
 
 For more info on creating a bot and obtaining a bot token, go here: https://github.com/discord-apps/bot-tutorial
 
