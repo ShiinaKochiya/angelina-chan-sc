@@ -12,6 +12,7 @@ Requires Node v17 to run.
 4. Run `npm start`
 5. Invite the bot to your server: `https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID_HERE&permissions=8&scope=bot`
 
+
 ##Configuration
  
 ### `./src/data/config.json`
