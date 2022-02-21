@@ -1,4 +1,5 @@
 const Command = require("../structures/Command.js");
+const {MessageEmbed} = require('discord.js')
 
 module.exports = new Command({
     name: "headhunt",
@@ -72,7 +73,7 @@ module.exports = new Command({
                 }
             } //4 stars
                 else if (numba < 90){
-                var result = Math.floor(Math.random() * 40)+1;
+                var result = Math.floor(Math.random() * 39)+1;
                 switch (result){
                     case result = 1:
                         var newLength = op.push("[★★★★]           Scavenger");
@@ -188,9 +189,6 @@ module.exports = new Command({
                     case result = 38:
                         var newLength = op.push("[★★★★]           Pinecone");
                         break;
-                    case result = 39:
-                        var newLength = op.push("[★★★★]           Indigo");
-                        break;
                     default:
                         var newLength = op.push("[★★★★]           Beanstalk");
                 }
@@ -200,11 +198,11 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 33){
-                            var result = 11
+                            var result = 3
                             
                         } else if (rateup < 66){
-                            var result = 22
-                        } else var result = 35
+                            var result = 51
+                        } else var result = 40
                         
                     }
                     else {var result = Math.floor(Math.random() * 56)+1;}
@@ -380,10 +378,10 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 50) {
-                            var result = 33
+                            var result = 8
                             
                         } else {
-                            var result = 20
+                            var result = 15
                             
                         }
                     } else {var result = Math.floor(Math.random() * 34)+1;}
@@ -490,9 +488,6 @@ module.exports = new Command({
                         case result = 34: 
                             var newLength = op.push("**[★★★★★★]   Kal'tsit**");
                             break;
-                        case result = 35: 
-                            var newLength = op.push("**[★★★★★★]   Pallas**");
-                            break;
                         default:
                             var newLength = op.push("**[★★★★★★]   Carnelian**");
                             break;
@@ -503,7 +498,14 @@ module.exports = new Command({
         }
     i = i + 1
     }
-    message.reply(`Result:\n${op[1]}\n${op[2]}\n${op[3]}\n${op[4]}\n${op[5]}\n${op[6]}\n${op[7]}\n${op[8]}\n${op[9]}\n${op[10]}`)   
+    //message.reply(`Result:\n${op[1]}\n${op[2]}\n${op[3]}\n${op[4]}\n${op[5]}\n${op[6]}\n${op[7]}\n${op[8]}\n${op[9]}\n${op[10]}`)  
+    const embed = new MessageEmbed()
+        .setColor('#8F8F8F')
+        .setTitle('Headhunt result')
+        .setURL('https://youtu.be/dQw4w9WgXcQ')
+        .setDescription(`Result:\n${op[1]}\n${op[2]}\n${op[3]}\n${op[4]}\n${op[5]}\n${op[6]}\n${op[7]}\n${op[8]}\n${op[9]}\n${op[10]}`)
+        //.setImage('https://cdn.discordapp.com/emojis/839892689637998612.webp?size=48')
+    message.channel.send({embeds: [embed]})
   }
 });
 

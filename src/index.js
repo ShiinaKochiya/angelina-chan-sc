@@ -1,5 +1,7 @@
 /** @format */
 
+console.clear();
+
 const { Permissions } = require('discord.js');
 
 const Client = require("./structures/Client.js");
@@ -28,7 +30,7 @@ fs.readdirSync("./src/cmd")
 client.on("ready", () => {
 	console.log("Angie is on")
 	client.user.setStatus('idle');
-    client.user.setActivity({type: `WATCHING`, name:`film with Sakura`})
+    client.user.setActivity({type: `PLAYING`, name:`Sakura codes`})
 	
 });
 
@@ -42,7 +44,9 @@ client.on("messageCreate", message => {
 	
 	if (message.author.bot) return;
 
-	if (!message.content.startsWith(config.prefix)) return;
+	//if (!start === config.prefix) return;
+
+	if (!message.content.startsWith(config.prefix)) return; 
 
 	if (message.author.bot) return;
 

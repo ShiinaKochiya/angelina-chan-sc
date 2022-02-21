@@ -2,7 +2,8 @@ const Command = require("../structures/Command.js");
 
 module.exports = new Command({
     name: "countdown",
-    description: "countdown le fucking time",
+    alias: "timer",
+    description: "countdown le fucking time",   
 
     async run(message, args, client) {
         if (message.author.bot) return;

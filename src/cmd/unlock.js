@@ -16,7 +16,8 @@ module.exports = new Command({
                 SEND_MESSAGES: true,
                 READ_MESSAGE_HISTORY: true,
                 ATTACH_FILES: true
-            });          
+            });    
+            message.reply(`channel unlocked :ok_hand:`)      
         } else message.reply(`why do you want to use a mod command when you're not a mod`)
 
     }

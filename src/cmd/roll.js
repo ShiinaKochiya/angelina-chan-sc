@@ -1,4 +1,5 @@
 const Command = require("../structures/Command.js");
+const {MessageEmbed} = require('discord.js');
 
 module.exports = new Command({
     name: "roll",
@@ -8,7 +9,7 @@ module.exports = new Command({
         if (message.author.bot) return;
         var n = args.slice(1).join(" ")
         var ch = 1
-        console.log(message.author.tag,"used a!roll",n)
+        //console.log(message.author.tag,"used a!roll",n)
         if (!isNaN(n)){
             if (n === "") {
                 var n = 100;
@@ -17,7 +18,13 @@ module.exports = new Command({
             if (n < 1) {message.reply('You entered an invalid number!')} else {var ch = 0}
         var numba = Math.floor(Math.random() * n)+1;
     var name = message.author.username;
-    if (ch === 0) {message.reply(`${name} rolled ${numba}`)}} else message.reply(`you didn't provide a valid number!`)
+    const embed = new MessageEmbed()
+    .setColor(`#2EFFEE`)
+    .setTitle(`${name} rolled ${numba}`)
+    .setTimestamp()
+    //.setFooter(`Rolled by ${name}`)
+    
+    if (ch === 0) {message.reply({embeds: [embed]})}} else message.reply(`you didn't provide a valid number!`)
 
     }
 });

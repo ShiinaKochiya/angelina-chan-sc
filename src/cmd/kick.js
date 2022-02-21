@@ -1,6 +1,7 @@
 const { Guild } = require("discord.js");
 const Command = require("../structures/Command.js");
 const { Permissions } = require('discord.js');
+const {MessageEmbed} = require('discord.js');
 
 module.exports = new Command({
   name: 'kick',
@@ -16,7 +17,11 @@ module.exports = new Command({
 
     try {
       mentionedMember.kick();
-      message.reply(`Kicked ${mentionedMember}`)
+      const embed = new MessageEmbed()
+    .setColor(`#FFFE2A`)
+    .setFields({ name: `${mentionedMember} was kicked!`, value: 'What a bad member'},)
+    .setTimestamp();
+      message.reply({embeds: [embed]});
     } catch (err) {
       console.log(err);
       message.reply(`Oops, there was an error kicking ${mentionedMember}`);

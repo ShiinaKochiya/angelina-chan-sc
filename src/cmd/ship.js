@@ -7,7 +7,7 @@ module.exports = new Command({
     async run(message, args, client) {
         if (message.author.bot) return;
         
-        var numba = Math.floor(Math.random() * 100) + 1;
+        var numba = Math.floor(Math.random() * 101);
     if (args.slice(2).join(" ")==="") {
         var name = message.author.username
         var l = 0;
@@ -29,9 +29,6 @@ module.exports = new Command({
            } else {var te=1}} else if (name2 === 'W'){
             if (name === 'N1K0'){
              message.reply(`${name} x ${name2}: 100 %`)
-        } else {var te=1}} else if (name2 === 'Archetto'){
-                if (name === 'Hyngwarus'){
-                 message.reply(`${name} x ${name2}: 100 %`)
         } else {var te=1}} else if (name2 === 'Dusk'){
                     if (name === 'FreelanceCash53'){
                      message.reply(`${name} x ${name2}: 100 %`)

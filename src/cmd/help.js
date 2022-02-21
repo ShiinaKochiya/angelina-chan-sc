@@ -24,6 +24,7 @@ module.exports = new Command({
             { name: 'a!seggs', value: `YAMERO TAKESHI\nCommand usage: a!seggs`, inline: true },
             { name: 'a!challenge', value: `Create a randomized roster and a random stage\nCommand usage: a!challenge <number_of_operators/optional>`, inline: false },
             { name: 'a!sakura', value: `a command\nCommand usage: a!sakura`, inline: false },
+            { name: 'a!changelog', value: `View Angelina-chan changelog\nCommand usage: a!changelog`, inline: false },
             {name: '\u200B', value: '\u200B' },
             { name: 'a!kick', value: `Kick a member (mods only)\nCommand usage: a!kick <mention_the_member>`, inline: false },
             { name: 'a!ban', value: `Do I even need to say?\nCommand usage: a!ban <mention_the_member>`, inline: false },
