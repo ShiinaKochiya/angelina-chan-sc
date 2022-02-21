@@ -1,6 +1,5 @@
 /** @format */
 
-console.clear();
 
 const { Permissions } = require('discord.js');
 
