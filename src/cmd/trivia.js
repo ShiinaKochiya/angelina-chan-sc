@@ -1,6 +1,6 @@
 const Command = require("../structures/Command.js");
 const quiz = require("../data/quiz.json");
-const quizgd = require("../data/gd.json");
+
 
 module.exports = new Command({
     name: "test",
@@ -11,7 +11,7 @@ module.exports = new Command({
         const filter = response => {
 	       return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
         };
-        
+
     message.reply(item.question, { fetchReply: true })
 	.then(() => {
 		message.channel.awaitMessages({ filter, max: 1, time: 15000, errors: ['time'] })
