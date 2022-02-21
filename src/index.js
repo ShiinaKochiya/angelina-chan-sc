@@ -13,7 +13,7 @@ const config = require("./data/config.json");
 const client = new Client();
 
 const cron = require('cron');
-	
+
 const fs = require("fs");
 
 fs.readdirSync("./src/cmd")
@@ -30,23 +30,23 @@ fs.readdirSync("./src/cmd")
 client.on("ready", () => {
 	console.log("Angie is on")
 	client.user.setStatus('idle');
-    client.user.setActivity({type: `PLAYING`, name:`Sakura codes`})
-	
+    client.user.setActivity({type: `PLAYING`, name:`with Sakura`})
+
 });
 
 //client.on('guildMemberAdd', member => {
 //	const mn = member.user.username;
-//    client.channels.cache.get('907265493600206950').send(`Welcome ${mn}`); 
+//    client.channels.cache.get('907265493600206950').send(`Welcome ${mn}`);
 //});
 
 client.on("messageCreate", message => {
 	//console.log(message.author.tag,"in ",message.channel.name,`: `, message.content);
-	
+
 	if (message.author.bot) return;
 
 	//if (!start === config.prefix) return;
 
-	if (!message.content.startsWith(config.prefix)) return; 
+	if (!message.content.startsWith(config.prefix)) return;
 
 	if (message.author.bot) return;
 
@@ -54,7 +54,7 @@ client.on("messageCreate", message => {
 
 	const command = client.commands.find(cmd => cmd.name == args[0]);
 
-	if (!command) return message.reply(`${args[0]} is not a valid command!`);
+	if (!command) return message.reply(`${args[0]} is not a command!`);
 
 	command.run(message, args, client);
 });
@@ -62,7 +62,7 @@ client.on("messageCreate", message => {
 let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
 	client.channels.cache.get('907265493600206950').send('Its my birthday today UwU')
   });
-  
+
  scheduledMessage.start()
 
 
