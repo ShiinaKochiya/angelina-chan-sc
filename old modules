@@ -1,0 +1,185 @@
+//urban:
+const Command = require("../structures/Command.js");
+const urban = require('urban-dictionary')
+
+module.exports = new Command({
+    name: "urban",
+    description: "urban dictionary",
+
+    async run(message, args, client) {
+        let obj = args.slice(1).join(" ");
+        urban.define(`${obj}`, (error, results) => {
+            if (error) {
+              console.error(`define (callback) error - ${error.message}`)
+              return
+            }
+          
+            console.log('define (callback)')
+          
+            Object.entries(results[0]).forEach(([key, prop]) => {
+              //message.reply(`${key}: ${prop}`)
+              var firstk = key;
+              var secondk = prop;
+              
+            })
+
+            message.reply(firstk, secondk);
+          })
+    }   
+});
+
+//urban 2
+const Command = require("../structures/Command.js");
+const axios = require(`axios`);
+const {MessageEmbed} = require('discord.js');
+
+module.exports = new Command({
+    name: "urban",
+    description: "urban dictionary",
+
+    async run(message, args, client) {
+        let wo = args.slice(1).join(" ");
+        if(!wo) return message.reply('No word was given to define!')
+
+        var obj = encodeURIComponent(wo);
+
+        const { data: {list}} = await axios.get(`https://api.urbandictionary.com/v0/define?term=${obj}`);
+
+        const [ answer ] = list;
+        var def = trim(answer.definition);
+
+        const embed = new MessageEmbed()
+        .setColor('AQUA')
+        .setTitle('Urban Dictionary')
+        .setURL('https://youtu.be/dQw4w9WgXcQ')
+        .setDescription(`Definition for `, obj)
+        .setFields(
+            { name: 'definition:', value: def},
+            { name: 'example:', value: trim(answer.example) }
+            )
+
+        message.reply({embeds: [embed]})
+
+    }   
+
+});
+
+
+function trim(input){
+  if (input.length>1020) input.slice(0, 1024)
+}
+
+//item
+
+const Command = require("../structures/Command.js");
+
+const aki = require("../data/item_table.json")
+
+const fs = require('fs');
+
+const readline = require('readline');
+
+const {MessageEmbed} = require('discord.js')
+
+module.exports = new Command({
+    name: "item",
+    description: "item in ak?",
+
+    async run(message, args, client) {
+        if (message.author.bot) return;
+         //args.slice(1).join(" ")
+        async function plbl() {
+            const fileStream = fs.createReadStream("./src/data/item_table.json");
+        
+        const readln = readline.createInterface({
+            input: fileStream,
+            crlfDelay: Infinity
+        });
+        for await (const line of readln) {
+            // Each line in input.txt will be successively available here as `line`.
+            //message.channel.send(`Line from file: ${line}`);
+          }
+        }
+        plbl();
+
+    }   
+});
+
+
+//item.js 2
+const Command = require("../structures/Command.js");
+
+const aki = require("../data/item_table.json")
+
+const fs = require('fs');
+
+const readline = require('readline');
+
+const {MessageEmbed} = require('discord.js')
+
+module.exports = new Command({
+    name: "item",
+    description: "item in ak?",
+
+    async run(message, args, client) {
+        if (message.author.bot) return;
+        var data = ''
+        var reader_stream = fs.createReadStream("./src/data/item_table.json") //Create a readable stream
+        reader_stream.setEncoding('UTF8')
+
+        reader_stream.on('data', function(chunk) {
+        data += chunk
+        })
+
+        reader_stream.on('end',function() {
+        const items = JSON.parse(data)
+        //resolve(items);
+        message.reply(items)
+        })
+
+        reader_stream.on('error', function(err) {
+        console.log(err.stack)
+        //reject(err.stack)
+        })
+        //I think I parsed it?
+        //Did I???
+        //Wtf Im so confused
+
+    }   
+});
+
+//item.js 3
+
+const Command = require("../structures/Command.js");
+
+const aki = require("../data/item_table.json")
+
+const fs = require('fs');
+
+const readline = require('readline');
+
+//const {MessageEmbed} = require('discord.js')
+
+module.exports = new Command({
+    name: "item",
+    description: "item in ak?",
+//10546
+    async run(message, args, client) {
+        if (message.author.bot) return;
+        const { data: {items}} = aki.items;
+        const [ it ] = items;
+        //var mydata = JSON.parse(aki);
+        var i = 0;
+        var vags = args.slice(1).join(" ");
+        while (i<10000){
+            if (vags = it[0].name){
+                let des = it[0].description
+                message.reply(`found item `, vags, ` with the description of `, des)
+                break;
+            } else 
+            i=i+1;
+        }
+        
+
+    }   
+});
