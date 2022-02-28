@@ -16,17 +16,17 @@ module.exports = new Command({
 
         const [ answer ] = list;
 
-        if (list.length === 0) return message.reply('There are no such word / expression')
+        if (list.length === 0) return message.reply('Word not found')
 
         var def = trim(answer.definition);
         var exa = trim(answer.example);
 
         if (def === ""){def = "No definition found"}
-        if (exa === ""){exa = "No example for this word(s)"}
+        if (exa === ""){exa = "No example for this word"}
         const embed = new MessageEmbed()
         .setColor('AQUA')
         .setTitle('Urban Dictionary')
-        .setURL('https://youtu.be/dQw4w9WgXcQ')
+        .setURL('https://youtu.be/dQw4w9WgXcQ') //wait wtf ur rickrolling or sth lol
         .setDescription(`Definition for ${wo}`)
         .setFields(
             { name: 'definition:', value: def},
@@ -35,9 +35,9 @@ module.exports = new Command({
             .setTimestamp()
 
         message.reply({embeds: [embed]})
-        
 
-    }   
+
+    }
 
 });
 
@@ -45,5 +45,3 @@ module.exports = new Command({
 function trim(input){
   return input.length > 1024 ? `${input.slice(0,1020)}...` : input
 }
-
-
