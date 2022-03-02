@@ -7,7 +7,11 @@ module.exports = new Command({
 
     async run(message, args, client) {
         if (message.author.bot) return;
-        console.log(message.author.tag,"used a!help")
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+        console.log("[",time,"]", message.author.tag,"used help")
         const embed = new MessageEmbed()
         .setColor('AQUA')
         .setTitle('Angelina-chan help page')
@@ -38,5 +42,5 @@ message.channel.send({embeds: [embed]})
         // this is what the old help command looks like smh
         //message.reply(`**Commands for Angie-chan**\n-------------------------------------------------------------------\na!info - show the info about the bot\na!roll - generate a random number between 0 and 100\na!ping - check the bot latency\na!shutdown - Temporary shut down the bot\na!hentai - sending a random hentai picture from Sakura Vault(Only usable in NSFW channel)\na!ship - ship to see how much you fit with the other\na!operator - show a breif guide for an Operator (to see all available operator, do a!operator list)\na!countdown - countdown a specfic amount of time, expect smth more?\na!wtf - Send BeasttrollMC screaming "WHAT THE FUCK"\na!seggs - SEGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG\na!avatar - get ur avatar pic\na!challenge: Create a randomized roster and a random stage (The command form is a!challenge <number of operators, less than 12>, by default it is 12)\n-------------------------------------------------------------------\nYe that's all, it's just a beta version, not much commands have been added`)
 
-    }   
+    }
 });

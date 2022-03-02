@@ -10,5 +10,10 @@ module.exports = new Command({
             attachment: './src/cmd/wtf/btmc.mp4',
             name: 'btmc.mp4'
           }]})
-    }   
+          var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                   hour: "numeric",
+                                                   minute: "numeric",
+                                                   second: "numeric"})
+          console.log("[",time,"]",message.author.tag,`used wtf`);
+    }
 });

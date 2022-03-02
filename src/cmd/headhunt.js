@@ -11,7 +11,11 @@ module.exports = new Command({
         var banner = "standard";
         var i = 1;
         let op = ['0']
-        
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+       console.log("[",time,"]", message.author.tag, "used headhunt");
         while (i<15){
         var numba = Math.floor(Math.random() * 100)+1;
         if (banner === "standard") {
@@ -19,7 +23,7 @@ module.exports = new Command({
             if (numba < 40){
                 var result = Math.floor(Math.random() * 17)+1;
                 switch (result){
-                    case result = 1: 
+                    case result = 1:
                         var newLength = op.push("[★★★]               Fang");
                         break;
                     case result = 2:
@@ -69,7 +73,7 @@ module.exports = new Command({
                         break;
                     default:
                         var newLength = op.push("[★★★]               Spot");
-                        
+
                 }
             } //4 stars
                 else if (numba < 90){
@@ -199,15 +203,15 @@ module.exports = new Command({
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 33){
                             var result = 3
-                            
+
                         } else if (rateup < 66){
                             var result = 51
                         } else var result = 40
-                        
+
                     }
                     else {var result = Math.floor(Math.random() * 56)+1;}
                     switch (result){
-                        case result = 1: 
+                        case result = 1:
                             var newLength = op.push("[★★★★★]       Ptilopsis");
                             break;
                         case result = 2:
@@ -379,113 +383,113 @@ module.exports = new Command({
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 50) {
                             var result = 8
-                            
+
                         } else {
                             var result = 15
-                            
+
                         }
                     } else {var result = Math.floor(Math.random() * 34)+1;}
                     switch (result){
-                        case result = 1: 
+                        case result = 1:
                             var newLength = op.push("**[★★★★★★]   Ch'en**");
                             break;
-                        case result = 2: 
+                        case result = 2:
                             var newLength = op.push("**[★★★★★★]   Siege**");
                             break;
-                        case result = 3: 
+                        case result = 3:
                             var newLength = op.push("**[★★★★★★]   Shining**");
                             break;
-                        case result = 4: 
+                        case result = 4:
                             var newLength = op.push("**[★★★★★★]   Nightingale**");
                             break;
-                        case result = 5: 
+                        case result = 5:
                             var newLength = op.push("**[★★★★★★]   Ifrit**");
                             break;
-                        case result = 6: 
+                        case result = 6:
                             var newLength = op.push("**[★★★★★★]   Eyjafjalla**");
                             break;
-                        case result = 7: 
+                        case result = 7:
                             var newLength = op.push("**[★★★★★★]   Exusiai**");
                             break;
-                        case result = 8: 
+                        case result = 8:
                             var newLength = op.push("**[★★★★★★]   Angelina**");
                             break;
-                        case result = 9: 
+                        case result = 9:
                             var newLength = op.push("**[★★★★★★]   SilverAsh**");
                             break;
-                        case result = 10: 
+                        case result = 10:
                             var newLength = op.push("**[★★★★★★]   Hoshiguma**");
                             break;
-                        case result = 11: 
+                        case result = 11:
                             var newLength = op.push("**[★★★★★★]   Saria**");
                             break;
-                        case result = 12: 
+                        case result = 12:
                             var newLength = op.push("**[★★★★★★]   Skadi**");
                             break;
-                        case result = 13: 
+                        case result = 13:
                             var newLength = op.push("**[★★★★★★]   Schwarz**");
                             break;
-                        case result = 14: 
+                        case result = 14:
                             var newLength = op.push("**[★★★★★★]   Hellagur**");
                             break;
-                        case result = 15: 
+                        case result = 15:
                             var newLength = op.push("**[★★★★★★]   Magallan**");
                             break;
-                        case result = 16: 
+                        case result = 16:
                             var newLength = op.push("**[★★★★★★]   Mostima**");
                             break;
-                        case result = 17: 
+                        case result = 17:
                             var newLength = op.push("**[★★★★★★]   Blaze**");
                             break;
-                        case result = 18: 
+                        case result = 18:
                             var newLength = op.push("**[★★★★★★]   Aak**");
                             break;
-                        case result = 19: 
+                        case result = 19:
                             var newLength = op.push("**[★★★★★★]   Ceobe**");
                             break;
-                        case result = 20: 
+                        case result = 20:
                             var newLength = op.push("**[★★★★★★]   Bagpipe**");
                             break;
-                        case result = 21: 
+                        case result = 21:
                             var newLength = op.push("**[★★★★★★]   Phantom**");
                             break;
-                        case result = 22: 
+                        case result = 22:
                             var newLength = op.push("**[★★★★★★]   Weedy**");
                             break;
-                        case result = 23: 
+                        case result = 23:
                             var newLength = op.push("**[★★★★★★]   Poca**");
                             break;
-                        case result = 24: 
+                        case result = 24:
                             var newLength = op.push("**[★★★★★★]   Suzuran**");
                             break;
-                        case result = 25: 
+                        case result = 25:
                             var newLength = op.push("**[★★★★★★]   Thorns**");
                             break;
-                        case result = 26: 
+                        case result = 26:
                             var newLength = op.push("**[★★★★★★]   Eunectes**");
                             break;
-                        case result = 27: 
+                        case result = 27:
                             var newLength = op.push("**[★★★★★★]   Surtr**");
                             break;
-                        case result = 28: 
+                        case result = 28:
                             var newLength = op.push("**[★★★★★★]   Blemishine**");
                             break;
-                        case result = 29: 
+                        case result = 29:
                             var newLength = op.push("**[★★★★★★]   Mudrock**");
                             break;
-                        case result = 30: 
+                        case result = 30:
                             var newLength = op.push("**[★★★★★★]   Mountain**");
                             break;
-                        case result = 31: 
+                        case result = 31:
                             var newLength = op.push("**[★★★★★★]   Archetto**");
                             break;
-                        case result = 32: 
+                        case result = 32:
                             var newLength = op.push("**[★★★★★★]   Saga**");
                             break;
-                        case result = 33: 
+                        case result = 33:
                             var newLength = op.push("**[★★★★★★]   Passenger**");
                             break;
-                        case result = 34: 
+                        case result = 34:
                             var newLength = op.push("**[★★★★★★]   Kal'tsit**");
                             break;
                         default:
@@ -498,7 +502,7 @@ module.exports = new Command({
         }
     i = i + 1
     }
-    //message.reply(`Result:\n${op[1]}\n${op[2]}\n${op[3]}\n${op[4]}\n${op[5]}\n${op[6]}\n${op[7]}\n${op[8]}\n${op[9]}\n${op[10]}`)  
+    //message.reply(`Result:\n${op[1]}\n${op[2]}\n${op[3]}\n${op[4]}\n${op[5]}\n${op[6]}\n${op[7]}\n${op[8]}\n${op[9]}\n${op[10]}`)
     const embed = new MessageEmbed()
         .setColor('#8F8F8F')
         .setTitle('Headhunt result')

@@ -13,7 +13,7 @@ const config = require("./data/config.json");
 const client = new Client();
 
 const cron = require('cron');
-	
+
 const fs = require("fs");
 
 //This part is used to declare global varible, ig
@@ -32,32 +32,40 @@ fs.readdirSync("./src/cmd")
 		 * @type {Command}
 		 */
 		const command = require(`./cmd/${file}`);
-		console.log(`Command ${command.name} lock and loaded`);
+		var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                             hour: "numeric",
+                                             minute: "numeric",
+																					   second: "numeric"})
+		console.log("[", time, "]", `Command ${command.name} lock and loaded`);
 		client.commands.set(command.name, command);
 	});
 
 client.on("ready", () => {
-	console.log("Angie is on")
+	var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+																					 hour: "numeric",
+																					 minute: "numeric",
+																					 second: "numeric"})
+	console.log("[", time, "]", "Angie is on")
 	client.user.setStatus('idle');
     client.user.setActivity({type: `PLAYING`, name:`Sakura codes`})
-	
+
 });
 
 /*client.on('guildMemberAdd', member => {
 	const mn = member.user.username;
-    client.channels.cache.get('907265493600206950').send(`Welcome ${mn}`); 
+    client.channels.cache.get('907265493600206950').send(`Welcome ${mn}`);
 });*/
 
 client.on("messageCreate", message => {
 	//console.log(message.author.tag,"in ",message.channel.name,`: `, message.content);
-	
+
 	if (message.author.bot) return;
 
 	//if (!start === config.prefix) return;
 
 	//if (!message.content.toLowerCase().startsWith(config.prefix)) return;
 
-	if(message.content.slice(0, config.prefix.length).toLowerCase() !== config.prefix) return; 
+	if(message.content.slice(0, config.prefix.length).toLowerCase() !== config.prefix) return;
 
 	if (message.author.bot) return;
 
@@ -73,7 +81,7 @@ client.on("messageCreate", message => {
 let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
 	client.channels.cache.get('907265493600206950').send('Its my birthday today UwU')
   });
-  
+
  scheduledMessage.start()
 
 

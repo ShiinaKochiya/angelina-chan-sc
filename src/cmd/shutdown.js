@@ -8,14 +8,20 @@ module.exports = new Command({
 
     async run(message, args, client) {
         if (message.author.bot) return;
-
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
         if (message.member.permissions.has(Permissions.ADMINISTRATOR)){
             message.reply(`See ya next time`).then(() => {
-             console.log(`Angie was shutted down using !shutdown`)
+             console.log("[",time,"]",`Shutdown requested by ${message.author.tag}, cya later`)
              client.destroy();
+             process.exit();
+
         })
         } else {
             message.reply(`boi u're not a mod`)
         }
     }
+
 });

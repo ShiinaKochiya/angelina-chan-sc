@@ -9,7 +9,6 @@ module.exports = new Command({
         if (message.author.bot) return;
         var opname = args.slice(1).join(" ")
 
-        console.log(message.author.tag,"used a!operator", opname)
         //6 stars
         if (opname === "Skalter"){
             message.channel.send(op.skalter)
@@ -84,11 +83,22 @@ module.exports = new Command({
             message.channel.send(`As a 2* Operator, Durin has no Skills and cannot promote. She does gain the Lucky Lass Talent at level 30, which gives her an enormous amount of Arts Dodge. Combined with her innate RES, Durin can be a surprisingly good early-game option for tanking enemy Casters.Without promotion gains or Skills, Durin has a tough time competing with free 5* donki for a roster spot, let alone other Casters the player may pull. Her biggest selling point is probably her low DP cost, making her a cheap source of Arts damage for maps with limited DP. \n\nStats(lvl 30, not include trust bonus and potential):\nHP: 952\nAtk: 340\nDef: 62\nRes: 10\nDP: 12\nBlock: 1\nRedeploy time: 70s\nAtkspd: 1,6s\n\nRecommended skill: None`)
         } else if (opname === "12F"){
             message.channel.send(`As a 2★ Starter Operator, 12F has no Skills and cannot be promoted. He does gain a Talent upon reaching level 30, though: Dodge Rate Up, which grants an enormous amount of passive Physical Dodge. Combined with his surprisingly high HP (even without promotion, his HP is higher than some 3★ Casters at max level), 12F can be unexpectedly survivable, especially if you stack additional sources of Physical Dodge on him from other Operators.\nAs an AoE Caster, 12F’s role is to do damage, usually to counter huge waves of weak enemies, and despite his purely defensive Talent and lack of promotion, his DPS is often sufficient to get the job done in the early game. As a 2★ unit, he also benefits from low DP cost (high DP cost is a drawback for most AoE Casters) and cheap upgrade costs, causing some Doctors to choose him over his higher-rarity, higher-DPS counterpart Lava.\n\nStats(lvl 30, not include trust bonus and potential):\nHP: 1378\nAtk: 400\nDef: 50\nRes: 10\nDP: 24\nBlock: 1\nRedeploy time: 70s\nAtkspd: 2,9s\n\nRecommended skill: None`)
-        }
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+        console.log("[",time,"]",message.author.tag,"used operator for", opname)
+      }
         //list
         else if (opname === "list"){
-            message.channel.send(`The database currently have: \n**6 stars:** Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock\n**5 stars:** none \n**4 stars:** Ambriel \n**3 stars:** Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel, Orchid, Melantha, Beagle, Spot, Cardigan, Catapult, Midnight, Popukar\n**2 stars:** Yato, Durin, 12F\n**1 stars:** none\nRemember to make the first letter of the name CAP`)
-        }
+        message.channel.send(`The database currently have: \n**6 stars:** Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock\n**5 stars:** none \n**4 stars:** Ambriel \n**3 stars:** Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel, Orchid, Melantha, Beagle, Spot, Cardigan, Catapult, Midnight, Popukar\n**2 stars:** Yato, Durin, 12F\n**1 stars:** none\nRemember to make the first letter of the name CAP`)
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+        console.log("[",time,"]",message.author.tag,"listed operator database")
+       }
+
         //error message
         else message.reply(`Info fetched failed, the database currently have: \n**6 stars:** Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock\n**5 stars:** none \n**4 stars:** Ambriel \n**3 stars:** Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel, Orchid, Melantha, Beagle, Spot, Cardigan, Catapult, Midnight, Popukar\n**2 stars:** Yato, Durin, 12F\n**1 stars:** none\nps: If you typed in the operator in the database and still get this error, try checking the spelling and make the first letter cap`)
      //6 stars:Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock \n 4 stars: Ambriel \n3 stars: Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel

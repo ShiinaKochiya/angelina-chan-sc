@@ -3,14 +3,18 @@ const Command = require("../structures/Command.js");
 module.exports = new Command({
     name: "countdown",
     alias: "timer",
-    description: "countdown le fucking time",   
+    description: "countdown le fucking time",
 
     async run(message, args, client) {
         if (message.author.bot) return;
-        var c = args.slice(1).join(" "); 
+        var c = args.slice(1).join(" ");
         var a = 0
         var check = 1
-        console.log(message.author.tag,"used a!countdown", c)
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+        console.log("[",time,"]",message.author.tag,"used countdown", c)
         if (message.author.bot) {
             message.reply(`Don't...`)
             return;
@@ -24,10 +28,5 @@ module.exports = new Command({
         clearInterval(cd);
     }
 }, 1000)}
-    }   
+    }
 });
-
-
-
-
-
