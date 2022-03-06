@@ -18,12 +18,17 @@ module.exports = new Command({
             if (n < 1) {message.reply('You entered an invalid number!')} else {var ch = 0}
         var numba = Math.floor(Math.random() * n)+1;
     var name = message.author.username;
+    var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                             hour: "numeric",
+                                             minute: "numeric",
+                                             second: "numeric"})
+    console.log("[",time,"]",message.author.tag,"rolled a random number");
     const embed = new MessageEmbed()
     .setColor(`#2EFFEE`)
     .setTitle(`${name} rolled ${numba}`)
     .setTimestamp()
     //.setFooter(`Rolled by ${name}`)
-    
+
     if (ch === 0) {message.reply({embeds: [embed]})}} else message.reply(`you didn't provide a valid number!`)
 
     }

@@ -1,6 +1,6 @@
 # Angelina-chan
 
-An Arknights operator stats and fun Discord bot by Sakura Kaslana for "The W kult". Not ready for deployment on other servers yet.
+An Arknights operator stats and fun Discord bot by Sakura Kaslana and Giabao06 for some servers. Not intended for global deployment.
 
 
 Requires Node v17 to run.
@@ -25,4 +25,4 @@ Requires Node v17 to run.
 
 For more info on creating a bot and obtaining a bot token, go here: https://github.com/discord-apps/bot-tutorial
 
-Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot; And some guys on StackOverflow for helping me make it work
+Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot; Akuba for helping me realize how dumb I am; And some guys on StackOverflow for helping me make it work

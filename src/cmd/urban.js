@@ -35,7 +35,11 @@ module.exports = new Command({
             .setTimestamp()
 
         message.reply({embeds: [embed]})
-
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+        console.log("[",time,"]",message.author.tag,`looked up "${wo}" on the Urban Dictionary`);
 
     }
 

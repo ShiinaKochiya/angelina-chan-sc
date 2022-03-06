@@ -10,5 +10,10 @@ module.exports = new Command({
             attachment: './src/cmd/wtf/sex.mp4',
             name: 'sex.mp4'
           }]})
-    }   
+          var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                   hour: "numeric",
+                                                   minute: "numeric",
+                                                   second: "numeric"})
+          console.log("[",time,"]",message.author.tag,"used seggs");
+    }
 });
