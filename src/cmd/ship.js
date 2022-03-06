@@ -2,7 +2,7 @@ const Command = require("../structures/Command.js");
 
 module.exports = new Command({
     name: "ship",
-    description: "Lets see how much likely you can marry the other person",
+    description: "Lets see how much likely you can marry the other person (btw this is rigged -giabao06)",
 
     async run(message, args, client) {
         if (message.author.bot) return;
@@ -20,7 +20,6 @@ module.exports = new Command({
 
     var l2 = name2.length
     var name2 = name2.substr(0, l2-l)
-    console.log(message.author.tag,"used a!ship", name2, name)
     if (name2 === 'Angelina'){
         if (name === 'Sakura Kaslana'){
          message.reply(`${name} x ${name2}: 100 %`)
