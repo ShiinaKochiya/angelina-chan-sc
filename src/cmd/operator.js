@@ -8,15 +8,10 @@ module.exports = new Command({
 
     async run(message, args, client) {
         if (message.author.bot) return;
-<<<<<<< HEAD
         var opname = args.slice(1).join(" ").toLowerCase()
         if (opname === "skalter"){var opname = "skadi the corrupting heart"}
         if (opname === "chen the holung day"){var opname = "chalter"}
         console.log(message.author.tag,"used a!operator", opname)
-=======
-        var opname = args.slice(1).join(" ")
-
->>>>>>> b666c02cfa4b37e04e37f4e1c4193ee6e169a09d
         //6 stars
         if (opname === "skadi the corrupting heart"){
             message.channel.send(op.skalter)
@@ -85,7 +80,6 @@ module.exports = new Command({
             message.channel.send(`Popukar, 3* AoE Guard who can deal Physical damage to two enemies at once. Like most 3* Operators, Popukar's skillset is straightforward.  Her talent provides a percent HP and Attack buff, while her skill ATK Up α provides a manual attack buff on a medium cooldown and no starting SP.\nAs a 3* AoE Guard, Popukar cannot reach Elite 2, missing out on blocking/attacking three enemies like her higher rarity peers.  Although this may seem like it defeats the purpose of using an AoE Guard, Popukar has a comparable statline to her Archetype peers at Elite 1, making her as effective as a pure attacker at a much lower investment cost.\n\nStats(Elite 1 lvl 55, not include trust bonus and potential):\nHP: 1858\nAtk: 495\nDef: 245\nRes: 0\nDP: 19\nBlock: 2\nRedeploy time: 70s\nAtkspd: 1,2s\n\nRecommended skill: ATK Up α(Skill 1)`) 
         }
         //2 stars
-<<<<<<< HEAD
         else if (opname === "yato"){
             message.channel.send(`Yato is a low rarity Starter that can block 2 enemies. Yato has a very low DP cost in addition to the shortened redeployment time granted by her Fast Redeployment talent. Unlocking her potential will reduce these even further, making her an extremely cost efficient drop. But even off the battlefield, she can be a valuable asset in the Trading Post, as her RIIC skill is better than some higher rarity units.\nYato’s main downside is her rarity, which means her low level cap will make her quickly fall behind other operators and that she cannot use special skills. Noticeably, Yato cannot recover DP like typical Vanguards. Thus, she functions more as a redeployable, low-cost Guard.\n\nStats(lvl 30, not include trust bonus and potential):\nHP: 1030\nAtk: 232\nDef: 192\nRes: 0\nDP: 7\nBlock: 2\nRedeploy time: 70s\nAtkspd: 1,05s\n\nRecommended skill: None`) 
         } else if (opname === "durin"){
@@ -97,30 +91,6 @@ module.exports = new Command({
         else if (opname === "list"){
             message.channel.send(`The database currently have: \n**6 stars:** Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock\n**5 stars:** none \n**4 stars:** Ambriel \n**3 stars:** Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel, Orchid, Melantha, Beagle, Spot, Cardigan, Catapult, Midnight, Popukar\n**2 stars:** Yato, Durin, 12F\n**1 stars:** none`) 
         } 
-=======
-        else if (opname === "Yato"){
-            message.channel.send(`Yato is a low rarity Starter that can block 2 enemies. Yato has a very low DP cost in addition to the shortened redeployment time granted by her Fast Redeployment talent. Unlocking her potential will reduce these even further, making her an extremely cost efficient drop. But even off the battlefield, she can be a valuable asset in the Trading Post, as her RIIC skill is better than some higher rarity units.\nYato’s main downside is her rarity, which means her low level cap will make her quickly fall behind other operators and that she cannot use special skills. Noticeably, Yato cannot recover DP like typical Vanguards. Thus, she functions more as a redeployable, low-cost Guard.\n\nStats(lvl 30, not include trust bonus and potential):\nHP: 1030\nAtk: 232\nDef: 192\nRes: 0\nDP: 7\nBlock: 2\nRedeploy time: 70s\nAtkspd: 1,05s\n\nRecommended skill: None`)
-        } else if (opname === "Durin"){
-            message.channel.send(`As a 2* Operator, Durin has no Skills and cannot promote. She does gain the Lucky Lass Talent at level 30, which gives her an enormous amount of Arts Dodge. Combined with her innate RES, Durin can be a surprisingly good early-game option for tanking enemy Casters.Without promotion gains or Skills, Durin has a tough time competing with free 5* donki for a roster spot, let alone other Casters the player may pull. Her biggest selling point is probably her low DP cost, making her a cheap source of Arts damage for maps with limited DP. \n\nStats(lvl 30, not include trust bonus and potential):\nHP: 952\nAtk: 340\nDef: 62\nRes: 10\nDP: 12\nBlock: 1\nRedeploy time: 70s\nAtkspd: 1,6s\n\nRecommended skill: None`)
-        } else if (opname === "12F"){
-            message.channel.send(`As a 2★ Starter Operator, 12F has no Skills and cannot be promoted. He does gain a Talent upon reaching level 30, though: Dodge Rate Up, which grants an enormous amount of passive Physical Dodge. Combined with his surprisingly high HP (even without promotion, his HP is higher than some 3★ Casters at max level), 12F can be unexpectedly survivable, especially if you stack additional sources of Physical Dodge on him from other Operators.\nAs an AoE Caster, 12F’s role is to do damage, usually to counter huge waves of weak enemies, and despite his purely defensive Talent and lack of promotion, his DPS is often sufficient to get the job done in the early game. As a 2★ unit, he also benefits from low DP cost (high DP cost is a drawback for most AoE Casters) and cheap upgrade costs, causing some Doctors to choose him over his higher-rarity, higher-DPS counterpart Lava.\n\nStats(lvl 30, not include trust bonus and potential):\nHP: 1378\nAtk: 400\nDef: 50\nRes: 10\nDP: 24\nBlock: 1\nRedeploy time: 70s\nAtkspd: 2,9s\n\nRecommended skill: None`)
-        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                                 hour: "numeric",
-                                                 minute: "numeric",
-                                                 second: "numeric"})
-        console.log("[",time,"]",message.author.tag,"used operator for", opname)
-      }
-        //list
-        else if (opname === "list"){
-        message.channel.send(`The database currently have: \n**6 stars:** Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock\n**5 stars:** none \n**4 stars:** Ambriel \n**3 stars:** Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel, Orchid, Melantha, Beagle, Spot, Cardigan, Catapult, Midnight, Popukar\n**2 stars:** Yato, Durin, 12F\n**1 stars:** none\nRemember to make the first letter of the name CAP`)
-        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                                 hour: "numeric",
-                                                 minute: "numeric",
-                                                 second: "numeric"})
-        console.log("[",time,"]",message.author.tag,"listed operator database")
-       }
-
->>>>>>> b666c02cfa4b37e04e37f4e1c4193ee6e169a09d
         //error message
         else message.reply(`Info fetched failed, the database currently have: \n**6 stars:** Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock\n**5 stars:** none \n**4 stars:** Ambriel \n**3 stars:** Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel, Orchid, Melantha, Beagle, Spot, Cardigan, Catapult, Midnight, Popukar\n**2 stars:** Yato, Durin, 12F\n**1 stars:** none`)
      //6 stars:Angelina, Skadi, Skalter, W, Ceobe, Dusk, Chen, Blaze, Kaltsit, Passenger, Chalter, Mudrock \n 4 stars: Ambriel \n3 stars: Fang, Plume, Vanilla, Hibiscus, Ansel, Lava, Steward, Kroos, Adnachiel
