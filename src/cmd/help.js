@@ -21,7 +21,7 @@ module.exports = new Command({
         .setFields(
             { name: 'a!ping', value: 'Check my connection\nCommand usage: a!ping' },
             { name: 'a!roll', value: `Generate a random number (Default is 100)\nCommand usage: a!roll <number/optional>`, inline: false },
-		    { name: 'a!ship', value: `Lets see how you fit with the other\nCommand usage: a!ship <name_1> <name_2/optional>`, inline: false },
+		    { name: 'a!ship', value: `Lets see how you fit with the other (btw this is rigged -giabao06)\nCommand usage: a!ship <name_1> <name_2/optional>`, inline: false },
             { name: 'a!operator', value: `show a breif guide for an Operator\nCommand usage: a!operator <list | operator_name>`, inline: false },
             { name: 'a!countdown', value: `countdown a specfic amount of time (in second)\nCommand usage: a!countdown <time>`, inline: false },
             { name: 'a!wtf', value: `BTMC wtf are you doing here?\nCommand usage: a!wtf`, inline: true },
