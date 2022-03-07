@@ -16,13 +16,11 @@ const cron = require('cron');
 
 const fs = require("fs");
 
-//This part is used to declare global varible, ig
-
-//const queue = new Map();
-
-/*
-welp it was never been used so..........
-*/
+/*hello my dear friend,
+You might wonder "wtf is this line doing here?"
+Well, nothing much. Anyway, if you wanna distribute the code somewhere else, just remember to credit me and my friend
+and for any hour wasted on this code place, increase the interger below to warn the other :)
+Time_wasted_couting_in_hour: 124*/
 
 
 fs.readdirSync("./src/cmd")
@@ -79,7 +77,7 @@ client.on("messageCreate", message => {
 });
 
 let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
-	client.channels.cache.get('907265493600206950').send('Its my birthday today UwU')
+	client.channels.cache.get('A_channel_ID_go_here').send('Its my birthday today UwU')
   });
 
  scheduledMessage.start()
