@@ -1,5 +1,5 @@
 const Command = require("../structures/Command.js");
-
+const config = require ("../data/config.json");
 const { Permissions } = require('discord.js');
 
 module.exports = new Command({
@@ -12,7 +12,7 @@ module.exports = new Command({
                                                  hour: "numeric",
                                                  minute: "numeric",
                                                  second: "numeric"})
-        if (message.member.permissions.has(Permissions.ADMINISTRATOR)){
+        if (message.member.roles.cache.has(config.adminRoles)){
             message.reply(`See ya next time`).then(() => {
              console.log("[",time,"]",`Shutdown requested by ${message.author.tag}, cya later`)
              client.destroy();
