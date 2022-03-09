@@ -1,6 +1,6 @@
 {
     "token": "Bot token here",
     "prefix": "a!",
-    "adminRoles": "Admin role ID here"
-    
+    "adminRoles": ["Admin role 1", "Admin role 2","Admin role n"]
+
 }
