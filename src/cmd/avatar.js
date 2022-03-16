@@ -16,6 +16,7 @@ module.exports = new Command({
         const embed = new MessageEmbed()
     .setDescription(`ur avatar`)
     .setImage(message.author.displayAvatarURL())
+    .setTimestamp()
         message.channel.send({embeds: [embed]})
 
 
