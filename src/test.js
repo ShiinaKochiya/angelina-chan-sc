@@ -8,7 +8,7 @@
   const client = new Client();
   const cron = require('cron');
   const fs = require("fs");
-  
+
   fs.readdirSync("./src/cmd")
       .filter(file => file.endsWith(".js"))
       .forEach(file => {
@@ -19,4 +19,4 @@
           console.log(`Command ${command.name} parse complete`);
           client.commands.set(command.name, command);
       });
-  return;
+  return 0;
