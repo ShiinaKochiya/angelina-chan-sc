@@ -14,7 +14,7 @@ module.exports = new Command({
     if (id === ``) {
       var id = message.channelId;
     }
-    if (message.member.roles.cache.has(config.adminRoles)) {
+    if (message.member.roles.cache.some(role => config.adminRoles.includes(role.id))) {
       client.channels.cache
         .get(id)
         .permissionOverwrites.edit(message.guild.roles.everyone.id, {
@@ -23,12 +23,7 @@ module.exports = new Command({
           READ_MESSAGE_HISTORY: true,
           ATTACH_FILES: false,
         });
-        message.reply(`channel locked :ok_hand:`);
-        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                                 hour: "numeric",
-                                                 minute: "numeric",
-                                                 second: "numeric"})
-        console.log("[",time,"]", message.author.tag,`locked channel ${id}`)
+        message.reply(`channel unlocked :ok_hand:`)      
     } else
       message.reply(
         `why do you want to use a mod command when you're not a mod`
