@@ -1,30 +1,25 @@
 {
-  "name": "angelina-chan",
-  "version": "0.0.1-alpha.2",
-  "description": "An Arknights operator stats and fun Discord bot",
+  "name": "mudrock-san",
+  "version": "1.0.0",
+  "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Build complete.\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Sakura Kaslana",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "@discordjs/voice": "^0.7.5",
+    "akdata": "^2.1.1",
+    "axios": "^0.26.0",
+    "cron": "^1.8.2",
     "discord.js": "^13.4.0-dev.1636502714.b256ae1",
-    "moment": "^2.29.1"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SakuraKaslana/angelina-chan-sc.git"
-  },
-  "keywords": [
-    "discord",
-    "bots",
-    "arknights"
-  ],
-  "bugs": {
-    "url": "https://github.com/SakuraKaslana/angelina-chan-sc/issues"
-  },
-  "homepage": "https://github.com/SakuraKaslana/angelina-chan-sc#readme"
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
+    "node-cron": "^3.0.0",
+    "nodesu": "^0.7.3",
+    "osu-api-extended": "^2.1.3",
+    "tz-offset": "^0.0.2",
+    "urban-dictionary": "^3.0.2"
+  }
 }
-

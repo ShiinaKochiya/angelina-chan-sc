@@ -5,6 +5,7 @@ module.exports = new Command({
     description: "show bot ping",
 
     async run(message, args, client) {
+        if (message.author.bot) return;
         console.log(message.author.tag,"used a!ping")
         const msg =  await message.reply(`Ping: ${client.ws.ping} ms`);
 

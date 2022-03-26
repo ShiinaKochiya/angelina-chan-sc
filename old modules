@@ -183,3 +183,40 @@ module.exports = new Command({
 
     }   
 });
+
+//Osu! test command 1
+const Command = require("../structures/Command.js");
+const { v2, auth, tools, mods } = require("osu-api-extended")
+const config = require("../data/config.json");
+
+
+module.exports = new Command({
+    name: "artist",
+    description: "beatmap searching on osu.ppy.sh/beatmaps",
+    
+    async run(message, args, client) {
+        if (message.author.bot) return;
+        const main = async () => {
+            // Authencating via client, go to https://osu.ppy.sh/home/account/edit#oauth for registering client (That is if you have an osu! account)
+            await auth.login(config.osu_id, config.osu_secret)
+            
+            /*const { data: {beatmapset}} = await v2.beatmap.get(3439849);
+
+            const [ info ] = beatmapset;*/
+
+            const rawdata = await v2.beatmap.get(3439849);
+
+            /*const info = JSON.parse(rawdata)
+
+            var artist = info.artist;
+
+            message.reply(`the artist of the beatmap 3439849 is ${artist}`)*/
+
+            console.log(rawdata)
+            
+        }
+        main();
+    }
+});
+
+

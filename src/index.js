@@ -1,6 +1,8 @@
 /** @format */
 
-console.clear();
+//console.clear();
+
+const { Permissions } = require('discord.js');
 
 const Client = require("./structures/Client.js");
 
@@ -9,8 +11,12 @@ const Command = require("./structures/Command.js");
 const config = require("./data/config.json");
 
 const client = new Client();
+
+const cron = require('cron');
 	
 const fs = require("fs");
+
+
 
 fs.readdirSync("./src/cmd")
 	.filter(file => file.endsWith(".js"))
@@ -25,15 +31,28 @@ fs.readdirSync("./src/cmd")
 
 client.on("ready", () => {
 	console.log("Angie is on")
-    client.user.setActivity(`games with Sakura`)
+	client.user.setStatus('idle');
+    client.user.setActivity({type: `PLAYING`, name:`with Osu!API`})
+	
 });
+
+/*client.on('guildMemberAdd', member => {
+	const mn = member.user.username;
+    client.channels.cache.get('907265493600206950').send(`Welcome ${mn}`); 
+});*/
 
 client.on("messageCreate", message => {
 	//console.log(message.author.tag,"in ",message.channel.name,`: `, message.content);
 	
-	//if (message.author.bot) return;
+	if (message.author.bot) return;
 
-	if (!message.content.startsWith(config.prefix)) return;
+	//if (!start === config.prefix) return;
+
+	//if (!message.content.toLowerCase().startsWith(config.prefix)) return;
+
+	if(message.content.slice(0, config.prefix.length).toLowerCase() !== config.prefix) return; 
+
+	if (message.author.bot) return;
 
 	const args = message.content.substring(config.prefix.length).split(/ +/);
 
@@ -43,5 +62,12 @@ client.on("messageCreate", message => {
 
 	command.run(message, args, client);
 });
+
+let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
+	client.channels.cache.get('907265493600206950').send('Its my birthday today UwU')
+  });
+  
+ scheduledMessage.start()
+
 
 client.login(config.token);

@@ -1,5 +1,7 @@
 {
-    "token": "Bot token goes here",
-    "prefix": "a!"
-    
+    "token": "Token go here",
+    "prefix": "ab!",
+    "adminRoles": ["ID 1", "ID 2"],
+    "osu_secret": "Get ur own lmao",
+    "osu_id": "no"
 }
