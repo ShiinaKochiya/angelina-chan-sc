@@ -21,7 +21,11 @@ module.exports = new Command({
     var l2 = name2.length
     var name2 = name2.substr(0, l2-l)
 
-    console.log(message.author.tag,"used a!ship", name2, name)
+    var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                             hour: "numeric",
+                                             minute: "numeric",
+                                             second: "numeric"})
+    console.log("[",time,"]",message.author.tag,`shipped ${name} with ${name2}`);
     if (name2 === 'Angelina'){
         if (name === 'Sakura Kaslana'){
          message.reply(`${name} x ${name2}: 100 %`)
@@ -43,6 +47,10 @@ module.exports = new Command({
         var name = s.substring(0, s.indexOf(' -')); 
         var name2 = s.substring(s.indexOf('- ')+2, s.length)
         }
+    else {
+        var name = args.slice(1).join(" ");
+        var name2 = message.author.username
+    }
         message.reply(`${name2} x ${name}: ${numba} %`)
     }
 

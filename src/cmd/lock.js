@@ -23,8 +23,13 @@ module.exports = new Command({
           READ_MESSAGE_HISTORY: true,
           ATTACH_FILES: false,
         });
-        message.reply(`channel unlocked :ok_hand:`)      
-    } else
+        message.reply(`channel locked :ok_hand:`);
+                var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+        console.log("[",time,"]", message.author.tag,`locked channel ${id}`);
+   } else
       message.reply(
         `why do you want to use a mod command when you're not a mod`
       );
