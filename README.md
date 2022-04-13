@@ -26,3 +26,6 @@ Requires Node v17 to run.
 For more info on creating a bot and obtaining a bot token, go here: https://github.com/discord-apps/bot-tutorial
 
 Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot; Akuba for helping me realize how dumb I am; And some guys on StackOverflow for helping me make it work
+
+## Notes
+- As of 2022-04-13, Sakura Kaslana is temporary on hiatus so there will be no feature updates, only bugfixes.

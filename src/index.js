@@ -45,7 +45,7 @@ client.on("ready", () => {
 																					 second: "numeric"})
 	console.log("[", time, "]", "Angie is on")
 	client.user.setStatus('idle');
-    client.user.setActivity({type: `PLAYING`, name:`Sakura codes`})
+    client.user.setActivity({type: `WATCHING`, name:`for someone's return`})
 
 });
 
