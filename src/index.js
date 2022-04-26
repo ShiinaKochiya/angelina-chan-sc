@@ -20,7 +20,7 @@ const fs = require("fs");
 You might wonder "wtf is this line doing here?"
 Well, nothing much. Anyway, if you wanna distribute the code somewhere else, just remember to credit me and my friend
 and for any hour wasted on this code place, increase the interger below to warn the other :)
-Time_wasted_couting_in_hour: 124*/
+Time_wasted_couting_in_hour: 125*/
 
 
 fs.readdirSync("./src/cmd")
