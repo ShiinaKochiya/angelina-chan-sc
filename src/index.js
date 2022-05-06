@@ -69,7 +69,9 @@ client.on("messageCreate", message => {
 
 	const args = message.content.substring(config.prefix.length).split(/ +/);
 
-	const command = client.commands.find(cmd => cmd.name == args[0]);
+	var command = client.commands.find(cmd => cmd.name == args[0]);
+
+	if (!command) var command = client.commands.find(cmd => cmd.alias == args[0]);
 
 	if (!command) return message.reply(`${args[0]} is not a valid command!`);
 

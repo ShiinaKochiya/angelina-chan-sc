@@ -3,6 +3,7 @@ const {MessageEmbed} = require('discord.js')
 
 module.exports = new Command({
     name: "headhunt",
+    alias: ["gacha"],
     description: "headhunt time",
 
     async run(message, args, client) {
