@@ -28,6 +28,6 @@ For more info on creating a bot and obtaining a bot token, go here: https://gith
 Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot; Akuba for helping me realize how dumb I am; And some guys on StackOverflow for helping me make it work
 
 ## Notes
-- As of 2022-04-13, Sakura Kaslana is temporary on hiatus so there will be no feature updates, only bugfixes.
+- ~~As of 2022-04-13, Sakura Kaslana is temporary on hiatus so there will be no feature updates, only bugfixes.~~ he resurrected /s -giabao06
 
 - 2022-05-06, Sakura Kaslana is back on the project, but with limited activities. Seyun Sky is now a part of this too.
