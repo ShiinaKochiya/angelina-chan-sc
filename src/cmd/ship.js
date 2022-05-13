@@ -62,7 +62,7 @@ module.exports = new Command({
                 var name2 = args.slice(1).join(" ");
                 var name = message.author.username;
             }
-            message.reply(`${name2} x ${name}: ${numba} %`)
+            if (args.slice(1).join(" ")==="") {message.reply("No arguments were given")} else {message.reply(`${name2} x ${name}: ${numba} %`)}
         }
 
     }
