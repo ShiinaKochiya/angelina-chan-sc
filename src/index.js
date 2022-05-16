@@ -78,11 +78,11 @@ client.on("messageCreate", message => {
 	command.run(message, args, client);
 });
 
-let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
-	client.channels.cache.get('A_channel_ID_go_here').send('Its my birthday today UwU')
-  });
+// let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
+//	client.channels.cache.get('A_channel_ID_go_here').send('Its my birthday today UwU')
+// });
 
- scheduledMessage.start()
+// scheduledMessage.start()
 
 
 client.login(config.token);
