@@ -4,14 +4,11 @@ const {MessageEmbed} = require('discord.js')
 module.exports = new Command({
     name: "help",
     description: "show bot help",
+    aliases:["commands"],
 
     async run(message, args, client) {
         if (message.author.bot) return;
-        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                                 hour: "numeric",
-                                                 minute: "numeric",
-                                                 second: "numeric"})
-        console.log("[",time,"]", message.author.tag,"used help")
+        console.log(message.author.tag,"used a!help")
         const embed = new MessageEmbed()
         .setColor('AQUA')
         .setTitle('Angelina-chan help page')
@@ -29,6 +26,7 @@ module.exports = new Command({
             { name: 'a!challenge', value: `Create a randomized roster and a random stage\nCommand usage: a!challenge <number_of_operators/optional>`, inline: false },
             { name: 'a!sakura', value: `a command\nCommand usage: a!sakura`, inline: false },
             { name: 'a!changelog', value: `View Angelina-chan changelog\nCommand usage: a!changelog`, inline: false },
+            { name: 'a!sauce', value: 'Finding sauce for images/links\nCommand usage: a!sauce <attachments/image links>' },
             {name: '\u200B', value: '\u200B' },
             { name: 'a!kick', value: `Kick a member (mods only)\nCommand usage: a!kick <mention_the_member>`, inline: false },
             { name: 'a!ban', value: `Do I even need to say?\nCommand usage: a!ban <mention_the_member>`, inline: false },
