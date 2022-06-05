@@ -8,7 +8,11 @@ module.exports = new Command({
 
     async run(message, args, client) {
         if (message.author.bot) return;
-        console.log(message.author.tag,"used a!help")
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                                                 hour: "numeric",
+                                                 minute: "numeric",
+                                                 second: "numeric"})
+        console.log("[",time,"]", message.author.tag,"used help")
         const embed = new MessageEmbed()
         .setColor('AQUA')
         .setTitle('Angelina-chan help page')
