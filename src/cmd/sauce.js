@@ -4,7 +4,6 @@ const {MessageEmbed} = require('discord.js');
 const {SauceNao} = require("saucenao.js")
 const sagiri = require("sagiri");
 const sagiriclient = sagiri(config.saucenaoAPIkey);
-const isImageUrl = require("is-image-url");
 const extractUrls = require("extract-urls");
 
 
@@ -12,11 +11,31 @@ module.exports = new Command({
     name: "sauce",
     description: "sauce?",
     async run(message, args, client) {
-      if (message.attachments.size > 0) {
+        var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric"})
+        console.log("[",time,"]", message.author.tag,"used sauce")
+        if (message.attachments.size > 0) {
         message.attachments.forEach(async Attachment => {
             try {
                 const results = await sagiriclient(Attachment.url)
-                message.reply(results[0].url)
+                /*const mera = new MessageEmbed()
+                .setColor('AQUA')
+                .setTitle('Sauce found?')
+                .setURL('https://youtu.be/dQw4w9WgXcQ')
+                .setDescription(`Here's a list of commands`)
+                .setFields(
+                    { name: 'Sauce', value: `${results[0].url}`},
+                    { name: '% of similarity', value: `${results[0].similarity}`},
+                    { name: '\u200B', value: '\u200B' },
+                    { name: 'Alternative (incase sauce is broken)'},
+                    {  value: `${results[1].url}\nSimilarity percentage: ${results[1].similarity}`}
+                )
+                message.reply({embeds: [mera]})*/
+
+                message.reply(`Sauce: ${results[0].url}\nSimilarity: ${results[0].similarity}`)
+                message.channel.send(`Incase of sauce is broken, here are some alternative link: \n${results[1].url}\nSimilarity: ${results[1].similarity}\n${results[2].url}\nSimilarity: ${results[2].similarity}\n\n~~Note that these link may have low similarity, or maybe not relating at all~~`)
             } catch (e) {
                 message.channel.send("Error, image is probably broken, not valid or sauce cannot be found");
             }
@@ -31,13 +50,17 @@ module.exports = new Command({
         var link = strr.replace(' ', '')
         try {
             const results = await sagiriclient(link)
-            message.reply(results[0].url)
+            message.reply(`Sauce: ${results[0].url}\nSimilarity: ${results[0].similarity}`)
+                message.channel.send(`Incase of sauce is broken, here are some alternative link: \n${results[1].url}\nSimilarity: ${results[1].similarity}\n${results[2].url}\nSimilarity: ${results[2].similarity}\n\n~~Note that these link may have low similarity, or maybe not relating at all~~`)
         } catch (e) {
             message.channel.send("Error, link is probably broken, not valid or sauce cannot be found")
 
         }
     }
 
+    if(!message.attachments.size > 0 && !message.content.includes("https://")){
+        message.reply(`No image/link was provided\nHow can I find sauce then?`)
+    }
     }   
 });
 
