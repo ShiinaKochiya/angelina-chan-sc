@@ -18,7 +18,7 @@ Requires Node v17 to run.
 ### `./src/data/config.json`
 - 'token': bot token
 - 'prefix': bot prefix
-- 'adminRoles': Admin role (implementation of an array of one planned)
+- 'adminRoles': admin roles, each should be in quotes. See instruction in file 
 
 ### `./src/data/quiz.json`:
 - make your own quiz lol
