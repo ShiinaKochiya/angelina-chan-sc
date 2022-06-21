@@ -20,13 +20,13 @@ module.exports = new Command ({
 
      // this function should send the msg when the bot's choice
      // and the player's choice are the same, however I'm dumb
-     // at js so *some help required
+     // at js so *some help required*
      } 
 
      var sel = Math.floor(Math.random() * 3); //the bot plays. 0=rocks, 1=paper, 2=scissors
-     if (args.slice.(2).join(" ")==="rocks" {var player = 0;} else 
-     if (args.slice.(2).join(" ")==="papers" {var player = 1;} else
-     if (args.slice.(2).join(" ")==="scissors" {var player = 2;}
+     if (args.slice.(2).join(" ")==="rocks") {var player = 0;} else 
+     if (args.slice.(2).join(" ")==="papers") {var player = 1;} else
+     if (args.slice.(2).join(" ")==="scissors") {var player = 2;}
      if player == sel {rpsequal(sel)} else
      {
           var time = new Date().toLocaleTimeString('en-US', { hour12: false,
