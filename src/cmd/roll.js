@@ -23,7 +23,7 @@ module.exports = new Command({
             if (n < 1) {message.reply('You entered an invalid number!')} else {var ch = 0}
         var numba = (Math.random() * n)+1;
     var name = message.author.username;
-    if (acc = "accurate") {
+    if (acc === "accurate") {
             var numble = numba
         } else {
             var numble = Math.floor(numba)
