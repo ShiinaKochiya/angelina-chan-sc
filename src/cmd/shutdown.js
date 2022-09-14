@@ -11,11 +11,7 @@ module.exports = new Command({
 
         if (message.member.roles.cache.some(role => config.adminRoles.includes(role.id))) {
             message.reply(`See ya next time`).then(() => {
-                   var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                                 hour: "numeric",
-                                                 minute: "numeric",
-                                                 second: "numeric"});
-                   console.log("[",time,"]",`Shutdown requested by ${message.author.tag}, cya later`);   
+             console.log(`Angie was shutted down using !shutdown`)   
              client.destroy();
         })   
         } else {

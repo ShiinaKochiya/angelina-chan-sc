@@ -22,14 +22,10 @@ module.exports = new Command({
     .setFields({ name: `${mentionedMember} was kicked!`, value: 'What a bad member'},)
     .setTimestamp();
       message.reply({embeds: [embed]});
-      var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                               hour: "numeric",
-                                               minute: "numeric",
-                                               second: "numeric"})
-      console.log("[",time,"]", message.author.tag,`kicked ${mentionedMember}`)
     } catch (err) {
       console.log(err);
       message.reply(`Oops, there was an error kicking ${mentionedMember}`);
     }
   },
 });
+

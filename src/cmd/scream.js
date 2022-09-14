@@ -12,10 +12,5 @@ module.exports = new Command({
             name: `${numba}.mp4`
           }]});
           if (numba === 9) {message.channel.send('this is not even a scream smh')}
-          var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                                   hour: "numeric",
-                                                   minute: "numeric",
-                                                   second: "numeric"})
-          console.log("[",time,"]",message.author.tag,"used scream (custom log out here)");
-    }
+    }   
 });

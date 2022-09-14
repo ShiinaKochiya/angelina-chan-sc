@@ -3,8 +3,9 @@ const {MessageEmbed} = require('discord.js');
 
 module.exports = new Command({
     name: "roll",
-    alias: ["random"],
+    alias: ["random"], 
     description: "roll a random number from 1 to 100",
+    
 
     async run(message, args, client) {
         if (message.author.bot) return;
@@ -14,6 +15,7 @@ module.exports = new Command({
         var l2 = acc.length
         var n = temp.substr(0, l-l2)
         var ch = 1
+
         //console.log(message.author.tag,"used a!roll",n)
         if (!isNaN(n)){
             if (n === "") {
@@ -24,21 +26,16 @@ module.exports = new Command({
         var numba = (Math.random() * n)+1;
     var name = message.author.username;
     if (acc === "accurate") {
-            var numble = numba
-        } else {
-            var numble = Math.floor(numba)
-        }
-    var time = new Date().toLocaleTimeString('en-US', { hour12: false,
-                                             hour: "numeric",
-                                             minute: "numeric",
-                                             second: "numeric"})
-    console.log("[",time,"]",message.author.tag,"rolled a random number");
+        var numble = numba
+    } else {
+        var numble = Math.floor(numba)
+    }
     const embed = new MessageEmbed()
     .setColor(`#2EFFEE`)
     .setTitle(`${name} rolled ${numble}`)
     .setTimestamp()
     //.setFooter(`Rolled by ${name}`)
-
+    
     if (ch === 0) {message.reply({embeds: [embed]})}} else message.reply(`you didn't provide a valid number!`)
 
     }

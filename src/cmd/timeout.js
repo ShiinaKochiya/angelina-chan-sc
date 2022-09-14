@@ -28,7 +28,6 @@ module.exports = new Command({
         var valid = false;
         message.reply("You didn't give me a valid duration (Everything is counted in minutes)")
     }
-
     try {
     if(valid === true){
       mentionedMember.timeout(duration * 60 * 1000);
@@ -42,7 +41,7 @@ module.exports = new Command({
         minute: "numeric",
         second: "numeric"})
     console.log("[",time,"]", message.author.tag,`time-out'ed ${mentionedMember}`)
-}
+    }
     } catch (err) {
       console.log(err);
       message.reply(`Oops, there was an error timing-out ${mentionedMember}`);
