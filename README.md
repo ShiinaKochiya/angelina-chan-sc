@@ -31,3 +31,5 @@ Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for tes
 - ~~As of 2022-04-13, Sakura Kaslana is temporary on hiatus so there will be no feature updates, only bugfixes.~~ he resurrected /s -giabao06
 
 - 2022-05-06, Sakura Kaslana is back on the project, but with limited activities. Seyun Sky is now a part of this too.
+
+- 2022-10-01: Sakura on hiatus again. No new features, only bugfixes.
