@@ -17,6 +17,6 @@ module.exports = new Command({
         var hours = Math.floor(delta / 3600) % 24;
         delta -= hours * 3600;
         
-        message.reply(`There's ${days} days and ${hours} hours left until Chirtmas`)
+        message.reply(`There's ${days} days and ${hours} hours left until Christmas`)
     }   
 });
