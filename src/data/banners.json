@@ -1,0 +1,11 @@
+{
+  "sampleBanner": [{
+    "name": "Sample Banner",
+    "start": 12220039123,
+    "end": 122223333000,
+    "rateup4_1": 2,
+    "rateup4_2": 4,
+    "rateup4_3": 34,
+    "rateup5": 25
+    }]
+}

@@ -1,0 +1,16 @@
+{
+  "chr": [
+    {
+      "id": 1,
+      "name": "Sample character",
+      "rarity": 3
+    },
+    {
+      "id": 2,
+      "name": "Sample character 2",
+      "rarity": 4
+    }
+    ]
+}
+
+
