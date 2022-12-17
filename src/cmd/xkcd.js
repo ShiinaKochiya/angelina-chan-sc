@@ -2,7 +2,7 @@
 
 const Command = require("../structures/Command");
 const {MessageEmbed} = require('discord.js');
-const fetch = require("node-fetch");
+
 
 module.exports = new Command({
     name: "xkcd",

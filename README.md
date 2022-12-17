@@ -3,7 +3,7 @@
 An Arknights operator stats and fun Discord bot by Sakura Kaslana and Giabao06 for some servers. Not intended for global deployment.
 
 
-Requires Node v17 to run.
+Requires Node v18 to run.
 
 ## Installation (for testing):
 1. Clone this repo
@@ -33,3 +33,5 @@ Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for tes
 - 2022-05-06, Sakura Kaslana is back on the project, but with limited activities. Seyun Sky is now a part of this too.
 
 - 2022-10-01: Sakura on hiatus again. No new features, only bugfixes.
+
+- The requirement bump to node 18 is due to fetch being implemented there. If you use node 17, you will not be able to use some commands.
