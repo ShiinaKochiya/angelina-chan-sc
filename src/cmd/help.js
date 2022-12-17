@@ -30,16 +30,22 @@ module.exports = new Command({
             { name: 'a!challenge', value: `Create a randomized roster and a random stage\nCommand usage: a!challenge <number_of_operators/optional>`, inline: false },
             { name: 'a!sakura', value: `a command\nCommand usage: a!sakura`, inline: false },
             { name: 'a!changelog', value: `View Angelina-chan changelog\nCommand usage: a!changelog`, inline: false },
-            { name: 'a!sauce', value: 'Finding sauce for images/links\nCommand usage: a!sauce <attachments/image links>', inline:false },
-            { name: 'a!xkcd', value: 'Gets an xkcd comic. \n Command usage: a!xkcd [random | latest | number] (default latest)', inline:false},
-            { name: 'a!xmas', value:'When will christmas arrive? \n Command usage: a!xmas', inline:false},
+            { name: 'a!sauce', value: `Finding sauce for images/links\nCommand usage: a!sauce <attachments/image links>`, inline:false },
+            { name: 'a!xkcd', value: `Gets an xkcd comic. \n Command usage: a!xkcd [random | latest | number] (default latest)`, inline:false},
+            { name: 'a!xmas', value:`When will christmas arrive? \n Command usage: a!xmas`, inline:false},
+            { name: 'a!scream', value: `idk what to write here, ask sakura -giabao06`, inline:false},
+            { name: 'a!rps', value: `Play a game of rock paper scissors \n Command usage: a!rps [rocks | papers | scissors]`,inline:false},
+            { name: 'a!info', value: 'Information about the bot', inline:false},
+            { name: 'a!trivia', value: 'How about a quiz game?', inline:false},
+            { name: 'a!help', value: 'Shows this help message', inline:false},
             { name: '\u200B', value: '\u200B' },
+            { name: 'a!timeout', value: 'Discord timeout \n Command usage: a!timeout @member time ',inline:false},
             { name: 'a!kick', value: `Kick a member (mods only)\nCommand usage: a!kick <mention_the_member>`, inline: false },
             { name: 'a!ban', value: `Do I even need to say?\nCommand usage: a!ban <mention_the_member>`, inline: false },
             { name: 'a!lock/a!unlock', value: `Lock/unlock a specific channel (mods only)\nCommand usage: a!lock/a!unlock <channel_ID/optional>`, inline: false },
             { name: 'a!shutdown', value: `A force shutdown command (mods only)\nCommand usage: a!shutdown`, inline: false },
-            { name: 'a!timeout', value: ''}
             
+
 
         )
         
