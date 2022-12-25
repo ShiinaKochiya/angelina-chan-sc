@@ -18,7 +18,7 @@ module.exports = new Command({
         delta -= hours * 3600;
         
         message.reply(`There's ${days} days and ${hours} hours left until Christmas`);}
-	else if (date_now >= date_future && date_now < 1671987600000) {message.reply(`Happy Christmas!`);}
+	else if (date_now >= date_future && date_now < 1671987600000) {message.reply(`Merry Christmas!`);}
 	else {message.reply(`Christmas's done already, go wait for new year's`);}
 	var time = new Date().toLocaleTimeString('en-US', { hour12: false,
                                                  hour: "numeric",
