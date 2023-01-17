@@ -209,10 +209,10 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 33){
-                            var result = 24
+                            var result = 45
                         } else if (rateup < 66){
-                            var result = 42
-                        } else var result = 61
+                            var result = 51
+                        } else var result = 52
                         
                     }
                     else {var result = Math.floor(Math.random() * 66)+1;}
@@ -421,9 +421,9 @@ module.exports = new Command({
                     if (rate > 50){
                         var rateup = Math.floor(Math.random() * 100)+1;
                         if (rateup < 50) {
-                            var result = 14
+                            var result = 17
                         } else {
-                            var result = 36
+                            var result = 37
                             
                         }
                     } else {var result = Math.floor(Math.random() * 42)+1;}
