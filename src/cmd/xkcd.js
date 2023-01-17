@@ -3,6 +3,7 @@
 const Command = require("../structures/Command");
 const {MessageEmbed} = require('discord.js');
 const axios = require(`axios`);
+const latest=require ("../data/xkcd.json");
 
 module.exports = new Command({
     name: "xkcd",
@@ -10,19 +11,18 @@ module.exports = new Command({
 
     async run(message, args, client){
         if (message.author.bot) return;
-        const latest =  await axios.get(`https://xkcd.com/info.0.json`);
         var type=args.slice(1).join(" "); 
         if (type === '' || type === 'latest') {
             const embed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle(`xkcd #${latest.data.num} - ${latest.data.safe_title}`)
-            .setImage(latest.data.img)
-            .setFooter(latest.data.alt)
+            .setTitle(`xkcd #${latest.num} - ${latest.safe_title}`)
+            .setImage(latest.img)
+            .setFooter(latest.alt)
             .setURL(`https://xkcd.com/`)
             message.reply({embeds: [embed]})
         }
         else if (type === 'random') {
-            var rng=Math.floor(Math.random() * latest.data.num);
+            var rng=Math.floor(Math.random() * latest.num);
             const random =  await axios.get(`https://xkcd.com/${rng}/info.0.json`);
             const embed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -32,7 +32,7 @@ module.exports = new Command({
             .setURL(`https://xkcd.com/${random.data.num}`)
             message.reply({embeds: [embed]})
         }
-        else if (type <= latest.data.num) {
+        else if (type <= latest.num) {
             const precise=await axios.get (`https://xkcd.com/${type}/info.0.json`);
             const embed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -47,6 +47,6 @@ module.exports = new Command({
             hour: "numeric",
             minute: "numeric",
             second: "numeric"})
-        console.log("[",time,"]",message.author.tag,`wanted to look at some xkcd`);    
+        console.log(`[${time}] ${message.author.tag} wanted to look at some xkcd`);    
     }
 })

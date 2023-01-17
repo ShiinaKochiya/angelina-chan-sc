@@ -45,9 +45,10 @@ client.on("ready", async () => {
 																					 minute: "numeric",
 																					 second: "numeric"})
 	console.log(`[${time} INFO] Angie is on`);
+	var cachexkcd = cron.CronJob('0 23 * * * 1,3,5', async function(){
 	console.log(`[${time} INFO] Caching latest xkcd data...`);
-	const latestxkcd =  await axios.get(`https://xkcd.com/info.0.json`);
-	const lateststr = JSON.stringify(latestxkcd.data);
+	var latestxkcd =  await axios.get(`https://xkcd.com/info.0.json`);
+	var lateststr = JSON.stringify(latestxkcd.data);
 	fs.writeFile('./src/data/xkcd.json', lateststr, err => {
 		if (err) {
 			console.log("[", time, "]", "ERROR: Cannot write to file! Throwing error below");
@@ -55,6 +56,7 @@ client.on("ready", async () => {
 		}
 	})
 	console.log(`[${time} INFO] Caching complete. Latest is #${latestxkcd.data.num}`);
+});
 	client.user.setStatus('idle');
     client.user.setActivity({type: `WATCHING`, name:`for someone's return`})
 
