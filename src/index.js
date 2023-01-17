@@ -16,6 +16,7 @@ const cron = require('cron');
 
 const fs = require("fs");
 
+const axios = require('axios');
 /*hello my dear friend,
 You might wonder "wtf is this line doing here?"
 Well, nothing much. Anyway, if you wanna distribute the code somewhere else, just remember to credit me and my friend
@@ -34,16 +35,26 @@ fs.readdirSync("./src/cmd")
                                              hour: "numeric",
                                              minute: "numeric",
 																					   second: "numeric"})
-		console.log("[", time, "]", `Command ${command.name} lock and loaded`);
+		console.log(`[${time} INFO] Command ${command.name} lock and loaded`);
 		client.commands.set(command.name, command);
 	});
 
-client.on("ready", () => {
+client.on("ready", async () => {
 	var time = new Date().toLocaleTimeString('en-US', { hour12: false,
 																					 hour: "numeric",
 																					 minute: "numeric",
 																					 second: "numeric"})
-	console.log("[", time, "]", "Angie is on")
+	console.log(`[${time} INFO] Angie is on`);
+	console.log(`[${time} INFO] Caching latest xkcd data...`);
+	const latestxkcd =  await axios.get(`https://xkcd.com/info.0.json`);
+	const lateststr = JSON.stringify(latestxkcd.data);
+	fs.writeFile('./src/data/xkcd.json', lateststr, err => {
+		if (err) {
+			console.log("[", time, "]", "ERROR: Cannot write to file! Throwing error below");
+			throw(err);
+		}
+	})
+	console.log(`[${time} INFO] Caching complete. Latest is #${latestxkcd.data.num}`);
 	client.user.setStatus('idle');
     client.user.setActivity({type: `WATCHING`, name:`for someone's return`})
 
@@ -86,3 +97,5 @@ client.on("messageCreate", message => {
 
 
 client.login(config.token);
+
+
