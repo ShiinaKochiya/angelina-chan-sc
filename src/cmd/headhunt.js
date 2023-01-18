@@ -758,20 +758,10 @@ module.exports = new Command({
                 //var rate = Math.floor(Math.random() * 100)+1;
                 var rate = 1
                 if (rate > 50){
-                    var rateup = Math.floor(Math.random() * 6);
+                    var rateup = Math.floor(Math.random() * 2);
                     switch(rateup){
                         case rateup = 1:
-                            var result = 5;
-                        case rateup = 2:
-                            var result = 16;
-                        case rateup = 3:
-                            var result = 18;
-                        case rateup = 4:
-                            var result = 25;
-                        case rateup = 5:
-                            var result = 41;
-                        default:
-                            var result = 54
+                            var result = 66;
                     }
                     
                 }
@@ -972,6 +962,9 @@ module.exports = new Command({
                     case result = 65:
                         var newLength = op.push("[★★★★★]       Rockrock");
                         break;
+                    case result = 66:
+                        var newLength = op.push("[★★★★★]       Cantabile");
+                        break;
                     default:
                         var newLength = op.push("[★★★★★]       Windflit");
                         break;
@@ -981,16 +974,12 @@ module.exports = new Command({
                 //var rate = Math.floor(Math.random() * 100)+1;
                 var rate = 1
                 if (rate > 50){
-                    var rateup = Math.floor(Math.random() * 4);
+                    var rateup = Math.floor(Math.random() * 2);
                     switch(rateup){
                         case rateup = 1:
-                            var result = 34;
-                        case rateup = 2:
-                            var result = 12;
-                        case rateup = 3:
-                            var result = 7;
+                            newLength = op.push("**[★★★★★★]   Gavial the Invincible**");
                         default:
-                            var result = 30;
+                            newLength = op.push("**[★★★★★★]   Pozёmka**");
                     }
                 } else {var result = Math.floor(Math.random() * 42)+1;}
                 switch (result){
