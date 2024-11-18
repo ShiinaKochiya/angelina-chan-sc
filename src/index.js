@@ -17,6 +17,10 @@ const cron = require('cron');
 const fs = require("fs");
 
 const axios = require('axios');
+
+global.ratePity = 0;
+global.userPity = [0];
+global.userPity.fill(0,0,4294967295);
 /*hello my dear friend,
 You might wonder "wtf is this line doing here?"
 Well, nothing much. Anyway, if you wanna distribute the code somewhere else, just remember to credit me and my friend
