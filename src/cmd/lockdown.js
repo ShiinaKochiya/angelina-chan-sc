@@ -1,15 +1,16 @@
 const Command = require("../structures/Command.js");
 
 module.exports = new Command({
-    name: "setpity",
+    name: "lockdown",
     description: "setting pity for the headhunt cmd",
-    alias: ["sp"],
+    alias: ["ld"],
 
     async run(message, args, client) {
-    var numPity = args.slice(1).join(" ");
-    pityIndex = message.author.id % 1000000000;
-    if( parseInt(numPity, 10) < 101 && parseInt(numPity, 10) > -1 && parseInt(numPity, 10) !== NaN) {global.userPity[pityIndex] = parseInt(numPity, 10);
-    message.reply(`Your headhunt pity has been set to ${numPity}!`)} else {message.reply("No")}
+    var arg = args.slice(1).join(" ").toLowerCase();
+    if (global.lockdown == false && arg == "enabled"){
+        global.lockdown = true;
+        message.reply("Bot lockdown'ed, stop listening to cmds now")
+    }
 
     var time = new Date().toLocaleTimeString('en-US', { hour12: false,
         hour: "numeric",

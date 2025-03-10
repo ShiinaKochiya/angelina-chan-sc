@@ -21,11 +21,15 @@ const axios = require('axios');
 global.ratePity = 0;
 global.userPity = [0];
 global.userPity.fill(0,0,4294967295);
+global.lockdown = false;
+global.havoc = false;
+global.chk = false;
+
 /*hello my dear friend,
 You might wonder "wtf is this line doing here?"
 Well, nothing much. Anyway, if you wanna distribute the code somewhere else, just remember to credit me and my friend
 and for any hour wasted on this code place, increase the interger below to warn the other :)
-Time_wasted_couting_in_hour: 125*/
+Time_wasted_couting_in_hour: 758*/
 
 
 fs.readdirSync("./src/cmd")
@@ -71,6 +75,41 @@ client.on("ready", async () => {
     client.channels.cache.get('907265493600206950').send(`Welcome ${mn}`);
 });*/
 
+//for assignment
+client.on("presenceUpdate", (oldPresence, newPresence) => {
+	if(newPresence.userId == "689364440600412195"){ // check if its me or not
+		var time = new Date().toLocaleTimeString('en-US', { hour12: false,
+			hour: "numeric",
+			minute: "numeric",
+			second: "numeric"});
+			const newActivities = newPresence.activities.filter(a => a.type === "PLAYING");
+			
+			if (newActivities.some(n => work(n.name)) && global.chk == false) {
+				client.channels.cache.get('944835286226051113').send(`<@${newPresence.userId}> is doing assignment at ${time}`);
+				global.chk = true;
+			}
+
+			if (!newActivities.some(n => work(n.name)) && global.chk == true){
+				global.chk = false;
+				client.channels.cache.get('944835286226051113').send(`<@${newPresence.userId}> stopped doing assignment at ${time}`);
+			}
+
+
+			function work(s){return s == "Visual Studio Code"}
+	
+	
+	}
+});
+
+client.snipes = new Map()
+client.on('messageDelete', function(message, channel){
+	client.snipes.set(message.channel.id, {
+		content: message.content,
+		author: message.author,
+		image: message.attachments.first() ? message.attachments.first().proxyURL : null 
+	})
+})
+
 client.on("messageCreate", message => {
 	//console.log(message.author.tag,"in ",message.channel.name,`: `, message.content);
 
@@ -79,6 +118,7 @@ client.on("messageCreate", message => {
 	//if (!start === config.prefix) return;
 
 	//if (!message.content.toLowerCase().startsWith(config.prefix)) return;
+	if (global.havoc == true && message.guild.id == 829400192142409838){message.reply("Then start a conversation smh")}
 
 	if(message.content.slice(0, config.prefix.length).toLowerCase() !== config.prefix) return;
 
@@ -92,14 +132,15 @@ client.on("messageCreate", message => {
 
 	if (!command) return message.reply(`${args[0]} is not a valid command!`);
 
-	command.run(message, args, client);
+	if(global.lockdown == false){command.run(message, args, client);} else {
+		if (message.content == "a!lockdown disabled"){
+			message.reply("Bot lockdown disabled, have fun")
+			global.lockdown = false
+		}
+	}
 });
 
-// let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
-//	client.channels.cache.get('A_channel_ID_go_here').send('Its my birthday today UwU')
-// });
 
-// scheduledMessage.start()
 
 
 client.login(config.token);

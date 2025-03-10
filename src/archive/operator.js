@@ -1,6 +1,6 @@
 const { MessageFlags } = require("discord.js");
-const Command = require("../../structures/Command.js");
-var op = require('../../data/op.json');
+const Command = require("../structures/Command.js");
+var op = require('../data/op.json');
 
 module.exports = new Command({
     name: "operator",
