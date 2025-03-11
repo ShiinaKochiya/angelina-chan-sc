@@ -122,9 +122,7 @@ module.exports = new Command({
                     await new Promise(r => setTimeout(r, 1000));
                     var tt = 0;
                     var angestr = card[s[1]][f[1]];
-                    for (let j = 1; j<=i; ++j){
-                        tt = tt + sf[j];
-                    }
+                    tt = calTotal(sf.slice(1,i+1))
                     for (let j = 2; j<=i; ++j){
                         angestr = angestr + ", " + card[s[j]][f[j]];
                     }
