@@ -1,8 +1,9 @@
 const Command = require("../structures/Command.js");
-const card = require("../data/bj.json")
+const card = require("../data/card.json")
 module.exports = new Command({
     name: "blackjack",
     description: "lets go gambling",
+    alias:["bj"],
 
     async run(message, args, client) {
         var mode = args.slice(1).join(" ").toLowerCase();
