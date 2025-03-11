@@ -174,5 +174,5 @@ function calTotal(a){
     for (let i = 0; i < a.length; i++){
         if (a[i] == 1) {count++} else total = total + a[i];
     }
-    if (count == 0) {return total} else {if (total + count > 10) {return total + count} else {return total + count + 10}}
+    if (count == 0) {return total} else {if (total + count - 1 > 10) {return total + count} else {return total + count + 10}}
 }
