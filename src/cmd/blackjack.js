@@ -54,7 +54,7 @@ module.exports = new Command({
             if (f[5] > 10){sf[5] = 10} else sf[5] = f[5];
 
             var play = calTotal(val.slice(0,2));
-            message.channel.send("Starting block: " + play);
+            //message.channel.send("Starting block: " + play);
             //message.channel.send(val[0],val[1],val[2],val[3],val[4]);
 
             for await (const msg of collector) {
@@ -145,6 +145,11 @@ module.exports = new Command({
                     }
                     if(tt>play && tt<=21){
                         message.channel.send(`**Angelina got higher hand, you lost**`);
+                        collector.stop();
+                        break;
+                    }
+                    if(tt <= 21 && i == 5){
+                        message.channel.send(`**Angelina won by  5-Cards Charlie rule**`);
                         collector.stop();
                         break;
                     }

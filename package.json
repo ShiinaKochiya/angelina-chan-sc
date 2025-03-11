@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SakuraKaslana/angelina-chan-sc.git"
+    "url": "git+https://github.com/ShiinaKochiya/angelina-chan-sc.git"
   },
   "keywords": [
     "discord",
@@ -32,7 +32,7 @@
     "arknights"
   ],
   "bugs": {
-    "url": "https://github.com/SakuraKaslana/angelina-chan-sc/issues"
+    "url": "https://github.com/ShiinaKochiya/angelina-chan-sc/issues"
   },
-  "homepage": "https://github.com/SakuraKaslana/angelina-chan-sc#readme"
+  "homepage": "https://github.com/ShiinaKochiya/angelina-chan-sc#readme"
 }
