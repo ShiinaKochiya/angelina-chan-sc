@@ -48,9 +48,8 @@ module.exports = new Command({
                 inDeck[i] = cardData[suit][num];
                 inDeckDisplay[i] = card[suit][num];
             }
-
-            console.log(inDeck);
-            console.log(inDeckDisplay);
+            //console.log(inDeck);
+            //console.log(inDeckDisplay);
 
             //dealing Angelina cards
             ange_card[0] = inDeck[0];
@@ -59,27 +58,30 @@ module.exports = new Command({
             for (let i = 2; i < 7; i++){
                 ange_card[i] = inDeck[i+2]
             }
-            console.log(`ange deck:`)
-            console.log(ange_card)
+            //console.log(`ange deck:`)
+            //console.log(ange_card)
 
             //dealing player cards
             for (let i = 0; i < 7; i++){
                 playerCard[i] = inDeck[i+2]
             }
-            console.log(`player deck:`)
-            console.log(playerCard)
+            //console.log(`player deck:`)
+            //console.log(playerCard)
 
-            console.log(`-------------------------------------------`)
+            //console.log(`-------------------------------------------`)
             
             var hand1 = Hand.solve(ange_card)
             var hand2 = Hand.solve(playerCard)
             var winner = Hand.winners([hand1, hand2]);
 
-            if (winner[0].descr == hand1.descr) {winnr = 1} else {winnr = 2}
-            console.log(winner[0].descr)
+            if (winner[0].descr == hand1.descr && winner[0].descr == hand2.descr) {winnr = 3} else if (winner[0].descr == hand1.descr) {winnr = 1} else if (winner[0].descr == hand2.descr) {winnr = 2}
+            //console.log(winner[0].descr)
 
             message.channel.send(`Poker game in progress\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]}\nPot value: ${pot} (Angelina big blind: 20)\n--------------------------------------\nNext round is the Turn card\n--------------------------------------\nMessage \`call\` to call a bet, \`raise\` to raise a bet, \`check\` to check or \`fold\` to abandon the current hand`)
-
+            if (mode == "show"){
+                let handTemp = Hand.solve(playerCard.slice(0,round + 4))
+                message.channel.send(`Your current best hand: ${handTemp.descr}`)
+            }
             for await (const msg of collector) {
                 //Calling case
             if (msg.content.toLowerCase() == "call") {
@@ -134,16 +136,26 @@ module.exports = new Command({
                     case 2:
                         message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]}\nPot value: ${pot}\n--------------------------------------\nNext round is the River card`)
                         break;
+                        
                     case 3:
                         message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]},${inDeckDisplay[8]}\nPot value: ${pot}\n--------------------------------------\nShowdown soon`)
                         break;
                     default:
                         message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]},${inDeckDisplay[8]}\nAngelina cards: ${inDeckDisplay[0]}, ${inDeckDisplay[1]}\nPot value: ${pot}\n--------------------------------------\nShowdown commencing`)
-                        if (winnr == 1) {message.channel.send(`Angelina won by ${winner[0].descr}`)} else {message.channel.send(`You won by ${winner[0].descr}`)}
+                        if (winnr == 1) {message.channel.send(`Angelina won by ${winner[0].descr}`)} else if (winnr == 2){message.channel.send(`You won by ${winner[0].descr}`)}
+                        else if(winnr == 3){
+                            let res = checkEqual(inDeck[0], inDeck[1], inDeck[2], inDeck[3]);
+                            if (res == 1){message.channel.send("You won by higher cards")} else if (res == 2){message.channel.send("Angelina won by higher cards")} else {message.channel.send("Both player got the same hand and cards, pot are splitted equally")}
+                        }
                         collector.stop();
                         angeTurn = false;
+                        
                 }
                 betEnd = false;
+                if (mode == "show" && round <4){
+                    let handTemp = Hand.solve(playerCard.slice(0,round + 4))
+                    message.channel.send(`Your current best hand: ${handTemp.descr}`)
+                }
             }
             //Angelina functions:
             
@@ -163,8 +175,8 @@ module.exports = new Command({
                     default:
                         score = 0;
                 }
-                score = hand.rank + 5
-                console.log(score)
+                score = hand.rank + 7
+                //console.log(score)
                 angeTurn = false;
                 let choice = Math.floor(Math.random() * 100)+1;
                 if (choice > score * 10){
@@ -208,3 +220,63 @@ module.exports = new Command({
         message.channel.send(`Angelina best hand: ${hand1.descr}\nYour best hand: ${hand2.descr}`)
     }
 });
+
+function checkEqual(p1,p12,p2,p22){
+    var num = [];
+    num[1] = p1.slice(0,1);
+    num[2] = p12.slice(0,1);
+    num[3] = p2.slice(0,1);
+    num[4] = p22.slice(0,1);
+    for (let i = 1; i < 5; i++){
+        switch(num[i]){
+            case "2": 
+                num[i] = 0;
+                break;
+            case "3": 
+                num[i] = 1;
+                break;
+            case "4": 
+                num[i] = 2;
+                break;
+            case "5": 
+                num[i] = 3;
+                break;
+            case "6": 
+                num[i] = 4;
+                break;
+            case "7": 
+                num[i] = 5;
+                break;
+            case "8": 
+                num[i] = 6;
+                break;
+            case "9": 
+                num[i] = 7;
+                break;
+            case "T": 
+                num[i] = 8;
+                break;
+            case "J": 
+                num[i] = 9;
+                break;
+            case "Q": 
+                num[i] = 10;
+                break;
+            case "K": 
+                num[i] = 11;
+                break;
+            case "A": 
+                num[i] = 12;
+                break;
+            default:
+                num[i] = 0;
+        }
+        if (num[1]>num[3] || num[1]>num[4] || num[2]>num[3] || num[2]>num[4]){
+            return 1;
+        } else if (num[1]<num[3] || num[1]<num[4] || num[2]<num[3] || num[2]<num[4]){
+            return 2;
+        } else if (num[1]==num[3] || num[1]==num[4] || num[2]==num[3] || num[2]==num[4]){
+            return 3;
+        }
+    }
+}
