@@ -21,12 +21,14 @@ module.exports = new Command({
             var inDeckDisplay = [];
             var pot = 30;
             var round = 1
-            var callValid = false;
             var raised = false;
             var checkCont = false;
             var angeTurn = false;
-            var betEnd = false;
+            var betRoundEnd = false;
+            var startingBet = true;
             let winnr = 0;
+            userIndex = message.author.id % 1000000000;
+            if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
 
             //generating deck
             let temp = Math.floor(Math.random() * 4)+1;
@@ -83,28 +85,48 @@ module.exports = new Command({
                 message.channel.send(`Your current best hand: ${handTemp.descr}`)
             }
             for await (const msg of collector) {
+                //Starting bet case
+            if (msg.content.toLowerCase() == "bet") {
+                if (startingBet == false){
+                    message.channel.send("Cannot bet, round starting bet passed")
+                } else if (!isNotBankrupt(global.userCost[userIndex], "bet")){
+                    message.channel.send("Not enough money, cannot bet anymore")
+                } else {
+                    pot = pot + 20;
+                    global.userCost[userIndex] = global.userCost[userIndex] - 20;
+                    message.channel.send(`Player bet 20 bits. Pot: ${pot}`)
+                    startingBet = false;
+                }
+            }
                 //Calling case
             if (msg.content.toLowerCase() == "call") {
-                if (callValid == false){
+                if (raised == false){
                     message.channel.send("Invalid call, no raise were dropped")
+                } else if (!isNotBankrupt(global.userCost[userIndex], "call")){
+                    message.channel.send("Not enough money, cannot call anymore")
                 } else {
-                    callValid = false;
                     raised = false;
-                    pot = pot + 20;
-                    message.channel.send(`Player called 20 bits, proceeds to next round. Pot: ${pot}`)
+                    pot = pot + 40;
+                    global.userCost[userIndex] = global.userCost[userIndex] - 40;
+                    message.channel.send(`Player called 40 bits, proceeds to next round. Pot: ${pot}`)
                     round++;
                     angeTurn = true;
-                    betEnd = true;
+                    startingBet = false;
+                    betRoundEnd = true;
                 }
             }
             //Raising case
             if (msg.content.toLowerCase() == "raise") {
-                pot = pot + 20;
-                callValid = true;
-                raised = true;
-                angeTurn = true;
-                checkCont = false;
-                message.channel.send(`Player raised 20 bits. Pot: ${pot}`)
+                if (!isNotBankrupt(global.userCost[userIndex], "raise")){
+                    message.channel.send("Not enough money, cannot raise anymore")
+                } else {
+                    pot = pot + 40;
+                    raised = true;
+                    angeTurn = true;
+                    checkCont = false;
+                    startingBet = false;
+                    message.channel.send(`Player raised by 20 bits. Pot: ${pot}`)
+                }
             }
             //Checking case
             if (msg.content.toLowerCase() == "check") {
@@ -116,42 +138,51 @@ module.exports = new Command({
                         round++;
                         checkCont = false;
                         angeTurn = true;
-                        betEnd = true;
+                        betRoundEnd = true;
                     } else {
                         checkCont = true;
                         message.channel.send("You checked");
                         angeTurn = true;
-                        callValid = false;
+                        raised = false;
+                        startingBet = false;
                     }
                 }
             }
+            
             //Folding case
             if (msg.content.toLowerCase() == "fold") {
                 message.channel.send("You folded");
                 collector.stop();
             }
+
              //changing rounds
-             while(betEnd == true){
+             while(betRoundEnd == true){
                 switch(round){
                     case 2:
                         message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]}\nPot value: ${pot}\n--------------------------------------\nNext round is the River card`)
+                        startingBet = true;
                         break;
                         
                     case 3:
                         message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]},${inDeckDisplay[8]}\nPot value: ${pot}\n--------------------------------------\nShowdown soon`)
+                        startingBet = true;
                         break;
                     default:
                         message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]},${inDeckDisplay[8]}\nAngelina cards: ${inDeckDisplay[0]}, ${inDeckDisplay[1]}\nPot value: ${pot}\n--------------------------------------\nShowdown commencing`)
+                        startingBet = true;
                         if (winnr == 1) {message.channel.send(`Angelina won by ${winner[0].descr}`)} else if (winnr == 2){message.channel.send(`You won by ${winner[0].descr}`)}
                         else if(winnr == 3){
                             let res = checkEqual(inDeck[0], inDeck[1], inDeck[2], inDeck[3]);
-                            if (res == 1){message.channel.send("You won by higher cards")} else if (res == 2){message.channel.send("Angelina won by higher cards")} else {message.channel.send("Both player got the same hand and cards, pot are splitted equally")}
+                            if (res == 1){
+                                message.channel.send("You won by higher cards");
+                                global.userCost[userIndex] = global.userCost[userIndex] + pot;
+                            } else if (res == 2){message.channel.send("Angelina won by higher cards")} else {message.channel.send("Both player got the same hand and cards, pot are splitted equally")}
                         }
                         collector.stop();
                         angeTurn = false;
                         
                 }
-                betEnd = false;
+                betRoundEnd = false;
                 if (mode == "show" && round <4){
                     let handTemp = Hand.solve(playerCard.slice(0,round + 4))
                     message.channel.send(`Your current best hand: ${handTemp.descr}`)
@@ -182,30 +213,39 @@ module.exports = new Command({
                 if (choice > score * 10){
                     message.channel.send("Angelina folded, you win")
                     message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]},${inDeckDisplay[8]}\nAngelina cards: ${inDeckDisplay[0]}, ${inDeckDisplay[1]}\nPot value: ${pot}`)
+                    global.userCost[userIndex] = global.userCost[userIndex] + pot;
                     collector.stop();
                 } else {
                     choice = Math.floor(Math.random() * 100)+1;
                     if(choice > 50){
-                        pot = pot + 20;
-                        message.channel.send(`Angelina raised 20. Pot: ${pot}`)
-                        callValid = true;
-                        raised = true;
-                        checkCont = false;
+                        let chanceTemp = Math.floor(Math.random() * 100)+1;
+                        if (chanceTemp < 50) {
+                            pot = pot + 40;
+                            message.channel.send(`Angelina raised by 20. Pot: ${pot}`)
+                            raised = true;
+                            checkCont = false;
+                            startingBet = false;
+                        } else {
+                            pot = pot + 20;
+                            message.channel.send(`Angelina betted 20. Pot: ${pot}`)
+                            startingBet = false;
+                        }
                     } else {
                         if(checkCont == true){
                             message.channel.send("Both player checked, proceed to next round");
                             round++;
                             checkCont = false;
-                            betEnd = true;
-                        } else if (callValid == true){
-                            callValid = false;
+                            betRoundEnd = true;
+                        } else if (raised == true){
                             raised = false;
-                            pot = pot + 20;
+                            pot = pot + 40;
                             message.channel.send(`Angelina called 20 bits. Betting round ends. Pot: ${pot}`)
                             round++;
-                            betEnd = true;
+                            betRoundEnd = true;
+                            betRoundEnd = true;
                         } else {
                             message.channel.send("Angelina checked");
+                            betRoundEnd = true;
                             checkCont = true;
                         }
                     }
@@ -278,5 +318,15 @@ function checkEqual(p1,p12,p2,p22){
         } else if (num[1]==num[3] || num[1]==num[4] || num[2]==num[3] || num[2]==num[4]){
             return 3;
         }
+    }
+}
+
+function isNotBankrupt(money, type){
+    if(type == "bet"){
+        if (money < 20) {return false} else {return true};
+    } else if(type == "raise"){
+        if (money < 40) {return false} else {return true};
+    } else if(type == "call"){
+        if (money < 40) {return false} else {return true};
     }
 }
