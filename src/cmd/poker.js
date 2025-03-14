@@ -11,7 +11,13 @@ module.exports = new Command({
         //var hand = Hand.solve([`8d`, `7h`, `9s` , `2h` , '9d']);
         //console.log(hand.name);
         var mode = args.slice(1).join(" ").toLowerCase();
-        const collector = message.channel.createMessageCollector(
+        userIndex = message.author.id % 1000000000;
+        if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
+
+        if (global.userCost[userIndex] < 40){
+            message.channel.send("Not enough bits! Cannot play")
+        } else {
+            const collector = message.channel.createMessageCollector(
             msg => msg.author.id == message.author.id,
             {time: 6000}
           );
@@ -27,8 +33,9 @@ module.exports = new Command({
             var betRoundEnd = false;
             var startingBet = true;
             let winnr = 0;
-            userIndex = message.author.id % 1000000000;
-            if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
+            
+            //entry cost
+            global.userCost[userIndex] = global.userCost[userIndex]  - 200;
 
             //generating deck
             let temp = Math.floor(Math.random() * 4)+1;
@@ -79,7 +86,7 @@ module.exports = new Command({
             if (winner[0].descr == hand1.descr && winner[0].descr == hand2.descr) {winnr = 3} else if (winner[0].descr == hand1.descr) {winnr = 1} else if (winner[0].descr == hand2.descr) {winnr = 2}
             //console.log(winner[0].descr)
 
-            message.channel.send(`Poker game in progress\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]}\nPot value: ${pot} (Angelina big blind: 20)\n--------------------------------------\nNext round is the Turn card\n--------------------------------------\nMessage \`call\` to call a bet, \`raise\` to raise a bet, \`check\` to check or \`fold\` to abandon the current hand`)
+            message.channel.send(`Poker game in progress\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]}\nPot value: ${pot} (Angelina big blind: 20)\n--------------------------------------\nNext round is the Turn card\n--------------------------------------\nMessage \`bet\` to place a starting bet, \`call\` to call a bet, \`raise\` to raise a bet, \`check\` to check or \`fold\` to abandon the current hand`)
             if (mode == "show"){
                 let handTemp = Hand.solve(playerCard.slice(0,round + 4))
                 message.channel.send(`Your current best hand: ${handTemp.descr}`)
@@ -96,6 +103,9 @@ module.exports = new Command({
                     global.userCost[userIndex] = global.userCost[userIndex] - 20;
                     message.channel.send(`Player bet 20 bits. Pot: ${pot}`)
                     startingBet = false;
+                    angeTurn = true;
+                    checkCont = false;
+                    raised = false;
                 }
             }
                 //Calling case
@@ -219,15 +229,17 @@ module.exports = new Command({
                     choice = Math.floor(Math.random() * 100)+1;
                     if(choice > 50){
                         let chanceTemp = Math.floor(Math.random() * 100)+1;
-                        if (chanceTemp < 50) {
+                        if (chanceTemp < 50 && startingBet == true) {
+                            pot = pot + 20;
+                            message.channel.send(`Angelina betted 20. Pot: ${pot}`)
+                            startingBet = false;
+                            checkCont = false;
+                            raised = false;
+                        } else {
                             pot = pot + 40;
                             message.channel.send(`Angelina raised by 20. Pot: ${pot}`)
                             raised = true;
                             checkCont = false;
-                            startingBet = false;
-                        } else {
-                            pot = pot + 20;
-                            message.channel.send(`Angelina betted 20. Pot: ${pot}`)
                             startingBet = false;
                         }
                     } else {
@@ -245,7 +257,6 @@ module.exports = new Command({
                             betRoundEnd = true;
                         } else {
                             message.channel.send("Angelina checked");
-                            betRoundEnd = true;
                             checkCont = true;
                         }
                     }
@@ -258,6 +269,7 @@ module.exports = new Command({
           // manually stop it with collector.stop())
         message.reply(`Game over`);
         message.channel.send(`Angelina best hand: ${hand1.descr}\nYour best hand: ${hand2.descr}`)
+        }
     }
 });
 
@@ -328,5 +340,7 @@ function isNotBankrupt(money, type){
         if (money < 40) {return false} else {return true};
     } else if(type == "call"){
         if (money < 40) {return false} else {return true};
+    } else if(type == "entry"){
+        if (money < 10) {return false} else {return true};
     }
 }

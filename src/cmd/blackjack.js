@@ -9,7 +9,9 @@ module.exports = new Command({
         var mode = args.slice(1).join(" ").toLowerCase();
         userIndex = message.author.id % 1000000000;
         if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
-        if (!isNotBankrupt(global.userCost[userIndex])){
+        if (global.userCost[userIndex] < 40){
+            message.channel.send("Not enough bits! Cannot play")
+        } else {
         const collector = message.channel.createMessageCollector(
             msg => msg.author.id == message.author.id,
             {time: 6000}
@@ -173,7 +175,8 @@ module.exports = new Command({
         }
           // This will be sent when the collector ends (when time runs out or if you
           // manually stop it with collector.stop())
-        message.reply(`Game over`);} else message.reply(`Not enough bits to play!`)
+        message.reply(`Game over`);} 
+        
     }
 });
 

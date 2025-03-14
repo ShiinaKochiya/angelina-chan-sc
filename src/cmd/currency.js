@@ -9,6 +9,6 @@ module.exports = new Command({
     async run(message, args, client) {
         userIndex = message.author.id % 1000000000;
         if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
-        message.reply(`Your current balance: ${global.userCost[userIndex]}`)
+        message.reply(`Your current bits balance: ${global.userCost[userIndex]}`)
     }
 });
