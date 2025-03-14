@@ -15,6 +15,7 @@ module.exports = new Command({
             var s =[];
             var sf = [];
             var val = [];
+            userIndex = message.author.id % 1000000000;
 
             var num = Math.floor(Math.random() * 13)+1;
             var suit = Math.floor(Math.random() * 4)+1;
@@ -62,6 +63,7 @@ module.exports = new Command({
             if (bjcheck(val[0], val[1])){
                 message.channel.send("**You got a black jack. Auto win**");
                 collector.stop();
+                playerWon();
                 break;
             }
             if (msg.content.toLowerCase() == "hit") {
@@ -71,6 +73,7 @@ module.exports = new Command({
                     var play = calTotal(val.slice(0,3));
                     if (play > 21){
                         message.channel.send(`You busted. Total value was ${play}`);
+                        playerLost();
                         collector.stop()
                     }
                     message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}, ${card[suit2][num2]}\nAngelina: ${card[s[1]][f[1]]}`);;
@@ -79,6 +82,7 @@ module.exports = new Command({
                     var play = calTotal(val.slice(0,4));
                     if (play > 21){
                         message.channel.send(`You busted. Total value was ${play}`);
+                        playerLost();
                         collector.stop()
                         }
                     message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}, ${card[suit2][num2]}, ${card[suit3][num3]}\nAngelina: ${card[s[1]][f[1]]}`);;
@@ -87,10 +91,12 @@ module.exports = new Command({
                     var play = calTotal(val.slice(0,5));
                     if (play > 21){
                         message.channel.send(`You busted. Total value was ${play}`); 
+                        playerLost();
                         collector.stop()
                     } 
                     else if(play <= 21){
                         message.channel.send(`You won by 5-cards Charlie. Total value was ${play}`); 
+                        playerWon();
                         collector.stop()
                     } 
                     message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}, ${card[suit2][num2]}, ${card[suit3][num3]}, ${card[suit4][num4]}\nAngelina: ${card[s[1]][f[1]]}`);;
@@ -116,6 +122,7 @@ module.exports = new Command({
                 for (let i = 2; i<=5; i++){
                     if(play<16){
                         message.channel.send("You did not met the 16 requirement. You busted");
+                        playerLost();
                         message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}\nAngelina: ${card[s[1]][f[1]]}, ${card[s[2]][f[2]]}`)
                         collector.stop();
                         break;
@@ -132,6 +139,7 @@ module.exports = new Command({
                         if (bjcheck(sf[1], sf[2])){
                             message.channel.send("**Angelina got a black jack. You lose**");
                             collector.stop();
+                            playerLost();
                             break;
                         }
                     if(tt <= play){
@@ -140,16 +148,19 @@ module.exports = new Command({
                     if(tt>21){
                         message.channel.send(`**Angelina busted, you win**`);
                         collector.stop();
+                        playerWon();
                         break;
                     }
                     if(tt>play && tt<=21){
                         message.channel.send(`**Angelina got higher hand, you lost**`);
                         collector.stop();
+                        playerLost();
                         break;
                     }
                     if(tt <= 21 && i == 5){
                         message.channel.send(`**Angelina won by  5-Cards Charlie rule**`);
                         collector.stop();
+                        playerLost();
                         break;
                     }
                 }
@@ -174,4 +185,16 @@ function calTotal(a){
         if (a[i] == 1) {count++} else total = total + a[i];
     }
     if (count == 0) {return total} else {if (total + count - 1 > 10) {return total + count} else {return total + count + 10}}
+}
+
+function isNotBankrupt(money, type){
+        if (money < 40) {return false} else {return true};
+}
+
+function playerWon(){
+    global.userCost[userIndex] = global.userCost[userIndex] + 40;
+}
+
+function playerLost(){
+    global.userCost[userIndex] = global.userCost[userIndex] - 40;
 }
