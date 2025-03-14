@@ -20,10 +20,8 @@ module.exports = new Command({
 
             message.channel.send("Successfully redeemed 350 bits!");
 
-        // Adds the user to the set so that they can't talk for a minute
         redeemed.add(message.author.id);
         setTimeout(() => {
-          // Removes the user from the set after a minute
           redeemed.delete(message.author.id);
         }, 43200000);
         }
