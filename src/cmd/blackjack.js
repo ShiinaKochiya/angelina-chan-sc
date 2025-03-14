@@ -16,6 +16,7 @@ module.exports = new Command({
             var sf = [];
             var val = [];
             userIndex = message.author.id % 1000000000;
+            if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
 
             var num = Math.floor(Math.random() * 13)+1;
             var suit = Math.floor(Math.random() * 4)+1;
