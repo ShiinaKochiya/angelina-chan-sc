@@ -7,6 +7,9 @@ module.exports = new Command({
 
     async run(message, args, client) {
         var mode = args.slice(1).join(" ").toLowerCase();
+        userIndex = message.author.id % 1000000000;
+        if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
+        if (!isNotBankrupt(global.userCost[userIndex])){
         const collector = message.channel.createMessageCollector(
             msg => msg.author.id == message.author.id,
             {time: 6000}
@@ -15,8 +18,7 @@ module.exports = new Command({
             var s =[];
             var sf = [];
             var val = [];
-            userIndex = message.author.id % 1000000000;
-            if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
+
 
             var num = Math.floor(Math.random() * 13)+1;
             var suit = Math.floor(Math.random() * 4)+1;
@@ -171,7 +173,7 @@ module.exports = new Command({
         }
           // This will be sent when the collector ends (when time runs out or if you
           // manually stop it with collector.stop())
-        message.reply(`Game over`);
+        message.reply(`Game over`);} else message.reply(`Not enough bits to play!`)
     }
 });
 
@@ -188,7 +190,7 @@ function calTotal(a){
     if (count == 0) {return total} else {if (total + count - 1 > 10) {return total + count} else {return total + count + 10}}
 }
 
-function isNotBankrupt(money, type){
+function isNotBankrupt(money){
         if (money < 40) {return false} else {return true};
 }
 
