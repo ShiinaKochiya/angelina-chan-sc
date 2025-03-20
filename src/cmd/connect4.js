@@ -8,7 +8,7 @@ module.exports = new Command({
     async run(message, args, client) {
             var playfield = [[]]
             var playfieldDisplay = [[]]
-            const collector = message.channel.createMessageCollector(
+          const collector = message.channel.createMessageCollector(
             msg => msg.author.id == message.author.id,
             {time: 6000}
           );
@@ -23,12 +23,43 @@ module.exports = new Command({
     }
 });
 
-function checkWin(posx, posy){
+function checkWin(posx, posy, type){
   var win = false;
   //X pos: 3 or lower
-  if (pox < 4){
+  if (posx < 4){
     //Y pos: 3 or lower
+    if (posy < 4) {
+      if (checkRight(posx, posy, type) || checkTop(posx, posy, type) || checkTopRight(posx, posy, type)) {win = true}
+    }
+    //Y pos: 4 or higher
+    else if (posy > 3) {
+      if (checkRight(posx, posy, type) || checkBot(posx, posy, type) || checkBotRight(posx, posy, type)) {win = true}
+    }
   }
+  //X pos: 5 or higher
+  else if (posx > 4){
+    //Y pos: 3 or lower
+    if (posy < 4) {
+      if (checkLeft(posx, posy, type) || checkTop(posx, posy, type) || checkTopLeft(posx, posy, type)) {win = true}
+    }
+    //Y pos: 4 or higher
+    else if (posy > 3) {
+      if (checkLeft(posx, posy, type) || checkBot(posx, posy, type) || checkBotLeft(posx, posy, type)) {win = true}
+    }
+  }
+  //X pos: 4
+  else if (posx == 4){
+    //Y pos: 3 or lower
+    if (posy < 4) {
+      if (checkLeft(posx, posy, type) || checkTop(posx, posy, type) || checkTopLeft(posx, posy, type) || checkRight(posx, posy, type) || checkTopRight(posx, posy, type)) {win = true}
+    }
+    //Y pos: 4 or higher
+    else if (posy > 3) {
+      if (checkLeft(posx, posy, type) || checkBot(posx, posy, type) || checkBotLeft(posx, posy, type) || checkRight(posx, posy, type) || checkBotRight(posx, posy, type)) {win = true}
+    }
+  }
+
+
 }
 
 function checkLeft(posX,posY, playerType){
