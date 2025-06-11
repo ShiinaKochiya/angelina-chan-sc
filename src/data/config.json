@@ -1,6 +1,6 @@
 {
     "token": "token",
-    "prefix": "s!",
+    "prefix": "a!",
     "adminRoles": ["role 1", "Admin role 2","Admin role n"],
     "saucenaoAPIkey": "key"
 
