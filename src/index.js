@@ -87,6 +87,10 @@ client.on("messageCreate", message => {
 	//console.log(message.author.tag,"in ",message.channel.name,`: `, message.content);
 
 	if (message.author.bot) return;
+	
+	if (message.content == "b!kho"){
+		message.reply(`<@${message.author.id}> thấy ca này khó`)
+	}
 
 	//if (!start === config.prefix) return;
 
