@@ -18,6 +18,10 @@ const fs = require("fs");
 
 const axios = require('axios');
 
+require('dotenv').config();
+//testing with mongo
+
+
 global.ratePity = 0;
 global.userPity = [0];
 global.userCost = [0];

@@ -8,7 +8,7 @@ module.exports = new Command({
     async run(message, args, client) {
         const now = new Date();
         var date_now = now.valueOf()
-        var date_future = 1671901200000
+        var date_future = 1766632574000
         if (date_now < date_future){
         var delta = Math.abs(date_future - date_now) / 1000;
         var days = Math.floor(delta / 86400);
@@ -18,7 +18,7 @@ module.exports = new Command({
         delta -= hours * 3600;
         
         message.reply(`There's ${days} days and ${hours} hours left until Christmas`);}
-	else if (date_now >= date_future && date_now < 1671987600000) {message.reply(`Merry Christmas!`);}
+	else if (date_now >= date_future && date_now < 1766632574000) {message.reply(`Merry Christmas!`);}
 	else {message.reply(`Christmas's done already, go wait for new year's`);}
 	var time = new Date().toLocaleTimeString('en-US', { hour12: false,
                                                  hour: "numeric",

@@ -2,7 +2,8 @@ const Command = require("../structures/Command.js");
 const {MessageEmbed} = require('discord.js')
 const pityTable = require('../data/pity.json');
 const charList = require('../data/op_list.json');
-
+const mongoose = require("../mongoose.js")
+const schema = require("../schema.js")
 
 module.exports = new Command({
     name: "headhunt",
@@ -20,18 +21,36 @@ module.exports = new Command({
         var lim = 10;
         if (banner == "100"){lim = 100}
         let op = [];
-        pityIndex = message.author.id % 1000000000;
-        if (global.userPity[pityIndex] == undefined){global.userPity[pityIndex] = 0};
+        
+        
+        const userPity = await schema.findOne({userID: message.author.id}).exec();
+        
+        if (!userPity){
+            const userPityNew = new schema(
+                {
+                    "userID": message.author.id,
+                    "wuwaPity": 0,
+                    "arknightsPity": 0
+                });
+            await userPityNew.save();
+
+        }
+
+        const actualPity = await schema.findOne({userID: message.author.id}).exec();
+        
+        
+
+        
         
         while (i<lim){
         var numba = Math.floor(Math.random() * 100)+1;
         if(banner == "angie" || banner == "ø"){numba = 100}
         //console.log(rate3, rate4, rate5, rate6)
-        if(global.userPity[pityIndex]>50){
-            var rate3 = pityTable[global.userPity[pityIndex]].rate3;
-            var rate4 = pityTable[global.userPity[pityIndex]].rate4;
-            var rate5 = pityTable[global.userPity[pityIndex]].rate5;
-            var rate6 = pityTable[global.userPity[pityIndex]].rate6;
+        if(actualPity.arknightsPity>50){
+            var rate3 = pityTable[actualPity.arknightsPity].rate3;
+            var rate4 = pityTable[actualPity.arknightsPity].rate4;
+            var rate5 = pityTable[actualPity.arknightsPity].rate5;
+            var rate6 = pityTable[actualPity.arknightsPity].rate6;
         } else {
             var rate3 = pityTable.default.rate3;
             var rate4 = pityTable.default.rate4;
@@ -41,22 +60,22 @@ module.exports = new Command({
             //3 stars
             if (numba < rate3){
                 var result = Math.floor(Math.random() * 17)+1;
-                global.userPity[pityIndex] = global.userPity[pityIndex] + 1;
+                actualPity.arknightsPity = actualPity.arknightsPity + 1;
                 var newLength = op.push(charList.star3[result].opName)
             } //4 stars
                 else if (numba < (rate3 + rate4)){
                     var result = Math.floor(Math.random() * 47)+1;
-                    global.userPity[pityIndex] = global.userPity[pityIndex] + 1;
+                    actualPity.arknightsPity = actualPity.arknightsPity + 1;
                     var newLength = op.push(charList.star4[result].opName)
             } //5 stars
                 else if (numba < (rate3+rate4+rate5)){
-                    global.userPity[pityIndex] = global.userPity[pityIndex] + 1;
+                    actualPity.arknightsPity = actualPity.arknightsPity + 1;
                     var result = Math.floor(Math.random() * 94)+1;
                     var newLength = op.push(charList.star5[result].opName)
                 } // 6 stars
                 else {
                     var result = Math.floor(Math.random() * 69)+1;
-                    global.userPity[pityIndex] = 0;
+                    actualPity.arknightsPity = 0;
                     
                     if(banner == "angie"){var newLength = op.push(charList.star6[8].opName)} else
                     {
@@ -70,13 +89,13 @@ module.exports = new Command({
 
     }
     //message.reply(`Result:\n${op[1]}\n${op[2]}\n${op[3]}\n${op[4]}\n${op[5]}\n${op[6]}\n${op[7]}\n${op[8]}\n${op[9]}\n${op[10]}`)  
-    if (global.userPity[pityIndex] > 50) {rate6 = rate6 + 2};
+    if (actualPity.arknightsPity > 50) {rate6 = rate6 + 2};
 
     if (banner == "angie"){
         var finalPity = "Angelina";
         var finalRate = "Angelina";
     } else {    
-        var finalPity = global.userPity[pityIndex];
+        var finalPity = actualPity.arknightsPity;
         var finalRate = rate6;
     }
     if (banner !== "100"){
@@ -116,6 +135,16 @@ module.exports = new Command({
         minute: "numeric",
         second: "numeric"})
     console.log("[",time,"]", message.author.tag,"wanted to gamble")
+    console.log(actualPity.arknightsPity)
+    await actualPity.save(); //Move this to wherever the headhunt is done
     //message.reply(`Test statement: Op 6 star no. 15 is ${charList.star6[15].opName} and pity at roll 83 has the rate of ${pityTable[83].rate6}`)
   }
 });
+
+
+/**\
+ * list need to do:
+ * 1. add mongo
+ * 2. convert old pity to new
+ * 3. uhh idk
+ */

@@ -1,6 +1,8 @@
 const Command = require("../structures/Command.js");
-const mergeImg = require('merge-img')
-const sharp = require('sharp');
+const mergeImg = require('merge-img');
+const sharp = require("sharp")
+const mongoose = require("../mongoose.js")
+const schema = require("../schema.js")
 
 module.exports = new Command({
     name: "convene",
@@ -10,6 +12,24 @@ module.exports = new Command({
 
         var arg = args.slice(1).join(" ").toLowerCase();
 
+        const userPity = await schema.findOne({userID: message.author.id}).exec();
+        
+        if (!userPity){
+            const userPityNew = new schema(
+                {
+                    "userID": message.author.id,
+                    "wuwaPity": 0,
+                    "arknightsPity": 0
+                });
+            await userPityNew.save();
+
+        }
+
+        const actualPity = await schema.findOne({userID: message.author.id}).exec();
+        actualPity.wuwaPity++;
+        await actualPity.save();
+
+        console.log(actualPity.wuwaPity)
         if (arg == ""){
             const charlist = ['brat', 'camel', 'canta', 'cartwheel', 'changli', 'charcoal', 'cocacola', 'desuwa', 'encore', 'jian', 'jingshi', 'jiyan', 'lingyang', 'lupo', 'pheb', 'roccia', 'shore', 'verina', 'xiangli', 'yinlin', 'zani', 'zhezhi']
             let gacha = []
@@ -55,7 +75,14 @@ module.exports = new Command({
             let rate3 = 100 - rate5 - rate4;
             message.reply(`5 stars rate: ${rate5.toFixed(4)}%\n4 stars rate: ${rate4.toFixed(4)}%\n3 stars rate: ${rate3.toFixed(4)}%`);
         }
+        }   
     }
-}
+
     }
 });
+
+
+async function quer(discordId){
+
+
+}
