@@ -16,18 +16,6 @@ const  pitySchema =  new mongoose.Schema({
     }
 })
 
-const moneySchema = new mongoose.Schema({
-    "userID":{
-        type: String,
-        required: true
-    },
-    "money":{
-        type: Number,
-        required: true
-    }
-})
 
 const Pity = mongoose.model("pity", pitySchema);
-const Money = mongoose.model("money", moneySchema);
 module.exports = Pity;
-module.exports = Money;
