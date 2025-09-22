@@ -4,12 +4,22 @@ const pityTable = require("../data/pity.json");
 const charList = require("../data/op_list.json");
 const { getPity, updatePity } = require("../pitySchema.js");
 
+const cooldowns = new Map();
+
 module.exports = new Command({
   name: "headhunt",
   alias: ["gacha"],
   description: "headhunt time",
 
   async run(message, args, client) {
+    const userId = message.author.id;
+    const now = Date.now();
+    const lastUsed = cooldowns.get(userId) || 0;
+    if (now - lastUsed < 1000) {
+      return message.reply("Please wait 1 second before using this command again.");
+    }
+    cooldowns.set(userId, now);
+
     let banner = args.slice(1).join(" ").toLowerCase();
     if (banner === "angelina") banner = "angie";
     if (banner === "ange") banner = "angie";
