@@ -10,6 +10,7 @@
   "author": "Sakura Kaslana",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^6.16.2",
     "axios": "^0.26.0",
     "cron": "^1.8.2",
     "discord.js": "^13.4.0-dev.1636502714.b256ae1",
@@ -39,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/ShiinaKochiya/angelina-chan-sc/issues"
   },
-  "homepage": "https://github.com/ShiinaKochiya/angelina-chan-sc#readme"
+  "homepage": "https://github.com/ShiinaKochiya/angelina-chan-sc#readme",
+  "devDependencies": {
+    "prisma": "^6.16.2"
+  }
 }

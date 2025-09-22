@@ -4,3 +4,4 @@ src/data/config.json
 src/data/wuwa/out.png
 src/data/wuwa/output.png
 src/data/wuwa/wuwa icons
+/src/generated/prisma

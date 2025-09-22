@@ -1,21 +1,32 @@
-const { mongo } = require("mongoose")
-const { mongoose } = require("./mongoose")
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-const  pitySchema =  new mongoose.Schema({
-    "userID": {
-        type: String,
-        required: true
-    },
-    "wuwaPity":{
-        type: Number,
-        required: true
-    },
-    "arknightsPity":{
-        type: Number,
-        required: true
-    }
-})
+async function getPity(userID) {
+  let pity = await prisma.pity.findUnique({
+    where: { userID: userID },
+  });
 
+  if (!pity) {
+    pity = await prisma.pity.create({
+      data: {
+        userID: userID,
+        wuwaPity: 0,
+        arknightsPity: 0,
+      },
+    });
+  }
 
-const Pity = mongoose.model("pity", pitySchema);
-module.exports = Pity;
+  return pity;
+}
+
+async function updatePity(userID, data) {
+  return await prisma.pity.update({
+    where: { userID: userID },
+    data,
+  });
+}
+
+module.exports = {
+  getPity,
+  updatePity
+};

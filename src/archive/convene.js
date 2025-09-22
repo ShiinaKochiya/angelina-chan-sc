@@ -1,8 +1,6 @@
 const Command = require("../structures/Command.js");
 const mergeImg = require('merge-img');
 const sharp = require("sharp")
-const mongoose = require("../mongoose.js")
-const schema = require("../schema.js")
 
 module.exports = new Command({
     name: "convene",
