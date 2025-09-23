@@ -2,8 +2,8 @@ const Command = require("../structures/Command.js");
 const { MessageEmbed } = require("discord.js");
 const pityTable = require("../data/pity.json");
 const charList = require("../data/op_list.json");
-const { getPity, updatePity } = require("../pitySchema.js");
-
+const { getPity, updatePityCache } = require("../pitySchema.js");
+const { naughtyList } = require("../naughtyList.js");
 const cooldowns = new Map();
 
 module.exports = new Command({
@@ -15,10 +15,6 @@ module.exports = new Command({
     const userId = message.author.id;
     const now = Date.now();
     const lastUsed = cooldowns.get(userId) || 0;
-    if (now - lastUsed < 1000) {
-      return message.reply("Please wait 1 second before using this command again.");
-    }
-    cooldowns.set(userId, now);
 
     let banner = args.slice(1).join(" ").toLowerCase();
     if (banner === "angelina") banner = "angie";
@@ -28,7 +24,8 @@ module.exports = new Command({
     let lim = banner === "100" ? 100 : 10;
     let op = [];
 
-    let actualPity = await getPity(message.author.id);
+    // 🔹 Always pulls from cache if available
+    let actualPity = await getPity(userId);
 
     while (i < lim) {
       let numba = Math.floor(Math.random() * 100) + 1;
@@ -76,7 +73,9 @@ module.exports = new Command({
 
     if (actualPity.arknightsPity > 50) {
       var rate6 = pityTable[actualPity.arknightsPity].rate6 + 2;
-    } else {rate6 = 2}
+    } else {
+      rate6 = 2;
+    }
 
     const finalPity = banner === "angie" ? "Angelina" : actualPity.arknightsPity;
     const finalRate = banner === "angie" ? "Angelina" : rate6;
@@ -91,8 +90,17 @@ module.exports = new Command({
 
     message.channel.send({ embeds: [embed] });
 
-    // save pity updates via Prisma
-    await updatePity(message.author.id, { arknightsPity: actualPity.arknightsPity });
+    // 🔹 Update cache immediately so next roll sees the right pity
+    updatePityCache(userId, {
+      arknightsPity: actualPity.arknightsPity,
+      wuwaPity: actualPity.wuwaPity,
+    });
+
+
+    updatePityCache(message.author.id, {
+        arknightsPity: actualPity.arknightsPity,
+        wuwaPity: actualPity.wuwaPity,
+    });
 
     const time = new Date().toLocaleTimeString("en-US", {
       hour12: false,
