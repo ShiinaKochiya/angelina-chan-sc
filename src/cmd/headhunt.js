@@ -12,9 +12,11 @@ module.exports = new Command({
   description: "headhunt time",
 
   async run(message, args, client) {
-    const userId = message.author.id;
-    const now = Date.now();
-    const lastUsed = cooldowns.get(userId) || 0;
+  const maxStar3 = Math.max(...Object.keys(charList.star3).map(Number));
+  const maxStar4 = Math.max(...Object.keys(charList.star4).map(Number));
+  const maxStar5 = Math.max(...Object.keys(charList.star5).map(Number));
+  const maxStar6 = Math.max(...Object.keys(charList.star6).map(Number));
+  const userId = message.author.id;
 
     let banner = args.slice(1).join(" ").toLowerCase();
     if (banner === "angelina") banner = "angie";
@@ -45,19 +47,19 @@ module.exports = new Command({
       }
 
       if (numba < rate3) {
-        const result = Math.floor(Math.random() * 17) + 1;
+        const result = Math.floor(Math.random() * maxStar3) + 1;
         actualPity.arknightsPity++;
         op.push(charList.star3[result].opName);
       } else if (numba < rate3 + rate4) {
-        const result = Math.floor(Math.random() * 48) + 1;
+        const result = Math.floor(Math.random() * maxStar4) + 1;
         actualPity.arknightsPity++;
         op.push(charList.star4[result].opName);
       } else if (numba < rate3 + rate4 + rate5) {
-        const result = Math.floor(Math.random() * 104) + 1;
+        const result = Math.floor(Math.random() * maxStar5) + 1;
         actualPity.arknightsPity++;
         op.push(charList.star5[result].opName);
       } else {
-        const result = Math.floor(Math.random() * 79) + 1;
+        const result = Math.floor(Math.random() * maxStar6) + 1;
         actualPity.arknightsPity = 0;
 
         if (banner === "angie") {
