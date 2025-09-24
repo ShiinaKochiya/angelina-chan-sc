@@ -1,630 +1,751 @@
 {
-    "star6":{
-    "1":{ 
-        "opName": "**[★★★★★★]   Ch'en**"
+    "star6": {
+        "1": {
+            "opName": "**[★★★★★★]   Ch'en**"
         },
-    "2":{ 
-        "opName": "**[★★★★★★]   Siege**"
+        "2": {
+            "opName": "**[★★★★★★]   Siege**"
         },
-    "3":{ 
-        "opName": "**[★★★★★★]   Shining**"
+        "3": {
+            "opName": "**[★★★★★★]   Shining**"
         },
-    "4":{ 
-        "opName": "**[★★★★★★]   Nightingale**"
+        "4": {
+            "opName": "**[★★★★★★]   Nightingale**"
         },
-    "5":{ 
-        "opName": "**[★★★★★★]   Ifrit**"
+        "5": {
+            "opName": "**[★★★★★★]   Ifrit**"
         },
-    "6":{ 
-        "opName": "**[★★★★★★]   Eyjafjalla**"
+        "6": {
+            "opName": "**[★★★★★★]   Eyjafjalla**"
         },
-    "7":{ 
-        "opName": "**[★★★★★★]   Exusiai**"
+        "7": {
+            "opName": "**[★★★★★★]   Exusiai**"
         },
-    "8":{ 
-        "opName": "**[★★★★★★]   Angelina**"
+        "8": {
+            "opName": "**[★★★★★★]   Angelina**"
         },
-    "9":{ 
-        "opName": "**[★★★★★★]   SilverAsh**"
+        "9": {
+            "opName": "**[★★★★★★]   SilverAsh**"
         },
-    "10":{ 
-        "opName": "**[★★★★★★]   Hoshiguma**"
+        "10": {
+            "opName": "**[★★★★★★]   Hoshiguma**"
         },
-    "11":{ 
-        "opName": "**[★★★★★★]   Saria**"
+        "11": {
+            "opName": "**[★★★★★★]   Saria**"
         },
-    "12":{ 
-        "opName": "**[★★★★★★]   Skadi**"
+        "12": {
+            "opName": "**[★★★★★★]   Skadi**"
         },
-    "13":{ 
-        "opName": "**[★★★★★★]   Schwarz**"
+        "13": {
+            "opName": "**[★★★★★★]   Schwarz**"
         },
-    "14":{ 
-        "opName": "**[★★★★★★]   Hellagur**"
+        "14": {
+            "opName": "**[★★★★★★]   Hellagur**"
         },
-    "15":{ 
-        "opName": "**[★★★★★★]   Magallan**"
+        "15": {
+            "opName": "**[★★★★★★]   Magallan**"
         },
-    "16":{ 
-        "opName": "**[★★★★★★]   Mostima**"
+        "16": {
+            "opName": "**[★★★★★★]   Mostima**"
         },
-    "17":{ 
-        "opName": "**[★★★★★★]   Blaze**"
+        "17": {
+            "opName": "**[★★★★★★]   Blaze**"
         },
-    "18":{ 
-        "opName": "**[★★★★★★]   Aak**"
+        "18": {
+            "opName": "**[★★★★★★]   Aak**"
         },
-    "19":{ 
-        "opName": "**[★★★★★★]   Ceobe**"
+        "19": {
+            "opName": "**[★★★★★★]   Ceobe**"
         },
-    "20":{ 
-        "opName": "**[★★★★★★]   Bagpipe**"
+        "20": {
+            "opName": "**[★★★★★★]   Bagpipe**"
         },
-    "21":{ 
-        "opName": "**[★★★★★★]   Phantom**"
+        "21": {
+            "opName": "**[★★★★★★]   Phantom**"
         },
-    "22":{ 
-        "opName": "**[★★★★★★]   Weedy**"
+        "22": {
+            "opName": "**[★★★★★★]   Weedy**"
         },
-    "23":{ 
-        "opName": "**[★★★★★★]   Poca**"
+        "23": {
+            "opName": "**[★★★★★★]   Poca**"
         },
-    "24":{ 
-        "opName": "**[★★★★★★]   Suzuran**"
+        "24": {
+            "opName": "**[★★★★★★]   Suzuran**"
         },
-    "25":{ 
-        "opName": "**[★★★★★★]   Thorns**"
+        "25": {
+            "opName": "**[★★★★★★]   Thorns**"
         },
-    "26":{ 
-        "opName": "**[★★★★★★]   Eunectes**"
+        "26": {
+            "opName": "**[★★★★★★]   Eunectes**"
         },
-    "27":{ 
-        "opName": "**[★★★★★★]   Surtr**"
+        "27": {
+            "opName": "**[★★★★★★]   Surtr**"
         },
-    "28":{ 
-        "opName": "**[★★★★★★]   Blemishine**"
+        "28": {
+            "opName": "**[★★★★★★]   Blemishine**"
         },
-    "29":{ 
-        "opName": "**[★★★★★★]   Mudrock**"
+        "29": {
+            "opName": "**[★★★★★★]   Mudrock**"
         },
-    "30":{ 
-        "opName": "**[★★★★★★]   Mountain**"
+        "30": {
+            "opName": "**[★★★★★★]   Mountain**"
         },
-    "31":{ 
-        "opName": "**[★★★★★★]   Archetto**"
+        "31": {
+            "opName": "**[★★★★★★]   Archetto**"
         },
-    "32":{ 
-        "opName": "**[★★★★★★]   Saga**"
+        "32": {
+            "opName": "**[★★★★★★]   Saga**"
         },
-    "33":{ 
-        "opName": "**[★★★★★★]   Passenger**"
+        "33": {
+            "opName": "**[★★★★★★]   Passenger**"
         },
-    "34":{ 
-        "opName": "**[★★★★★★]   Kal'tsit**"
+        "34": {
+            "opName": "**[★★★★★★]   Kal'tsit**"
         },
-    "35":{ 
-        "opName": "**[★★★★★★]   Pallas**"
+        "35": {
+            "opName": "**[★★★★★★]   Pallas**"
         },
-    "36":{ 
-        "opName": "**[★★★★★★]   Mizuki**"
+        "36": {
+            "opName": "**[★★★★★★]   Mizuki**"
         },
-    "37":{ 
-        "opName": "**[★★★★★★]   Saileach**"
+        "37": {
+            "opName": "**[★★★★★★]   Saileach**"
         },
-    "38":{ 
-        "opName": "**[★★★★★★]   Fartooth**"
+        "38": {
+            "opName": "**[★★★★★★]   Fartooth**"
         },
-    "39":{ 
-        "opName": "**[★★★★★★]   Flametail**"
+        "39": {
+            "opName": "**[★★★★★★]   Flametail**"
         },
-    "40":{ 
-        "opName": "**[★★★★★★]   Gnosis**"
+        "40": {
+            "opName": "**[★★★★★★]   Gnosis**"
         },
-    "41":{ 
-        "opName": "**[★★★★★★]   Lee**"
+        "41": {
+            "opName": "**[★★★★★★]   Lee**"
         },
-    "42":{
-        "opName": "**[★★★★★★]   Carnelian**"
+        "42": {
+            "opName": "**[★★★★★★]   Carnelian**"
         },
-    "43":{
-        "opName": "**[★★★★★★]   Goldenglow**"
+        "43": {
+            "opName": "**[★★★★★★]   Goldenglow**"
         },
-    "44":{
-        "opName": "**[★★★★★★]   Fiammetta**"
+        "44": {
+            "opName": "**[★★★★★★]   Fiammetta**"
         },
-    "45":{
-        "opName": "**[★★★★★★]   Horn**"
+        "45": {
+            "opName": "**[★★★★★★]   Horn**"
         },
-    "46":{
-        "opName": "**[★★★★★★]   Irene**"
+        "46": {
+            "opName": "**[★★★★★★]   Irene**"
         },
-    "47":{
-        "opName": "**[★★★★★★]   Ebenholz**"
+        "47": {
+            "opName": "**[★★★★★★]   Ebenholz**"
         },
-    "48":{
-        "opName": "**[★★★★★★]   Dorothy**"
+        "48": {
+            "opName": "**[★★★★★★]   Dorothy**"
         },
-    "49":{
-        "opName": "**[★★★★★★]   Pozyomka**"
+        "49": {
+            "opName": "**[★★★★★★]   Pozyomka**"
         },
-    "50":{
-        "opName": "**[★★★★★★]   Mlynar**"
+        "50": {
+            "opName": "**[★★★★★★]   Mlynar**"
         },
-    "51":{
-        "opName": "**[★★★★★★]   Stainless**"
+        "51": {
+            "opName": "**[★★★★★★]   Stainless**"
         },
-    "53":{
-        "opName": "**[★★★★★★]   Penance**"
+        "53": {
+            "opName": "**[★★★★★★]   Penance**"
         },
-    "54":{
-        "opName": "**[★★★★★★]   Reed the Flame Shadow**"
+        "54": {
+            "opName": "**[★★★★★★]   Reed the Flame Shadow**"
         },
-    "55":{
-        "opName": "**[★★★★★★]   Lin**"
+        "55": {
+            "opName": "**[★★★★★★]   Lin**"
         },
-    "56":{
-        "opName": "**[★★★★★★]   Qiubai**"
+        "56": {
+            "opName": "**[★★★★★★]   Qiubai**"
         },
-    "57":{
-        "opName": "**[★★★★★★]   Ines**"
+        "57": {
+            "opName": "**[★★★★★★]   Ines**"
         },
-    "58":{
-        "opName": "**[★★★★★★]   Ho'olheyak**"
+        "58": {
+            "opName": "**[★★★★★★]   Ho'olheyak**"
         },
-    "59":{
-        "opName": "**[★★★★★★]   Executor the Ex Foedere**"
+        "59": {
+            "opName": "**[★★★★★★]   Executor the Ex Foedere**"
         },
-    "60":{
-        "opName": "**[★★★★★★]   Typhon**"
+        "60": {
+            "opName": "**[★★★★★★]   Typhon**"
         },
-    "61":{
-        "opName": "**[★★★★★★]   Swire the Elegent Wit**"
+        "61": {
+            "opName": "**[★★★★★★]   Swire the Elegent Wit**"
         },
-    "62":{
-        "opName": "**[★★★★★★]   Jessica the Liberated**"
+        "62": {
+            "opName": "**[★★★★★★]   Jessica the Liberated**"
         },
-    "63":{
-        "opName": "**[★★★★★★]   Hoedere**"
+        "63": {
+            "opName": "**[★★★★★★]   Hoedere**"
         },
-    "64":{
-        "opName": "**[★★★★★★]   Viviana**"
+        "64": {
+            "opName": "**[★★★★★★]   Viviana**"
         },
-    "65":{
-        "opName": "**[★★★★★★]   Degenbreacher**"
+        "65": {
+            "opName": "**[★★★★★★]   Degenbreacher**"
         },
-    "66":{
-        "opName": "**[★★★★★★]   Ray**"
+        "66": {
+            "opName": "**[★★★★★★]   Ray**"
         },
-    "67":{
-        "opName": "**[★★★★★★]   Zuo Le**"
+        "67": {
+            "opName": "**[★★★★★★]   Zuo Le**"
         },
-    "68":{
-        "opName": "**[★★★★★★]   Ascalon**"
+        "68": {
+            "opName": "**[★★★★★★]   Ascalon**"
         },
-    "69":{
-        "opName": "**[★★★★★★]   Logos**"
+        "69": {
+            "opName": "**[★★★★★★]   Logos**"
         },
-    "70":{
-        "opName": "**[★★★★★★]   Ulpianus**"
+        "70": {
+            "opName": "**[★★★★★★]   Ulpianus**"
         },
-    "71":{
-        "opName": "**[★★★★★★]   Nymph**"
+        "71": {
+            "opName": "**[★★★★★★]   Nymph**"
         },
-    "72":{
-        "opName": "**[★★★★★★]   Narantuya**"
+        "72": {
+            "opName": "**[★★★★★★]   Narantuya**"
         },
-    "73":{
-        "opName": "**[★★★★★★]   Vina Victoria**"
+        "73": {
+            "opName": "**[★★★★★★]   Vina Victoria**"
         },
-    "74":{
-        "opName": "**[★★★★★★]   Vulpisfoglia**"
+        "74": {
+            "opName": "**[★★★★★★]   Vulpisfoglia**"
         },
-    "75":{
-        "opName": "**[★★★★★★]   Thorns The Lodestar**"
+        "75": {
+            "opName": "**[★★★★★★]   Thorns The Lodestar**"
         },
-    "76":{
-        "opName": "**[★★★★★★]   Blaze The igniting Spark**"
+        "76": {
+            "opName": "**[★★★★★★]   Blaze The igniting Spark**"
         },
-    "77":{
-        "opName": "**[★★★★★★]   Entelechia**"
+        "77": {
+            "opName": "**[★★★★★★]   Entelechia**"
         },
-    "78":{
-        "opName": "**[★★★★★★]   Necrass**"
+        "78": {
+            "opName": "**[★★★★★★]   Necrass**"
         },
-    "79":{
-        "opName": "**[★★★★★★]   Mon3tr**"
+        "79": {
+            "opName": "**[★★★★★★]   Mon3tr**"
         }
     },
-    "star5":{
-    "1":{ 
-        "opName": "[★★★★★]       Savage"},
-    "2":{ 
-        "opName": "[★★★★★]       Texas"},
-    "3":{ 
-        "opName": "[★★★★★]       [Zima] Зима"},
-    "4":{ 
-        "opName": "[★★★★★]       Ptilopsis"},
-    "5":{ 
-        "opName": "[★★★★★]       Silence"},
-    "6":{ 
-        "opName": "[★★★★★]       Warfarin"},
-    "7":{ 
-        "opName": "[★★★★★]       Nightmare"},
-    "8":{ 
-        "opName": "[★★★★★]       Skyfire"},
-    "9":{ 
-        "opName": "[★★★★★]       Projekt Red"},
-    "10":{ 
-        "opName": "[★★★★★]       Manticore"},
-    "11":{ 
-        "opName": "[★★★★★]       Cliffheart"},
-    "12":{ 
-        "opName": "[★★★★★]       FEater"},
-    "13":{ 
-        "opName": "[★★★★★]       Provence"},
-    "14":{ 
-        "opName": "[★★★★★]       Blue Poison"},
-    "15":{ 
-        "opName": "[★★★★★]       Firewatch"},
-    "16":{ 
-        "opName": "[★★★★★]       Meteorite"},
-    "17":{ 
-        "opName": "[★★★★★]       Platinum"},
-    "18":{ 
-        "opName": "[★★★★★]       Pramanix"},
-    "19":{ 
-        "opName": "[★★★★★]       [Istina] Истина"},
-    "20":{ 
-        "opName": "[★★★★★]       Mayer"},
-    "21":{ 
-        "opName": "[★★★★★]       Sora"},
-    "22":{ 
-        "opName": "[★★★★★]       Franka"},
-    "23":{ 
-        "opName": "[★★★★★]       Specter"},
-    "24":{ 
-        "opName": "[★★★★★]       Lappland"},
-    "25":{ 
-        "opName": "[★★★★★]       Nearl"},
-    "26":{ 
-        "opName": "[★★★★★]       Liskarm"},
-    "27":{ 
-        "opName": "[★★★★★]       Croissant"},
-    "28":{ 
-        "opName": "[★★★★★]       Swire"},
-    "29":{ 
-        "opName": "[★★★★★]       Glaucus"},
-    "30":{ 
-        "opName": "[★★★★★]       Astesia"},
-    "31":{ 
-        "opName": "[★★★★★]       Executor"},
-    "32":{ 
-        "opName": "[★★★★★]       Waai Fu"},
-    "33":{ 
-        "opName": "[★★★★★]       Reed"},
-    "34":{ 
-        "opName": "[★★★★★]       Broca"},
-    "35":{ 
-        "opName": "[★★★★★]       GreyThroat"},
-    "36":{ 
-        "opName": "[★★★★★]       Hung"},
-    "37":{ 
-        "opName": "[★★★★★]       Leizi"},
-    "38":{ 
-        "opName": "[★★★★★]       Sesa"},
-    "39":{ 
-        "opName": "[★★★★★]       Shamare"},
-    "40":{ 
-        "opName": "[★★★★★]       Sideroca"},
-    "41":{ 
-        "opName": "[★★★★★]       Elysium"},
-    "42":{ 
-        "opName": "[★★★★★]       Asbestos"},
-    "43":{ 
-        "opName": "[★★★★★]       Tsukinogi"},
-    "44":{ 
-        "opName": "[★★★★★]       Leonhardt"},
-    "45":{ 
-        "opName": "[★★★★★]       Ayerscarpe"},
-    "46":{ 
-        "opName": "[★★★★★]       Beeswax"},
-    "47":{ 
-        "opName": "[★★★★★]       Chiave"},
-    "48":{ 
-        "opName": "[★★★★★]       Andreana"},
-    "49":{ 
-        "opName": "[★★★★★]       Flint"},
-    "50":{ 
-        "opName": "[★★★★★]       April"},
-    "51":{ 
-        "opName": "[★★★★★]       Aosta"},
-    "52":{ 
-        "opName": "[★★★★★]       Whisperain"},
-    "53":{ 
-        "opName": "[★★★★★]       Kafka"},
-    "54":{ 
-        "opName": "[★★★★★]       Iris"},
-    "55":{ 
-        "opName": "[★★★★★]       Mr.Nothing"},
-    "56":{ 
-        "opName": "[★★★★★]       Toddifons"},
-    "57":{ 
-        "opName": "[★★★★★]       Akafuyu"},
-    "58":{ 
-        "opName": "[★★★★★]       Kirara"},
-    "59":{ 
-        "opName": "[★★★★★]       Bena"},
-    "60":{ 
-        "opName": "[★★★★★]       La Pluma"},
-    "61":{ 
-        "opName": "[★★★★★]       Mulberry"},
-    "62":{ 
-        "opName": "[★★★★★]       Ashlock"},
-    "63":{ 
-        "opName": "[★★★★★]       Corroserum"},
-    "64":{ 
-        "opName": "[★★★★★]       Honeyberry"},
-    "65":{ 
-        "opName": "[★★★★★]       Aurora"},
-    "66":{ 
-        "opName": "[★★★★★]       Blacknight"},
-    "67":{ 
-        "opName": "[★★★★★]       Quercus"},
-    "68":{ 
-        "opName": "[★★★★★]       Kazemaru"},
-    "69":{ 
-        "opName": "[★★★★★]       Rockrock"},
-    "70":{ 
-        "opName": "[★★★★★]       Windflit"},
-    "71":{ 
-        "opName": "[★★★★★]       Czerny"},
-    "72":{ 
-        "opName": "[★★★★★]       Hibiscus the Purifier"},
-    "73":{ 
-        "opName": "[★★★★★]       Greyy the Lightningbearer"},
-    "74":{ 
-        "opName": "[★★★★★]       Cantabile"},
-    "75":{ 
-        "opName": "[★★★★★]       Minimalist"},
-    "76":{ 
-        "opName": "[★★★★★]       Proviso"},
-    "77":{ 
-        "opName": "[★★★★★]       Paprika"},
-    "78":{ 
-        "opName": "[★★★★★]       Lunacub"},
-    "79":{ 
-        "opName": "[★★★★★]       Puzzle"},
-    "80":{ 
-        "opName": "[★★★★★]       Firewhistle"},
-    "81":{ 
-        "opName": "[★★★★★]       Wind Chimes"},
-    "82":{ 
-        "opName": "[★★★★★]       Cement"},
-    "83":{ 
-        "opName": "[★★★★★]       Morgan"},
-    "84":{ 
-        "opName": "[★★★★★]       Spuria"},
-    "85":{ 
-        "opName": "[★★★★★]       Poncirus"},
-    "86":{ 
-        "opName": "[★★★★★]       Almond"},
-    "87":{ 
-        "opName": "[★★★★★]       Coldshot"},
-    "88":{ 
-        "opName": "[★★★★★]       Vendela"},
-    "89":{ 
-        "opName": "[★★★★★]       Harold"},
-    "90":{ 
-        "opName": "[★★★★★]       [Leto] Лето"},
-    "91":{ 
-        "opName": "[★★★★★]       Warmy"},
-    "92":{ 
-        "opName": "[★★★★★]       Grain Buds"},
-    "93":{ 
-        "opName": "[★★★★★]       Aroma"},
-    "94":{ 
-        "opName": "[★★★★★]       Fang the Fire-sharpened"},
-    "95":{ 
-        "opName": "[★★★★★]       Lucilla"},
-    "96":{ 
-        "opName": "[★★★★★]       Sand Reckoner"},
-    "97":{ 
-        "opName": "[★★★★★]       Mitm"},
-    "98":{ 
-        "opName": "[★★★★★]       Bobbing"},
-    "99":{ 
-        "opName": "[★★★★★]       Figurino"},
-    "100":{ 
-        "opName": "[★★★★★]       Tecno"},
-    "101":{ 
-        "opName": "[★★★★★]       Surfer"},
-    "102":{ 
-        "opName": "[★★★★★]       Nowell"},
-    "103":{ 
-        "opName": "[★★★★★]       Wulfenite"},
-    "104":{ 
-        "opName": "[★★★★★]       Alanna"}
+    "star5": {
+        "1": {
+            "opName": "[★★★★★]       Savage"
+        },
+        "2": {
+            "opName": "[★★★★★]       Texas"
+        },
+        "3": {
+            "opName": "[★★★★★]       [Zima] Зима"
+        },
+        "4": {
+            "opName": "[★★★★★]       Ptilopsis"
+        },
+        "5": {
+            "opName": "[★★★★★]       Silence"
+        },
+        "6": {
+            "opName": "[★★★★★]       Warfarin"
+        },
+        "7": {
+            "opName": "[★★★★★]       Nightmare"
+        },
+        "8": {
+            "opName": "[★★★★★]       Skyfire"
+        },
+        "9": {
+            "opName": "[★★★★★]       Projekt Red"
+        },
+        "10": {
+            "opName": "[★★★★★]       Manticore"
+        },
+        "11": {
+            "opName": "[★★★★★]       Cliffheart"
+        },
+        "12": {
+            "opName": "[★★★★★]       FEater"
+        },
+        "13": {
+            "opName": "[★★★★★]       Provence"
+        },
+        "14": {
+            "opName": "[★★★★★]       Blue Poison"
+        },
+        "15": {
+            "opName": "[★★★★★]       Firewatch"
+        },
+        "16": {
+            "opName": "[★★★★★]       Meteorite"
+        },
+        "17": {
+            "opName": "[★★★★★]       Platinum"
+        },
+        "18": {
+            "opName": "[★★★★★]       Pramanix"
+        },
+        "19": {
+            "opName": "[★★★★★]       [Istina] Истина"
+        },
+        "20": {
+            "opName": "[★★★★★]       Mayer"
+        },
+        "21": {
+            "opName": "[★★★★★]       Sora"
+        },
+        "22": {
+            "opName": "[★★★★★]       Franka"
+        },
+        "23": {
+            "opName": "[★★★★★]       Specter"
+        },
+        "24": {
+            "opName": "[★★★★★]       Lappland"
+        },
+        "25": {
+            "opName": "[★★★★★]       Nearl"
+        },
+        "26": {
+            "opName": "[★★★★★]       Liskarm"
+        },
+        "27": {
+            "opName": "[★★★★★]       Croissant"
+        },
+        "28": {
+            "opName": "[★★★★★]       Swire"
+        },
+        "29": {
+            "opName": "[★★★★★]       Glaucus"
+        },
+        "30": {
+            "opName": "[★★★★★]       Astesia"
+        },
+        "31": {
+            "opName": "[★★★★★]       Executor"
+        },
+        "32": {
+            "opName": "[★★★★★]       Waai Fu"
+        },
+        "33": {
+            "opName": "[★★★★★]       Reed"
+        },
+        "34": {
+            "opName": "[★★★★★]       Broca"
+        },
+        "35": {
+            "opName": "[★★★★★]       GreyThroat"
+        },
+        "36": {
+            "opName": "[★★★★★]       Hung"
+        },
+        "37": {
+            "opName": "[★★★★★]       Leizi"
+        },
+        "38": {
+            "opName": "[★★★★★]       Sesa"
+        },
+        "39": {
+            "opName": "[★★★★★]       Shamare"
+        },
+        "40": {
+            "opName": "[★★★★★]       Sideroca"
+        },
+        "41": {
+            "opName": "[★★★★★]       Elysium"
+        },
+        "42": {
+            "opName": "[★★★★★]       Asbestos"
+        },
+        "43": {
+            "opName": "[★★★★★]       Tsukinogi"
+        },
+        "44": {
+            "opName": "[★★★★★]       Leonhardt"
+        },
+        "45": {
+            "opName": "[★★★★★]       Ayerscarpe"
+        },
+        "46": {
+            "opName": "[★★★★★]       Beeswax"
+        },
+        "47": {
+            "opName": "[★★★★★]       Chiave"
+        },
+        "48": {
+            "opName": "[★★★★★]       Andreana"
+        },
+        "49": {
+            "opName": "[★★★★★]       Flint"
+        },
+        "50": {
+            "opName": "[★★★★★]       April"
+        },
+        "51": {
+            "opName": "[★★★★★]       Aosta"
+        },
+        "52": {
+            "opName": "[★★★★★]       Whisperain"
+        },
+        "53": {
+            "opName": "[★★★★★]       Kafka"
+        },
+        "54": {
+            "opName": "[★★★★★]       Iris"
+        },
+        "55": {
+            "opName": "[★★★★★]       Mr.Nothing"
+        },
+        "56": {
+            "opName": "[★★★★★]       Toddifons"
+        },
+        "57": {
+            "opName": "[★★★★★]       Akafuyu"
+        },
+        "58": {
+            "opName": "[★★★★★]       Kirara"
+        },
+        "59": {
+            "opName": "[★★★★★]       Bena"
+        },
+        "60": {
+            "opName": "[★★★★★]       La Pluma"
+        },
+        "61": {
+            "opName": "[★★★★★]       Mulberry"
+        },
+        "62": {
+            "opName": "[★★★★★]       Ashlock"
+        },
+        "63": {
+            "opName": "[★★★★★]       Corroserum"
+        },
+        "64": {
+            "opName": "[★★★★★]       Honeyberry"
+        },
+        "65": {
+            "opName": "[★★★★★]       Aurora"
+        },
+        "66": {
+            "opName": "[★★★★★]       Blacknight"
+        },
+        "67": {
+            "opName": "[★★★★★]       Quercus"
+        },
+        "68": {
+            "opName": "[★★★★★]       Kazemaru"
+        },
+        "69": {
+            "opName": "[★★★★★]       Rockrock"
+        },
+        "70": {
+            "opName": "[★★★★★]       Windflit"
+        },
+        "71": {
+            "opName": "[★★★★★]       Czerny"
+        },
+        "72": {
+            "opName": "[★★★★★]       Hibiscus the Purifier"
+        },
+        "73": {
+            "opName": "[★★★★★]       Greyy the Lightningbearer"
+        },
+        "74": {
+            "opName": "[★★★★★]       Cantabile"
+        },
+        "75": {
+            "opName": "[★★★★★]       Minimalist"
+        },
+        "76": {
+            "opName": "[★★★★★]       Proviso"
+        },
+        "77": {
+            "opName": "[★★★★★]       Paprika"
+        },
+        "78": {
+            "opName": "[★★★★★]       Lunacub"
+        },
+        "79": {
+            "opName": "[★★★★★]       Puzzle"
+        },
+        "80": {
+            "opName": "[★★★★★]       Firewhistle"
+        },
+        "81": {
+            "opName": "[★★★★★]       Wind Chimes"
+        },
+        "82": {
+            "opName": "[★★★★★]       Cement"
+        },
+        "83": {
+            "opName": "[★★★★★]       Morgan"
+        },
+        "84": {
+            "opName": "[★★★★★]       Spuria"
+        },
+        "85": {
+            "opName": "[★★★★★]       Poncirus"
+        },
+        "86": {
+            "opName": "[★★★★★]       Almond"
+        },
+        "87": {
+            "opName": "[★★★★★]       Coldshot"
+        },
+        "88": {
+            "opName": "[★★★★★]       Vendela"
+        },
+        "89": {
+            "opName": "[★★★★★]       Harold"
+        },
+        "90": {
+            "opName": "[★★★★★]       [Leto] Лето"
+        },
+        "91": {
+            "opName": "[★★★★★]       Warmy"
+        },
+        "92": {
+            "opName": "[★★★★★]       Grain Buds"
+        },
+        "93": {
+            "opName": "[★★★★★]       Aroma"
+        },
+        "94": {
+            "opName": "[★★★★★]       Fang the Fire-sharpened"
+        },
+        "95": {
+            "opName": "[★★★★★]       Lucilla"
+        },
+        "96": {
+            "opName": "[★★★★★]       Sand Reckoner"
+        },
+        "97": {
+            "opName": "[★★★★★]       Mitm"
+        },
+        "98": {
+            "opName": "[★★★★★]       Bobbing"
+        },
+        "99": {
+            "opName": "[★★★★★]       Figurino"
+        },
+        "100": {
+            "opName": "[★★★★★]       Tecno"
+        },
+        "101": {
+            "opName": "[★★★★★]       Surfer"
+        },
+        "102": {
+            "opName": "[★★★★★]       Nowell"
+        },
+        "103": {
+            "opName": "[★★★★★]       Wulfenite"
+        },
+        "104": {
+            "opName": "[★★★★★]       Alanna"
+        }
     },
-    "star4":{
-        "1":{
-        "opName": "[★★★★]           Scavenger"
-        }, 
-        "2":{
-        "opName": "[★★★★]           Vigna"
-        }, 
-        "3":{
-        "opName": "[★★★★]           Myrrh"
-        }, 
-        "4":{
-        "opName": "[★★★★]           Perfumer"
-        }, 
-        "5":{
-        "opName": "[★★★★]           Haze"
-        }, 
-        "6":{
-        "opName": "[★★★★]           Gitano"
-        }, 
-        "7":{
-        "opName": "[★★★★]           Gravel"
-        }, 
-        "8":{
-        "opName": "[★★★★]           Rope"
-        }, 
-        "9":{
-        "opName": "[★★★★]           Shaw"
-        }, 
-        "10":{
-        "opName": "[★★★★]           Shirayuki"
-        }, 
-        "11":{
-        "opName": "[★★★★]           Meteor"
-        }, 
-        "12":{
-        "opName": "[★★★★]           Jessica"
-        }, 
-        "13":{
-        "opName": "[★★★★]           Deepcolor"
-        }, 
-        "14":{
-        "opName": "[★★★★]           Earthspirit"
-        }, 
-        "15":{
-        "opName": "[★★★★]           Dobermann"
-        }, 
-        "16":{
-        "opName": "[★★★★]           Beehunter"
-        }, 
-        "17":{
-        "opName": "[★★★★]           Mousse"
-        }, 
-        "18":{
-        "opName": "[★★★★]           Frostleaf"
-        }, 
-        "19":{
-        "opName": "[★★★★]           Matoimaru"
-        }, 
-        "20":{
-        "opName": "[★★★★]           Cuora"
-        }, 
-        "21":{
-        "opName": "[★★★★]           Gummy"
-        }, 
-        "22":{
-        "opName": "[★★★★]           Matterhorn"
-        }, 
-        "23":{
-        "opName": "[★★★★]           Greyy"
-        }, 
-        "24":{
-        "opName": "[★★★★]           Sussurro"
-        }, 
-        "25":{
-        "opName": "[★★★★]           Myrtle"
-        }, 
-        "26":{
-        "opName": "[★★★★]           Vermiel"
-        }, 
-        "27":{
-        "opName": "[★★★★]           May"
-        }, 
-        "28":{
-        "opName": "[★★★★]           Ambriel"
-        }, 
-        "29":{
-        "opName": "[★★★★]           Utage"
-        }, 
-        "30":{
-        "opName": "[★★★★]           Cutter"
-        }, 
-        "31":{
-        "opName": "[★★★★]           Podenco"
-        }, 
-        "32":{
-        "opName": "[★★★★]           Click"
-        }, 
-        "33":{
-        "opName": "[★★★★]           Jaye"
-        }, 
-        "34":{
-        "opName": "[★★★★]           Aciddrop"
-        }, 
-        "35":{
-        "opName": "[★★★★]           Arene"
-        }, 
-        "36":{
-        "opName": "[★★★★]           Bubble"
-        }, 
-        "37":{
-        "opName": "[★★★★]           Jackie"
-        }, 
-        "38":{
-        "opName": "[★★★★]           Pinecone"
-        }, 
-        "39":{
-        "opName": "[★★★★]           Indigo"
-        }, 
-        "40":{
-        "opName": "[★★★★]           Roberta"
-        }, 
-        "41":{
-        "opName": "[★★★★]           Beanstalk"
-        }, 
-        "42":{
-        "opName": "[★★★★]           Totter"
-        }, 
-        "43":{
-        "opName": "[★★★★]           Humus"
-        }, 
-        "44":{
-        "opName": "[★★★★]           Verdant"
-        }, 
-        "45":{
-        "opName": "[★★★★]           Beanstalk"
-        }, 
-        "46":{
-        "opName": "[★★★★]           Beanstalk"
-        }, 
-        "47":{
-        "opName": "[★★★★]           Lutonada"
-        }, 
-        "48":{
-        "opName": "[★★★★]           Windscoot"
-        } 
+    "star4": {
+        "1": {
+            "opName": "[★★★★]           Scavenger"
+        },
+        "2": {
+            "opName": "[★★★★]           Vigna"
+        },
+        "3": {
+            "opName": "[★★★★]           Myrrh"
+        },
+        "4": {
+            "opName": "[★★★★]           Perfumer"
+        },
+        "5": {
+            "opName": "[★★★★]           Haze"
+        },
+        "6": {
+            "opName": "[★★★★]           Gitano"
+        },
+        "7": {
+            "opName": "[★★★★]           Gravel"
+        },
+        "8": {
+            "opName": "[★★★★]           Rope"
+        },
+        "9": {
+            "opName": "[★★★★]           Shaw"
+        },
+        "10": {
+            "opName": "[★★★★]           Shirayuki"
+        },
+        "11": {
+            "opName": "[★★★★]           Meteor"
+        },
+        "12": {
+            "opName": "[★★★★]           Jessica"
+        },
+        "13": {
+            "opName": "[★★★★]           Deepcolor"
+        },
+        "14": {
+            "opName": "[★★★★]           Earthspirit"
+        },
+        "15": {
+            "opName": "[★★★★]           Dobermann"
+        },
+        "16": {
+            "opName": "[★★★★]           Beehunter"
+        },
+        "17": {
+            "opName": "[★★★★]           Mousse"
+        },
+        "18": {
+            "opName": "[★★★★]           Frostleaf"
+        },
+        "19": {
+            "opName": "[★★★★]           Matoimaru"
+        },
+        "20": {
+            "opName": "[★★★★]           Cuora"
+        },
+        "21": {
+            "opName": "[★★★★]           Gummy"
+        },
+        "22": {
+            "opName": "[★★★★]           Matterhorn"
+        },
+        "23": {
+            "opName": "[★★★★]           Greyy"
+        },
+        "24": {
+            "opName": "[★★★★]           Sussurro"
+        },
+        "25": {
+            "opName": "[★★★★]           Myrtle"
+        },
+        "26": {
+            "opName": "[★★★★]           Vermiel"
+        },
+        "27": {
+            "opName": "[★★★★]           May"
+        },
+        "28": {
+            "opName": "[★★★★]           Ambriel"
+        },
+        "29": {
+            "opName": "[★★★★]           Utage"
+        },
+        "30": {
+            "opName": "[★★★★]           Cutter"
+        },
+        "31": {
+            "opName": "[★★★★]           Podenco"
+        },
+        "32": {
+            "opName": "[★★★★]           Click"
+        },
+        "33": {
+            "opName": "[★★★★]           Jaye"
+        },
+        "34": {
+            "opName": "[★★★★]           Aciddrop"
+        },
+        "35": {
+            "opName": "[★★★★]           Arene"
+        },
+        "36": {
+            "opName": "[★★★★]           Bubble"
+        },
+        "37": {
+            "opName": "[★★★★]           Jackie"
+        },
+        "38": {
+            "opName": "[★★★★]           Pinecone"
+        },
+        "39": {
+            "opName": "[★★★★]           Indigo"
+        },
+        "40": {
+            "opName": "[★★★★]           Roberta"
+        },
+        "41": {
+            "opName": "[★★★★]           Beanstalk"
+        },
+        "42": {
+            "opName": "[★★★★]           Totter"
+        },
+        "43": {
+            "opName": "[★★★★]           Humus"
+        },
+        "44": {
+            "opName": "[★★★★]           Verdant"
+        },
+        "45": {
+            "opName": "[★★★★]           Beanstalk"
+        },
+        "46": {
+            "opName": "[★★★★]           Beanstalk"
+        },
+        "47": {
+            "opName": "[★★★★]           Lutonada"
+        },
+        "48": {
+            "opName": "[★★★★]           Windscoot"
+        }
     },
-    "star3":{
-    "1":{ 
-        "opName": "[★★★]               Fang"},
-    "2":{
-        "opName": "[★★★]               Vanilla"},
-    "3":{
-        "opName": "[★★★]               Plume"},
-    "4":{
-        "opName": "[★★★]               Hibiscus"},
-    "5":{
-        "opName": "[★★★]               Ansel"},
-    "6":{
-        "opName": "[★★★]               Lava"},
-    "7":{
-        "opName": "[★★★]               Steward"},
-    "8":{
-        "opName": "[★★★]               Kroos"},
-    "9":{
-        "opName": "[★★★]               Adnachiel"},
-    "10":{
-        "opName": "[★★★]               Orchid"},
-    "11":{
-        "opName": "[★★★]               Melantha"},
-    "12":{
-        "opName": "[★★★]               Beagle"},
-    "13":{
-        "opName": "[★★★]               Cardigan"},
-    "14":{
-        "opName": "[★★★]               Catapult"},
-    "15":{
-        "opName": "[★★★]               Midnight"},
-    "16":{
-        "opName": "[★★★]               Popukar"},
-    "17":{
-        "opName": "[★★★]               Spot"}
+    "star3": {
+        "1": {
+            "opName": "[★★★]               Fang"
+        },
+        "2": {
+            "opName": "[★★★]               Vanilla"
+        },
+        "3": {
+            "opName": "[★★★]               Plume"
+        },
+        "4": {
+            "opName": "[★★★]               Hibiscus"
+        },
+        "5": {
+            "opName": "[★★★]               Ansel"
+        },
+        "6": {
+            "opName": "[★★★]               Lava"
+        },
+        "7": {
+            "opName": "[★★★]               Steward"
+        },
+        "8": {
+            "opName": "[★★★]               Kroos"
+        },
+        "9": {
+            "opName": "[★★★]               Adnachiel"
+        },
+        "10": {
+            "opName": "[★★★]               Orchid"
+        },
+        "11": {
+            "opName": "[★★★]               Melantha"
+        },
+        "12": {
+            "opName": "[★★★]               Beagle"
+        },
+        "13": {
+            "opName": "[★★★]               Cardigan"
+        },
+        "14": {
+            "opName": "[★★★]               Catapult"
+        },
+        "15": {
+            "opName": "[★★★]               Midnight"
+        },
+        "16": {
+            "opName": "[★★★]               Popukar"
+        },
+        "17": {
+            "opName": "[★★★]               Spot"
+        }
     }
 }
