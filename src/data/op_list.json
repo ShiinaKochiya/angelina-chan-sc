@@ -203,6 +203,36 @@
         },
     "69":{
         "opName": "**[★★★★★★]   Logos**"
+        },
+    "70":{
+        "opName": "**[★★★★★★]   Ulpianus**"
+        },
+    "71":{
+        "opName": "**[★★★★★★]   Nymph**"
+        },
+    "72":{
+        "opName": "**[★★★★★★]   Narantuya**"
+        },
+    "73":{
+        "opName": "**[★★★★★★]   Vina Victoria**"
+        },
+    "74":{
+        "opName": "**[★★★★★★]   Vulpisfoglia**"
+        },
+    "75":{
+        "opName": "**[★★★★★★]   Thorns The Lodestar**"
+        },
+    "76":{
+        "opName": "**[★★★★★★]   Blaze The igniting Spark**"
+        },
+    "77":{
+        "opName": "**[★★★★★★]   Entelechia**"
+        },
+    "78":{
+        "opName": "**[★★★★★★]   Necrass**"
+        },
+    "79":{
+        "opName": "**[★★★★★★]   Mon3tr**"
         }
     },
     "star5":{
@@ -393,7 +423,27 @@
     "93":{ 
         "opName": "[★★★★★]       Aroma"},
     "94":{ 
-        "opName": "[★★★★★]       Fang the Fire-sharpened"}
+        "opName": "[★★★★★]       Fang the Fire-sharpened"},
+    "95":{ 
+        "opName": "[★★★★★]       Lucilla"},
+    "96":{ 
+        "opName": "[★★★★★]       Sand Reckoner"},
+    "97":{ 
+        "opName": "[★★★★★]       Mitm"},
+    "98":{ 
+        "opName": "[★★★★★]       Bobbing"},
+    "99":{ 
+        "opName": "[★★★★★]       Figurino"},
+    "100":{ 
+        "opName": "[★★★★★]       Tecno"},
+    "101":{ 
+        "opName": "[★★★★★]       Surfer"},
+    "102":{ 
+        "opName": "[★★★★★]       Nowell"},
+    "103":{ 
+        "opName": "[★★★★★]       Wulfenite"},
+    "104":{ 
+        "opName": "[★★★★★]       Alanna"}
     },
     "star4":{
         "1":{
@@ -536,6 +586,9 @@
         }, 
         "47":{
         "opName": "[★★★★]           Lutonada"
+        }, 
+        "48":{
+        "opName": "[★★★★]           Windscoot"
         } 
     },
     "star3":{

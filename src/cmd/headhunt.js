@@ -49,15 +49,15 @@ module.exports = new Command({
         actualPity.arknightsPity++;
         op.push(charList.star3[result].opName);
       } else if (numba < rate3 + rate4) {
-        const result = Math.floor(Math.random() * 47) + 1;
+        const result = Math.floor(Math.random() * 48) + 1;
         actualPity.arknightsPity++;
         op.push(charList.star4[result].opName);
       } else if (numba < rate3 + rate4 + rate5) {
-        const result = Math.floor(Math.random() * 94) + 1;
+        const result = Math.floor(Math.random() * 104) + 1;
         actualPity.arknightsPity++;
         op.push(charList.star5[result].opName);
       } else {
-        const result = Math.floor(Math.random() * 69) + 1;
+        const result = Math.floor(Math.random() * 79) + 1;
         actualPity.arknightsPity = 0;
 
         if (banner === "angie") {
