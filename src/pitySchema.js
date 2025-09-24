@@ -53,7 +53,7 @@ async function flushPityCache() {
           arknightsPity: data.arknightsPity,
         },
       });
-      if (relay == 10){ //set the amount of data flush cycles needed for 1 log to print, to reduce log size
+      if (relay == 100){ //set the amount of data flush cycles needed for 1 log to print, to reduce log size
         const time = new Date().toLocaleTimeString("en-US", {
           hour12: false,
           hour: "numeric",
