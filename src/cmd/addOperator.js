@@ -7,6 +7,7 @@ const opListPath = path.join(__dirname, '../data/op_list.json');
 module.exports = new Command({
     name: "addOperator",
     description: "add Operators to op_list.json",
+    alias: ["addOp"],
 
     async run(message, args, client) {
 
