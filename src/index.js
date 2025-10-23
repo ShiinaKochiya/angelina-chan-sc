@@ -96,6 +96,11 @@ client.on("messageCreate", message => {
 		message.reply(`<@${message.author.id}> thấy ca này khó`)
 	}
 
+	if(message.content.includes("hadilao")){
+		message.channel.send(`<@740939041675149444> Hadilao when`);
+		console.log("test")
+	}
+
 	//if (!start === config.prefix) return;
 
 	//if (!message.content.toLowerCase().startsWith(config.prefix)) return;
@@ -118,6 +123,7 @@ client.on("messageCreate", message => {
 			global.lockdown = false
 		}
 	}
+
 });
 
 // let scheduledMessage = new cron.CronJob('* * * 14 4 *', () => {
