@@ -96,9 +96,8 @@ client.on("messageCreate", message => {
 		message.reply(`<@${message.author.id}> thấy ca này khó`)
 	}
 
-	if(message.content.includes("hadilao")){
+	if(message.content.toLowerCase().includes("hadilao")){
 		message.channel.send(`<@740939041675149444> Hadilao when`);
-		console.log("test")
 	}
 
 	//if (!start === config.prefix) return;
