@@ -1,6 +1,9 @@
 const Command = require("../structures/Command.js");
 const mergeImg = require('merge-img');
 const sharp = require("sharp")
+const { getPity, updatePityCache } = require("../pitySchema.js");
+const { naughtyList } = require("../naughtyList.js");
+const cooldowns = new Map();
 
 module.exports = new Command({
     name: "convene",
@@ -9,27 +12,14 @@ module.exports = new Command({
     async run(message, args, client) {
 
         var arg = args.slice(1).join(" ").toLowerCase();
+        const userId = message.author.id;
 
-        const userPity = await schema.findOne({userID: message.author.id}).exec();
-        
-        if (!userPity){
-            const userPityNew = new schema(
-                {
-                    "userID": message.author.id,
-                    "wuwaPity": 0,
-                    "arknightsPity": 0
-                });
-            await userPityNew.save();
-
-        }
-
-        const actualPity = await schema.findOne({userID: message.author.id}).exec();
+        let actualPity = await getPity(userId);
         actualPity.wuwaPity++;
-        await actualPity.save();
 
         console.log(actualPity.wuwaPity)
         if (arg == ""){
-            const charlist = ['brat', 'camel', 'canta', 'cartwheel', 'changli', 'charcoal', 'cocacola', 'desuwa', 'encore', 'jian', 'jingshi', 'jiyan', 'lingyang', 'lupo', 'pheb', 'roccia', 'shore', 'verina', 'xiangli', 'yinlin', 'zani', 'zhezhi']
+            const charlist = ['brat', 'camel', 'canta', 'cartwheel', 'changli', 'charcoal', 'cocacola', 'desuwa', 'encore', 'jian', 'jingshi', 'jiyan', 'lingyang', 'lupo', 'pheb', 'roccia', 'shore', 'verina', 'xiangli', 'yinlin', 'zani', 'zhezhi', 'phro', 'iuno', 'august', 'galbrena', 'qiuyuan']
             let gacha = []
             for (let i = 0; i<10; i++){
                 var random = Math.floor(Math.random() * charlist.length);
@@ -42,7 +32,7 @@ module.exports = new Command({
               .toFile('./src/data/wuwa/output.png')
             setTimeout(function(){
                 message.channel.send({files: ['./src/data/wuwa/output.png']})
-            }, 5000);
+            }, 6000);
         }
     else {
       
@@ -75,7 +65,10 @@ module.exports = new Command({
         }
         }   
     }
-
+        updatePityCache(userId, {
+            arknightsPity: actualPity.arknightsPity, 
+            wuwaPity: actualPity.wuwaPity,
+        });
     }
 });
 

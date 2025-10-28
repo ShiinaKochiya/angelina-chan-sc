@@ -26,7 +26,6 @@ module.exports = new Command({
     let lim = banner === "100" ? 100 : 10;
     let op = [];
 
-    // 🔹 Always pulls from cache if available
     let actualPity = await getPity(userId);
 
     while (i < lim) {
@@ -92,16 +91,9 @@ module.exports = new Command({
 
     message.channel.send({ embeds: [embed] });
 
-    // 🔹 Update cache immediately so next roll sees the right pity
     updatePityCache(userId, {
       arknightsPity: actualPity.arknightsPity,
       wuwaPity: actualPity.wuwaPity,
-    });
-
-
-    updatePityCache(message.author.id, {
-        arknightsPity: actualPity.arknightsPity,
-        wuwaPity: actualPity.wuwaPity,
     });
 
     const time = new Date().toLocaleTimeString("en-US", {
