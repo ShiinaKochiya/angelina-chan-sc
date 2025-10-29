@@ -21,8 +21,8 @@ module.exports = new Command({
             }
         }
 
-        cooldowns.set(userId, Date.now() + 2000);
-        setTimeout(() => cooldowns.delete(userId), 2000);
+        cooldowns.set(userId, Date.now() + 5000);
+        setTimeout(() => cooldowns.delete(userId), 5000);
 
         let convRes = [];
         let gacha = [];
