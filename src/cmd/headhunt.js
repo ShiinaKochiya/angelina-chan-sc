@@ -92,8 +92,9 @@ module.exports = new Command({
     message.channel.send({ embeds: [embed] });
 
     updatePityCache(userId, {
-      arknightsPity: actualPity.arknightsPity,
-      wuwaPity: actualPity.wuwaPity,
+        arknightsPity: actualPity.arknightsPity, 
+        wuwaPity4: actualPity.wuwaPity4,
+        wuwaPity: actualPity.wuwaPity,
     });
 
     const time = new Date().toLocaleTimeString("en-US", {
