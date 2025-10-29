@@ -1,6 +1,5 @@
 const Command = require("../structures/Command.js");
-const config = require("../data/config.json")
-const Twitter = require('twit');
+const charlist = require("../data/charlist_wuwa.json")
 
 module.exports = new Command({
     name: "test",
@@ -8,7 +7,7 @@ module.exports = new Command({
 
     async run(message, args, client) {
 
-        message.channel.send("Hi this is a test command")
+        message.channel.send(charlist.star5[5].res)
         message.channel.send("https://tenor.com/view/touhou-fumo-reimu-hakurei-spin-sit-gif-18089362")
 
     }

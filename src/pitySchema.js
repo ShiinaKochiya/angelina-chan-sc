@@ -18,6 +18,7 @@ async function getPity(userID) {
       data: {
         userID,
         wuwaPity: 0,
+        wuwaPity4: 0,
         arknightsPity: 0,
       },
     });
@@ -30,7 +31,7 @@ async function getPity(userID) {
 function updatePityCache(userID, newData) {
   let pity = pityCache.get(userID);
   if (!pity) {
-    pity = { userID, wuwaPity: 0, arknightsPity: 0 };
+    pity = { userID, wuwaPity: 0, wuwaPity4: 0, arknightsPity: 0 };
   }
   const updated = { ...pity, ...newData };
   pityCache.set(userID, updated);
@@ -45,11 +46,13 @@ async function flushPityCache() {
         where: { userID },
         update: {
           wuwaPity: data.wuwaPity,
+          wuwaPity4: data.wuwaPity4,
           arknightsPity: data.arknightsPity,
         },
         create: {
           userID,
           wuwaPity: data.wuwaPity,
+          wuwaPity4: data.wuwaPity4,
           arknightsPity: data.arknightsPity,
         },
       });

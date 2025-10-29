@@ -16,5 +16,6 @@ datasource db {
 model Pity {
   userID         String @unique
   wuwaPity       Int    @default(0)
+  wuwaPity4      Int    @default(0)
   arknightsPity  Int    @default(0)
 }
