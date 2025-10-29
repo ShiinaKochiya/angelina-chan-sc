@@ -84,7 +84,7 @@ module.exports = new Command({
 
         mergeImg(gacha).then((img) => img.write(`./src/data/wuwa/${userId}.png`))
         const embed = new MessageEmbed()
-            .setColor("#8F8F8F")
+            .setColor("#FFBC2B")
             .setTitle(`Convene result:`)
             .setURL("https://youtu.be/dQw4w9WgXcQ")
             .setDescription(
@@ -94,11 +94,10 @@ module.exports = new Command({
             
             
         setTimeout(function () {
-            message.channel.send({ embeds: [embed] });
+            message.reply({ embeds: [embed] });
             message.reply({ files: [`./src/data/wuwa/${userId}.png`] })
                 .then(() => unlink(`./src/data/wuwa/${userId}.png`, (err) => {
                     if (err) throw err;
-                    console.log('gone');
                 }))
         }, 1000);
 
