@@ -96,9 +96,9 @@ client.on("messageCreate", message => {
 		message.reply(`<@${message.author.id}> thấy ca này khó`)
 	}
 
-	if(message.content.toLowerCase().includes("haidilao") && message.guild.id == "939851547590934610"){
+	/*if(message.content.toLowerCase().includes("haidilao") && message.guild.id == "939851547590934610"){
 		message.channel.send(`<@740939041675149444> Haidilao when`);
-	}
+	}*/
 
 	//if (!start === config.prefix) return;
 
