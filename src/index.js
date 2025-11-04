@@ -96,14 +96,16 @@ client.on("messageCreate", message => {
 		message.reply(`<@${message.author.id}> thấy ca này khó`)
 	}
 
-	/*if(message.content.toLowerCase().includes("haidilao")){
+	if(message.content.toLowerCase().includes("haidilao") && message.guild.id == "939851547590934610"){
 		message.channel.send(`<@740939041675149444> Haidilao when`);
-	}*/
+	}
 
 	//if (!start === config.prefix) return;
 
 	//if (!message.content.toLowerCase().startsWith(config.prefix)) return;
 
+	
+	
 	if(message.content.slice(0, config.prefix.length).toLowerCase() !== config.prefix) return;
 
 	if (message.author.bot) return;
