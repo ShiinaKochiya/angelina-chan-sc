@@ -93,7 +93,23 @@ client.on("messageCreate", message => {
 	if (message.author.bot) return;
 	
 	if (message.content == "b!kho"){
-		message.reply(`<@${message.author.id}> thấy ca này khó`)
+		message.channel.send(`<@${message.author.id}> thấy ca này khó`)
+	}
+
+	if (message.content == "b!qt"){
+		message.channel.send(`<@${message.author.id}> đã quan tâm`)
+	}
+
+	if (message.content == "b!kqt"){
+		message.channel.send(`<@${message.author.id}> đã đéo hỏi`)
+	}
+
+	if (message.content == "b!uoc"){
+		message.channel.send(`<@${message.author.id}> chỉ biết ước`)
+	}
+
+	if(message.content.toLowerCase().includes("t1") && message.guild.id == "939851547590934610"){
+		message.channel.send(`"Đế vương phải có long ngai"\nMấy con gà thì biết cái gì`);
 	}
 
 	/*if(message.content.toLowerCase().includes("haidilao") && message.guild.id == "939851547590934610"){
