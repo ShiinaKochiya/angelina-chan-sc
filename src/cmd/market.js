@@ -40,7 +40,7 @@ module.exports = new Command({
                 if (p < 0) return `${k} bị giảm ${Math.abs(p)}%`;
                 return `${k} không thay đổi`;
             });
-            return message.channel.send( `Trong giờ vừa qua:\n` + lines.join('\n'));
+            return message.channel.send( `Trong 5 phút vừa qua:\n` + lines.join('\n'));
         }
 
         if (action === 'add') {
