@@ -2,7 +2,7 @@
 
 //console.clear();
 
-const { Permissions } = require('discord.js');
+const { Permissions, MessageEmbed } = require('discord.js');
 
 const Client = require("./structures/Client.js");
 
@@ -72,23 +72,17 @@ client.on("ready", async () => {
 });
 	cachexkcd.start();
 
-	// Hourly market updater: randomly increase or decrease each entry by up to 10%
 	var marketUpdater = new cron.CronJob('0 */5 * * * *', function(){
 		const marketModulePath = path.join(__dirname, 'data', 'market.json');
-		// Read fresh disk state
 		const diskRaw = fs.readFileSync(marketModulePath, 'utf8');
 		const diskData = JSON.parse(diskRaw);
-		// Try to sync disk state into the cached module exports so other modules see changes
 		let marketData;
 		const cacheEntry = require.cache[require.resolve(marketModulePath)];
 		if (cacheEntry && cacheEntry.exports && typeof cacheEntry.exports === 'object') {
-			// remove keys present in cache but removed on disk
 			Object.keys(cacheEntry.exports).forEach(k => { if (!Object.prototype.hasOwnProperty.call(diskData, k)) delete cacheEntry.exports[k]; });
-			// copy disk values into cached object
 			Object.keys(diskData).forEach(k => { cacheEntry.exports[k] = diskData[k]; });
 			marketData = cacheEntry.exports;
 		} else {
-			// populate cache (if it wasn't loaded yet)
 			marketData = diskData;
 			require(marketModulePath);
 			const e = require.cache[require.resolve(marketModulePath)];
@@ -98,22 +92,58 @@ client.on("ready", async () => {
 		const lastChanges = {};
 		Object.keys(marketData).forEach(key => {
 			const old = Number(marketData[key]) || 0;
-			const changeFactor = Math.random() * 0.10; // max 10%
+			const changeFactor = Math.random();
 			const sign = Math.random() < 0.5 ? -1 : 1;
 			const newVal = Math.round(old * (1 + sign * changeFactor));
-			marketData[key] = newVal; // mutate cached object in-place
+			marketData[key] = newVal;
 			const change = newVal - old;
 			const percent = old === 0 ? (newVal === 0 ? 0 : 100) : ((change / old) * 100);
 			lastChanges[key] = { percent: Number(percent.toFixed(2)), delta: change };
 			changes.push({ key, old, new: newVal, change, percent: lastChanges[key].percent });
 		});
-		// persist
 		fs.writeFileSync(marketModulePath, JSON.stringify(marketData, null, 4), 'utf8');
-		// ensure cache exports references updated object
 		const entry = require.cache[require.resolve(marketModulePath)];
 		if (entry) entry.exports = marketData;
 		const lastPath = path.join(__dirname, 'data', 'market_last_hour.json');
 		fs.writeFileSync(lastPath, JSON.stringify(lastChanges, null, 4), 'utf8');
+		(async () => {
+			try {
+				const channelId = '1452356894827090013';
+				const channel = await client.channels.fetch(channelId).catch(() => null);
+				if (channel && channel.send) {
+					const description = Object.keys(marketData).length
+						? Object.entries(marketData)
+							.sort((a, b) => Number(b[1]) - Number(a[1]))
+							.map(([k, v]) => `${k}: ${Number(v).toLocaleString('en-US')} VND`)
+							.join('\n')
+						: 'No market data available.';
+
+					const embed = new MessageEmbed()
+						.setColor('#8F8F8F')
+						.setTitle('Bảng giá thị trường Phoenix Frontiers')
+						.setURL('')
+						.setDescription(description.slice(0, 4096));
+
+					const lines = Object.keys(lastChanges).map(k => {
+						const entry = lastChanges[k];
+						const p = Number(entry.percent);
+						const delta = Number(entry.delta);
+						if (p > 0) return `${k} đã tăng ${p}% (+${delta.toLocaleString('en-US')} VND)`;
+						if (p < 0) return `${k} bị giảm ${Math.abs(p)}% (-${Math.abs(delta).toLocaleString('en-US')} VND)`;
+						return `${k} không thay đổi 0% (0 VND)`;
+					});
+
+					await channel.send({ embeds: [embed] });
+					if (lines.length > 0) {
+						await channel.send(`Trong 15 phút vừa qua:\n${lines.join('\n')}\n-----------------------------------------`);
+					} else {
+						await channel.send('Market update: no changes this interval.');
+					}
+				}
+			} catch (err) {
+				console.error('Failed to send market update to channel', err);
+			}
+		})();
 	});
 	marketUpdater.start();
 
