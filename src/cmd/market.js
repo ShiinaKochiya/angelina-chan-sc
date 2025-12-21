@@ -29,18 +29,20 @@ module.exports = new Command({
 
         const action = args[1].toLowerCase();
 
-        // Show last hour fluctuations: a!market last
+        // Show last interval fluctuations: a!market last
         if (action === 'last' || action === 'fluct' || action === 'fluctuate' || action === 'fluctuations') {
             const lastPath = path.join(__dirname, '../data/market_last_hour.json');
             if (!fs.existsSync(lastPath)) return message.channel.send('Market chưa đổi đâu, chill');
             const last = JSON.parse(fs.readFileSync(lastPath, 'utf8'));
             const lines = Object.keys(last).map(k => {
-                const p = Number(last[k]);
-                if (p > 0) return `${k} đã tăng ${p}%`;
-                if (p < 0) return `${k} bị giảm ${Math.abs(p)}%`;
-                return `${k} không thay đổi`;
+                const entry = last[k];
+                const p = Number(entry.percent);
+                const delta = Number(entry.delta);
+                if (p > 0) return `${k} đã tăng ${p}% (${delta.toLocaleString('en-US')} VND)`;
+                if (p < 0) return `${k} bị giảm ${Math.abs(p)}% (${Math.abs(delta).toLocaleString('en-US')} VND)`;
+                return `${k} không thay đổi 0% (0 VND)`;
             });
-            return message.channel.send( `Trong 5 phút vừa qua:\n` + lines.join('\n'));
+            return message.channel.send( `Trong 15 phút vừa qua:\n` + lines.join('\n'));
         }
 
         if (action === 'add') {

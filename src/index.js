@@ -95,17 +95,17 @@ client.on("ready", async () => {
 			if (e) e.exports = marketData;
 		}
 		const changes = [];
-		const lastPercent = {};
+		const lastChanges = {};
 		Object.keys(marketData).forEach(key => {
 			const old = Number(marketData[key]) || 0;
-			const changeFactor = Math.random();
+			const changeFactor = Math.random() * 0.10; // max 10%
 			const sign = Math.random() < 0.5 ? -1 : 1;
 			const newVal = Math.round(old * (1 + sign * changeFactor));
 			marketData[key] = newVal; // mutate cached object in-place
 			const change = newVal - old;
 			const percent = old === 0 ? (newVal === 0 ? 0 : 100) : ((change / old) * 100);
-			lastPercent[key] = Number(percent.toFixed(2));
-			changes.push({ key, old, new: newVal, change, percent: lastPercent[key] });
+			lastChanges[key] = { percent: Number(percent.toFixed(2)), delta: change };
+			changes.push({ key, old, new: newVal, change, percent: lastChanges[key].percent });
 		});
 		// persist
 		fs.writeFileSync(marketModulePath, JSON.stringify(marketData, null, 4), 'utf8');
@@ -113,7 +113,7 @@ client.on("ready", async () => {
 		const entry = require.cache[require.resolve(marketModulePath)];
 		if (entry) entry.exports = marketData;
 		const lastPath = path.join(__dirname, 'data', 'market_last_hour.json');
-		fs.writeFileSync(lastPath, JSON.stringify(lastPercent, null, 4), 'utf8');
+		fs.writeFileSync(lastPath, JSON.stringify(lastChanges, null, 4), 'utf8');
 	});
 	marketUpdater.start();
 
