@@ -5,3 +5,5 @@ src/data/wuwa/out.png
 src/data/wuwa/output.png
 src/data/wuwa/psd
 /src/generated/prisma
+src/data/market.json
+src/data/market_last_hour.json
