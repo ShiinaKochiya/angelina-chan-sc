@@ -74,7 +74,7 @@ module.exports = new Command({
 
             const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
             console.log(`[${time} Database] Market added ${name}: ${price}`);
-            return message.channel.send(`Added **${name}**: $${price.toLocaleString('en-US')}`);
+            return message.channel.send(`Added **${name}**: ${price.toLocaleString('en-US')}VND`);
         }
 
         if (action === 'change' || action === 'set' || action === 'update') {
@@ -98,7 +98,7 @@ module.exports = new Command({
 
             const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
             console.log(`[${time} Database] Market changed ${name}: ${price}`);
-            return message.channel.send(`Updated **${name}**: $${price.toLocaleString('en-US')}`);
+            return message.channel.send(`Updated **${name}**: ${price.toLocaleString('en-US')}VND`);
         }
 
         return message.channel.send('Invalid action. Use `add` or `change`.');
