@@ -135,7 +135,7 @@ client.on("ready", async () => {
 
 					await channel.send({ embeds: [embed] });
 					if (lines.length > 0) {
-						await channel.send(`Trong 15 phút vừa qua:\n${lines.join('\n')}\n-----------------------------------------`);
+						await channel.send(`Trong 5 phút vừa qua:\n${lines.join('\n')}\n-----------------------------------------`);
 					} else {
 						await channel.send('Market update: no changes this interval.');
 					}
