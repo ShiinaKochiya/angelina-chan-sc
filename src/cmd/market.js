@@ -38,9 +38,9 @@ module.exports = new Command({
                 const p = Number(last[k]);
                 if (p > 0) return `${k} đã tăng ${p}%`;
                 if (p < 0) return `${k} bị giảm ${Math.abs(p)}%`;
-                return `${k} không thay đổi 0%`;
+                return `${k} không thay đổi`;
             });
-            return message.channel.send(lines.join('\n'));
+            return message.channel.send( `Trong giờ vừa qua:\n` + lines.join('\n'));
         }
 
         if (action === 'add') {

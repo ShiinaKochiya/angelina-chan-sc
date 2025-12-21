@@ -73,9 +73,7 @@ client.on("ready", async () => {
 	cachexkcd.start();
 
 	// Hourly market updater: randomly increase or decrease each entry by up to 10%
-	var marketUpdater = new cron.CronJob('0 * * * * *', function(){
-		var t = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric", second: "numeric" });
-		console.log(`[${t} INFO] Running hourly market updater...`);
+	var marketUpdater = new cron.CronJob('0 0 * * * *', function(){
 		const marketModulePath = path.join(__dirname, 'data', 'market.json');
 		// Read fresh disk state
 		const diskRaw = fs.readFileSync(marketModulePath, 'utf8');
@@ -116,7 +114,6 @@ client.on("ready", async () => {
 		if (entry) entry.exports = marketData;
 		const lastPath = path.join(__dirname, 'data', 'market_last_hour.json');
 		fs.writeFileSync(lastPath, JSON.stringify(lastPercent, null, 4), 'utf8');
-		console.log(`[${t} INFO] Market updated. Changes: ${JSON.stringify(changes)}`);
 	});
 	marketUpdater.start();
 
