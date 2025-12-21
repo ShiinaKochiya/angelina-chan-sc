@@ -29,6 +29,20 @@ module.exports = new Command({
 
         const action = args[1].toLowerCase();
 
+        // Show last hour fluctuations: a!market last
+        if (action === 'last' || action === 'fluct' || action === 'fluctuate' || action === 'fluctuations') {
+            const lastPath = path.join(__dirname, '../data/market_last_hour.json');
+            if (!fs.existsSync(lastPath)) return message.channel.send('Market chưa đổi đâu, chill');
+            const last = JSON.parse(fs.readFileSync(lastPath, 'utf8'));
+            const lines = Object.keys(last).map(k => {
+                const p = Number(last[k]);
+                if (p > 0) return `${k} đã tăng ${p}%`;
+                if (p < 0) return `${k} bị giảm ${Math.abs(p)}%`;
+                return `${k} không thay đổi 0%`;
+            });
+            return message.channel.send(lines.join('\n'));
+        }
+
         if (action === 'add') {
             if (!message.member || !message.member.roles || !message.member.roles.cache.has(allowedRole)) {
                 return message.channel.send('You do not have permission to use this action.');

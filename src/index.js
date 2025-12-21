@@ -15,6 +15,7 @@ const client = new Client();
 const cron = require('cron');
 
 const fs = require("fs");
+const path = require('path');
 
 const axios = require('axios');
 
@@ -57,7 +58,7 @@ client.on("ready", async () => {
 																					 minute: "numeric",
 																					 second: "numeric"})
 	console.log(`[${time} INFO] Angie is on`);
-	var cachexkcd = cron.CronJob('0 23 * * * 1,3,5', async function(){
+	var cachexkcd = new cron.CronJob('0 23 * * * 1,3,5', async function(){
 	console.log(`[${time} INFO] Caching latest xkcd data...`);
 	var latestxkcd =  await axios.get(`https://xkcd.com/info.0.json`);
 	var lateststr = JSON.stringify(latestxkcd.data);
@@ -69,6 +70,56 @@ client.on("ready", async () => {
 	})
 	console.log(`[${time} INFO] Caching complete. Latest is #${latestxkcd.data.num}`);
 });
+	cachexkcd.start();
+
+	// Hourly market updater: randomly increase or decrease each entry by up to 10%
+	var marketUpdater = new cron.CronJob('0 * * * * *', function(){
+		var t = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric", second: "numeric" });
+		console.log(`[${t} INFO] Running hourly market updater...`);
+		const marketModulePath = path.join(__dirname, 'data', 'market.json');
+		// Read fresh disk state
+		const diskRaw = fs.readFileSync(marketModulePath, 'utf8');
+		const diskData = JSON.parse(diskRaw);
+		// Try to sync disk state into the cached module exports so other modules see changes
+		let marketData;
+		const cacheEntry = require.cache[require.resolve(marketModulePath)];
+		if (cacheEntry && cacheEntry.exports && typeof cacheEntry.exports === 'object') {
+			// remove keys present in cache but removed on disk
+			Object.keys(cacheEntry.exports).forEach(k => { if (!Object.prototype.hasOwnProperty.call(diskData, k)) delete cacheEntry.exports[k]; });
+			// copy disk values into cached object
+			Object.keys(diskData).forEach(k => { cacheEntry.exports[k] = diskData[k]; });
+			marketData = cacheEntry.exports;
+		} else {
+			// populate cache (if it wasn't loaded yet)
+			marketData = diskData;
+			require(marketModulePath);
+			const e = require.cache[require.resolve(marketModulePath)];
+			if (e) e.exports = marketData;
+		}
+		const changes = [];
+		const lastPercent = {};
+		Object.keys(marketData).forEach(key => {
+			const old = Number(marketData[key]) || 0;
+			const changeFactor = Math.random() * 0.10; // max 10%
+			const sign = Math.random() < 0.5 ? -1 : 1;
+			const newVal = Math.round(old * (1 + sign * changeFactor));
+			marketData[key] = newVal; // mutate cached object in-place
+			const change = newVal - old;
+			const percent = old === 0 ? (newVal === 0 ? 0 : 100) : ((change / old) * 100);
+			lastPercent[key] = Number(percent.toFixed(2));
+			changes.push({ key, old, new: newVal, change, percent: lastPercent[key] });
+		});
+		// persist
+		fs.writeFileSync(marketModulePath, JSON.stringify(marketData, null, 4), 'utf8');
+		// ensure cache exports references updated object
+		const entry = require.cache[require.resolve(marketModulePath)];
+		if (entry) entry.exports = marketData;
+		const lastPath = path.join(__dirname, 'data', 'market_last_hour.json');
+		fs.writeFileSync(lastPath, JSON.stringify(lastPercent, null, 4), 'utf8');
+		console.log(`[${t} INFO] Market updated. Changes: ${JSON.stringify(changes)}`);
+	});
+	marketUpdater.start();
+
 	client.user.setStatus('idle');
     client.user.setActivity({type: `WATCHING`, name:`for someone's return`})
 
