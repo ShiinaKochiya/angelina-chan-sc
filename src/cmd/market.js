@@ -15,7 +15,10 @@ module.exports = new Command({
 
         if (args.length <= 1) {
             const description = Object.keys(marketData).length
-                ? Object.entries(marketData).map(([k, v]) => `${k}: ${Number(v).toLocaleString('en-US')} VND`).join('\n')
+                ? Object.entries(marketData)
+                      .sort((a, b) => Number(b[1]) - Number(a[1]))
+                      .map(([k, v]) => `${k}: ${Number(v).toLocaleString('en-US')} VND`)
+                      .join('\n')
                 : 'No market data available.';
 
             const embed = new MessageEmbed()
