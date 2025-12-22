@@ -7,7 +7,8 @@ const { MessageEmbed } = require("discord.js");
 const { getMoney, updateMoneyCache } = require('../moneySchema.js');
 const marketPath = path.join(__dirname, '../data/market.json');
 const inventoryPath = path.join(__dirname, '../marketInventory.json');
-const allowedRole = "939851547590934613"
+// Roles allowed to perform admin actions (add/change/remove). The user needs any one of these roles.
+const allowedRoles = ["939851547590934613"]
 
 module.exports = new Command({
     name: "market",
@@ -52,7 +53,7 @@ module.exports = new Command({
         }
 
         if (action === 'add') {
-            if (!message.member || !message.member.roles || !message.member.roles.cache.has(allowedRole)) {
+            if (!message.member || !message.member.roles || !message.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
                 return message.channel.send('You do not have permission to use this action.');
             }
             if (args.length < 3) return message.channel.send('Usage: `a!market add <name> [price]`');
@@ -81,7 +82,7 @@ module.exports = new Command({
         }
 
         if (action === 'change' || action === 'set' || action === 'update') {
-            if (!message.member || !message.member.roles || !message.member.roles.cache.has(allowedRole)) {
+            if (!message.member || !message.member.roles || !message.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
                 return message.channel.send('You do not have permission to use this action.');
             }
             if (args.length < 4) return message.channel.send('Usage: `a!market change <name> <price>`');
@@ -105,7 +106,7 @@ module.exports = new Command({
         }
 
         if (action === 'remove' || action === 'rm' || action === 'delete') {
-            if (!message.member || !message.member.roles || !message.member.roles.cache.has(allowedRole)) {
+            if (!message.member || !message.member.roles || !message.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
                 return message.channel.send('You do not have permission to use this action.');
             }
             if (args.length < 3) return message.channel.send('Usage: `a!market remove <name>`');
@@ -126,20 +127,34 @@ module.exports = new Command({
         }
 
         if (action === 'buy') {
-            if (args.length < 4) return message.channel.send('Usage: `a!market buy <name> <quantity>`');
-            const qtyToken = args[args.length - 1];
-            if (!/^[0-9]+$/.test(qtyToken)) return message.channel.send('Quantity must be a positive integer.');
-            const qty = Number(qtyToken);
+            if (args.length < 4) return message.channel.send('Usage: `a!market buy <name> <quantity|all>`');
+            const qtyToken = String(args[args.length - 1]).toLowerCase();
             const name = args.slice(2, args.length - 1).join(' ').trim();
 
             if (!Object.prototype.hasOwnProperty.call(marketData, name)) return message.channel.send(`**${name}** có trên thị trường đâu?`);
 
             const price = BigInt(marketData[name]);
-            const total = price * BigInt(qty);
+            if (price === 0n) return message.channel.send('Item price is 0, cannot buy.');
 
             const userId = message.author.id;
             const money = await getMoney(userId);
             const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
+
+            let qtyBigInt;
+            let total;
+
+            if (qtyToken === 'all') {
+                qtyBigInt = wallet / price; // how many can buy with full wallet
+                if (qtyBigInt <= 0n) return message.channel.send('Nghèo rồi ông cháu ei');
+                const maxQty = BigInt(Number.MAX_SAFE_INTEGER);
+                if (qtyBigInt > maxQty) qtyBigInt = maxQty;
+                total = price * qtyBigInt;
+            } else {
+                if (!/^[0-9]+$/.test(qtyToken)) return message.channel.send('Quantity must be a positive integer or `all`.');
+                const qty = Number(qtyToken);
+                qtyBigInt = BigInt(qty);
+                total = price * qtyBigInt;
+            }
 
             if (wallet < total) return message.channel.send('Nghèo rồi ông cháu ei');
 
@@ -150,11 +165,12 @@ module.exports = new Command({
             let inventory = {};
             if (fs.existsSync(inventoryPath)) inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
             if (!inventory[userId]) inventory[userId] = {};
-            inventory[userId][name] = (inventory[userId][name] || 0) + qty;
+            const qtyNumber = qtyBigInt > 9007199254740991n ? 9007199254740991 : Number(qtyBigInt);
+            inventory[userId][name] = (inventory[userId][name] || 0) + qtyNumber;
             fs.writeFileSync(inventoryPath, JSON.stringify(inventory, null, 4), 'utf8');
 
             const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
-            return message.channel.send(`Mua thành công: **${qty}x ${name}** - Tổng: ${total.toLocaleString('en-US')} VND. Ví hiện tại: ${newWallet.toLocaleString('en-US')} VND`);
+            return message.channel.send(`Mua thành công: **${qtyBigInt.toString()}x ${name}** - Tổng: ${total.toLocaleString('en-US')} VND. Ví hiện tại: ${newWallet.toLocaleString('en-US')} VND`);
         }
 
         // sell: a!market sell <name> <quantity>
