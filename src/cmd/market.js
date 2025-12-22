@@ -101,6 +101,27 @@ module.exports = new Command({
             return message.channel.send(`Updated **${name}**: ${price.toLocaleString('en-US')}VND`);
         }
 
-        return message.channel.send('Invalid action. Use `add` or `change`.');
+        if (action === 'remove' || action === 'rm' || action === 'delete') {
+            if (!message.member || !message.member.roles || !message.member.roles.cache.has(allowedRole)) {
+                return message.channel.send('You do not have permission to use this action.');
+            }
+            if (args.length < 3) return message.channel.send('Usage: `a!market remove <name>`');
+
+            const name = args.slice(2).join(' ').trim();
+            if (!name) return message.channel.send('?');
+
+            if (!Object.prototype.hasOwnProperty.call(marketData, name)) {
+                return message.channel.send(`Làm gì có **${name}** đâu bro`);
+            }
+
+            const old = marketData[name];
+            delete marketData[name];
+            fs.writeFileSync(marketPath, JSON.stringify(marketData, null, 4), 'utf8');
+
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            return message.channel.send(`**${name}** đã bị chim cút`);
+        }
+
+        return message.channel.send('Invalid action. Use `add`, `change`, or `remove`.');
     }
 });
