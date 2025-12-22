@@ -174,31 +174,40 @@ module.exports = new Command({
 
         // sell: a!market sell <name> <quantity>
         if (action === 'sell') {
-            if (args.length < 4) return message.channel.send('Usage: `a!market sell <name> <quantity>`');
-            const qtyToken = args[args.length - 1];
-            if (!/^[0-9]+$/.test(qtyToken)) return message.channel.send('Quantity must be a positive integer.');
-            const qty = Number(qtyToken);
+            if (args.length < 4) return message.channel.send('Usage: `a!market sell <name> <quantity|all>`');
+            const qtyTokenRaw = String(args[args.length - 1]);
+            const qtyToken = qtyTokenRaw.toLowerCase();
             const name = args.slice(2, args.length - 1).join(' ').trim();
 
             // load inventory
             let inventory = {};
             if (fs.existsSync(inventoryPath)) inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
-            const userInv = inventory[message.author.id] || {};
+            const userId = message.author.id;
+            const userInv = inventory[userId] || {};
             const have = userInv[name] || 0;
-            if (have < qty) return message.channel.send(`Bạn không có đủ **${name}** để bán.`);
+
+            let qty;
+            if (qtyToken === 'all') {
+                qty = have;
+                if (qty <= 0) return message.channel.send(`Bạn không có **${name}** để bán.`);
+            } else {
+                if (!/^[0-9]+$/.test(qtyTokenRaw)) return message.channel.send('Quantity must be a positive integer or `all`.');
+                qty = Number(qtyTokenRaw);
+                if (have < qty) return message.channel.send(`Bạn không có đủ **${name}** để bán.`);
+            }
 
             if (!Object.prototype.hasOwnProperty.call(marketData, name)) return message.channel.send(`**${name}** not found in market.`);
             const price = BigInt(marketData[name]);
             const total = price * BigInt(qty);
 
             // add money
-            const userId = message.author.id;
             const money = await getMoney(userId);
             const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
             const newWallet = wallet + total;
             updateMoneyCache(userId, { wallet: newWallet });
 
             // deduct inventory
+            if (!inventory[userId]) inventory[userId] = {};
             inventory[userId][name] = have - qty;
             if (inventory[userId][name] <= 0) delete inventory[userId][name];
             fs.writeFileSync(inventoryPath, JSON.stringify(inventory, null, 4), 'utf8');
