@@ -19,3 +19,9 @@ model Pity {
   wuwaPity4      Int    @default(0)
   arknightsPity  Int    @default(0)
 }
+
+model Money{
+  userID         String @unique
+  chips          BigInt @default(0)
+  wallet         BigInt @default(0)
+}

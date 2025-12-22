@@ -3,14 +3,13 @@ const config = require("../data/config.json")
 const { getMoney } = require("../moneySchema.js");
 
 module.exports = new Command({
-    name: "currency",
-    alias: ["balance"],
-    description: "check ur current balance",
+    name: "wallet",
+    description: "xin 50k",
 
     async run(message, args, client) {
         const userId = message.author.id;
         const money = await getMoney(userId);
-        const chips = typeof money.chips === 'bigint' ? money.chips : BigInt(money.chips || 0);
-        message.reply(`Your current bits balance: ${chips.toString()}`)
+        const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.chips || 0);
+        message.reply(`Ví của bạn đang có: ${wallet.toLocaleString('en-US')} VND`)
     }
 });

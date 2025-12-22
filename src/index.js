@@ -92,7 +92,7 @@ client.on("ready", async () => {
 		const lastChanges = {};
 		Object.keys(marketData).forEach(key => {
 			const old = Number(marketData[key]) || 0;
-			const changeFactor = Math.random();
+			const changeFactor = Math.random() * 0.8;
 			const sign = Math.random() < 0.5 ? -1 : 1;
 			const newVal = Math.round(old * (1 + sign * changeFactor));
 			marketData[key] = newVal;
@@ -108,7 +108,7 @@ client.on("ready", async () => {
 		fs.writeFileSync(lastPath, JSON.stringify(lastChanges, null, 4), 'utf8');
 		(async () => {
 			try {
-				const channelId = '1452356894827090013';
+				const channelId = '944835286226051113';
 				const channel = await client.channels.fetch(channelId).catch(() => null);
 				if (channel && channel.send) {
 					const description = Object.keys(marketData).length
@@ -130,7 +130,7 @@ client.on("ready", async () => {
 						const delta = Number(entry.delta);
 						if (p > 0) return `${k} đã tăng ${p}% (+${delta.toLocaleString('en-US')} VND)`;
 						if (p < 0) return `${k} bị giảm ${Math.abs(p)}% (-${Math.abs(delta).toLocaleString('en-US')} VND)`;
-						return `${k} không thay đổi 0% (0 VND)`;
+						return `${k} không thay đổi`;
 					});
 
 					await channel.send({ embeds: [embed] });

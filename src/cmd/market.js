@@ -43,7 +43,7 @@ module.exports = new Command({
                 const delta = Number(entry.delta);
                 if (p > 0) return `${k} đã tăng ${p}% (+${delta.toLocaleString('en-US')} VND)`;
                 if (p < 0) return `${k} bị giảm ${Math.abs(p)}% (-${Math.abs(delta).toLocaleString('en-US')} VND)`;
-                return `${k} không thay đổi 0% (0 VND)`;
+                return `${k} không thay đổi`;
             });
             return message.channel.send( `Trong 5 phút vừa qua:\n` + lines.join('\n'));
         }

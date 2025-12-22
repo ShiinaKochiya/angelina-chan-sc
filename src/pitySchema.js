@@ -63,7 +63,7 @@ async function flushPityCache() {
           minute: "numeric",
           second: "numeric",
         });
-        console.log(`[${time} Database] Flushed pity for ${userID}`, data);
+        //console.log(`[${time} Database] Flushed pity for ${userID}`, data);
         relay = 0;
       }
     } catch (err) {

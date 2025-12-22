@@ -6,11 +6,22 @@ module.exports = new Command({
     alias:["bj"],
 
     async run(message, args, client) {
+        const { getMoney, updateMoneyCache } = require("../moneySchema.js");
         var mode = args.slice(1).join(" ").toLowerCase();
-        userIndex = message.author.id % 1000000000;
-        if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
-        if (global.userCost[userIndex] < 40){
-            message.channel.send("Not enough bits! Cannot play")
+        const userId = message.author.id;
+        async function getChips(){
+            const money = await getMoney(userId);
+            return typeof money.chips === 'bigint' ? money.chips : BigInt(money.chips || 0);
+        }
+        async function modifyChips(delta){
+            const curr = await getChips();
+            const updated = curr + BigInt(delta);
+            updateMoneyCache(userId, { chips: updated });
+            return updated;
+        }
+        const chips = await getChips();
+        if (chips < 40n){
+            return message.channel.send("Not enough bits! Cannot play");
         } else {
         const collector = message.channel.createMessageCollector(
             msg => msg.author.id == message.author.id,
@@ -68,7 +79,7 @@ module.exports = new Command({
             if (bjcheck(val[0], val[1])){
                 message.channel.send("**You got a black jack. Auto win**");
                 collector.stop();
-                playerWon();
+                await modifyChips(40);
                 break;
             }
             if (msg.content.toLowerCase() == "hit") {
@@ -96,12 +107,12 @@ module.exports = new Command({
                     var play = calTotal(val.slice(0,5));
                     if (play > 21){
                         message.channel.send(`You busted. Total value was ${play}`); 
-                        playerLost();
+                        await modifyChips(-40);
                         collector.stop()
                     } 
                     else if(play <= 21){
                         message.channel.send(`You won by 5-cards Charlie. Total value was ${play}`); 
-                        playerWon();
+                        await modifyChips(40);
                         collector.stop()
                     } 
                     message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}, ${card[suit2][num2]}, ${card[suit3][num3]}, ${card[suit4][num4]}\nAngelina: ${card[s[1]][f[1]]}`);;
@@ -127,7 +138,7 @@ module.exports = new Command({
                 for (let i = 2; i<=5; i++){
                     if(play<16){
                         message.channel.send("You did not met the 16 requirement. You busted");
-                        playerLost();
+                        await modifyChips(-40);
                         message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}\nAngelina: ${card[s[1]][f[1]]}, ${card[s[2]][f[2]]}`)
                         collector.stop();
                         break;
@@ -144,7 +155,7 @@ module.exports = new Command({
                         if (bjcheck(sf[1], sf[2])){
                             message.channel.send("**Angelina got a black jack. You lose**");
                             collector.stop();
-                            playerLost();
+                            await modifyChips(-40);
                             break;
                         }
                     if(tt <= play){
@@ -153,19 +164,19 @@ module.exports = new Command({
                     if(tt>21){
                         message.channel.send(`**Angelina busted, you win**`);
                         collector.stop();
-                        playerWon();
+                        await modifyChips(40);
                         break;
                     }
                     if(tt>play && tt<=21){
                         message.channel.send(`**Angelina got higher hand, you lost**`);
                         collector.stop();
-                        playerLost();
+                        await modifyChips(-40);
                         break;
                     }
                     if(tt <= 21 && i == 5){
                         message.channel.send(`**Angelina won by  5-Cards Charlie rule**`);
                         collector.stop();
-                        playerLost();
+                        await modifyChips(-40);
                         break;
                     }
                 }
@@ -194,13 +205,6 @@ function calTotal(a){
 }
 
 function isNotBankrupt(money){
-        if (money < 40) {return false} else {return true};
-}
-
-function playerWon(){
-    global.userCost[userIndex] = global.userCost[userIndex] + 40;
-}
-
-function playerLost(){
-    global.userCost[userIndex] = global.userCost[userIndex] - 40;
+    const m = typeof money === 'bigint' ? money : BigInt(money || 0);
+    return m >= 40n;
 }

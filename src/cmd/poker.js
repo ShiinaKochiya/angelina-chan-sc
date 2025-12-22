@@ -11,12 +11,22 @@ module.exports = new Command({
         //var hand = Hand.solve([`8d`, `7h`, `9s` , `2h` , '9d']);
         //console.log(hand.name);
         var mode = args.slice(1).join(" ").toLowerCase();
-        userIndex = message.author.id % 1000000000;
-        if (global.userCost[userIndex] == undefined){global.userCost[userIndex] = 200};
-
-        if (global.userCost[userIndex] < 40){
-            message.channel.send("Not enough bits! Cannot play")
-        } else {
+        const { getMoney, updateMoneyCache } = require("../moneySchema.js");
+        const userId = message.author.id;
+        async function getChips(){
+            const money = await getMoney(userId);
+            return typeof money.chips === 'bigint' ? money.chips : BigInt(money.chips || 0);
+        }
+        async function addChips(delta){
+            const curr = await getChips();
+            const updated = curr + BigInt(delta);
+            updateMoneyCache(userId, { chips: updated });
+            return updated;
+        }
+        const chips = await getChips();
+        if (chips < 40n){
+            return message.channel.send("Not enough bits! Cannot play");
+        } else { 
             const collector = message.channel.createMessageCollector(
             msg => msg.author.id == message.author.id,
             {time: 6000}
@@ -35,7 +45,7 @@ module.exports = new Command({
             let winnr = 0;
             
             //entry cost
-            global.userCost[userIndex] = global.userCost[userIndex]  - 200;
+            await addChips(-200);
 
             //generating deck
             let temp = Math.floor(Math.random() * 4)+1;
@@ -96,11 +106,11 @@ module.exports = new Command({
             if (msg.content.toLowerCase() == "bet") {
                 if (startingBet == false){
                     message.channel.send("Cannot bet, round starting bet passed")
-                } else if (!isNotBankrupt(global.userCost[userIndex], "bet")){
+                } else if (!isNotBankrupt(await getChips(), "bet")){
                     message.channel.send("Not enough money, cannot bet anymore")
                 } else {
                     pot = pot + 20;
-                    global.userCost[userIndex] = global.userCost[userIndex] - 20;
+                    await addChips(-20);
                     message.channel.send(`Player bet 20 bits. Pot: ${pot}`)
                     startingBet = false;
                     angeTurn = true;
@@ -112,12 +122,12 @@ module.exports = new Command({
             if (msg.content.toLowerCase() == "call") {
                 if (raised == false){
                     message.channel.send("Invalid call, no raise were dropped")
-                } else if (!isNotBankrupt(global.userCost[userIndex], "call")){
+                } else if (!isNotBankrupt(await getChips(), "call")){
                     message.channel.send("Not enough money, cannot call anymore")
                 } else {
                     raised = false;
                     pot = pot + 40;
-                    global.userCost[userIndex] = global.userCost[userIndex] - 40;
+                    await addChips(-40);
                     message.channel.send(`Player called 40 bits, proceeds to next round. Pot: ${pot}`)
                     round++;
                     angeTurn = true;
@@ -127,7 +137,7 @@ module.exports = new Command({
             }
             //Raising case
             if (msg.content.toLowerCase() == "raise") {
-                if (!isNotBankrupt(global.userCost[userIndex], "raise")){
+                if (!isNotBankrupt(await getChips(), "raise")){
                     message.channel.send("Not enough money, cannot raise anymore")
                 } else {
                     pot = pot + 40;
@@ -185,7 +195,7 @@ module.exports = new Command({
                             let res = checkEqual(inDeck[0], inDeck[1], inDeck[2], inDeck[3]);
                             if (res == 1){
                                 message.channel.send("You won by higher cards");
-                                global.userCost[userIndex] = global.userCost[userIndex] + pot;
+                                await addChips(pot);
                             } else if (res == 2){message.channel.send("Angelina won by higher cards")} else {message.channel.send("Both player got the same hand and cards, pot are splitted equally")}
                         }
                         collector.stop();
@@ -223,7 +233,7 @@ module.exports = new Command({
                 if (choice > score * 10){
                     message.channel.send("Angelina folded, you win")
                     message.channel.send(`\n--------------------------------------\nYour cards: ${inDeckDisplay[2]}, ${inDeckDisplay[3]}\nRiver: ${inDeckDisplay[4]}, ${inDeckDisplay[5]}, ${inDeckDisplay[6]},${inDeckDisplay[7]},${inDeckDisplay[8]}\nAngelina cards: ${inDeckDisplay[0]}, ${inDeckDisplay[1]}\nPot value: ${pot}`)
-                    global.userCost[userIndex] = global.userCost[userIndex] + pot;
+                    await addChips(pot);
                     collector.stop();
                 } else {
                     choice = Math.floor(Math.random() * 100)+1;
@@ -334,13 +344,14 @@ function checkEqual(p1,p12,p2,p22){
 }
 
 function isNotBankrupt(money, type){
+    const m = typeof money === 'bigint' ? money : BigInt(money || 0);
     if(type == "bet"){
-        if (money < 20) {return false} else {return true};
+        return m >= 20n;
     } else if(type == "raise"){
-        if (money < 40) {return false} else {return true};
+        return m >= 40n;
     } else if(type == "call"){
-        if (money < 40) {return false} else {return true};
+        return m >= 40n;
     } else if(type == "entry"){
-        if (money < 10) {return false} else {return true};
+        return m >= 10n;
     }
 }
