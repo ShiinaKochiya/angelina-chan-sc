@@ -17,6 +17,6 @@ module.exports = new Command({
 
         updateMoneyCache(userId, { wallet: newWallet });
 
-        message.reply(`Đại đế Kamito thấy bạn thật đáng thương, nên Đại đế đã drop cho bạn ${bonus}\nHiện tại bạn có: ${newWallet.toLocaleString('en-US')} VND`);
+        message.reply(`Đại đế Kamito thấy bạn thật đáng thương, nên Đại đế đã drop cho bạn ${bonus.toLocaleString('en-US')}\nHiện tại bạn có: ${newWallet.toLocaleString('en-US')} VND`);
     }
 });
