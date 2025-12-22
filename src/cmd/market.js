@@ -6,7 +6,7 @@ const axios = require("axios");
 const { MessageEmbed } = require("discord.js");
 const { getMoney, updateMoneyCache } = require('../moneySchema.js');
 const marketPath = path.join(__dirname, '../data/market.json');
-const inventoryPath = path.join(__dirname, '../marketInventory.json');
+const inventoryPath = path.join(__dirname, '../data/marketInventory.json');
 // Roles allowed to perform admin actions (add/change/remove). The user needs any one of these roles.
 const allowedRoles = ["939851547590934613"]
 
