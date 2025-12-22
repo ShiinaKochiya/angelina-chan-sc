@@ -7,7 +7,6 @@ const { MessageEmbed } = require("discord.js");
 const { getMoney, updateMoneyCache } = require('../moneySchema.js');
 const marketPath = path.join(__dirname, '../data/market.json');
 const inventoryPath = path.join(__dirname, '../data/marketInventory.json');
-// Roles allowed to perform admin actions (add/change/remove). The user needs any one of these roles.
 const allowedRoles = ["939851547590934613"]
 
 module.exports = new Command({
@@ -230,9 +229,16 @@ module.exports = new Command({
                 return message.channel.send(`${name} chưa có món hàng nào trong kho.`);
             }
 
+            // compute per-item values and total value
+            let totalValue = 0n;
             const lines = Object.entries(userInv)
                 .sort((a, b) => Number(b[1]) - Number(a[1]))
-                .map(([k, v]) => `${k}: ${v}`);
+                .map(([k, v]) => {
+                    const price = BigInt(marketData[k] || 0);
+                    const value = price * BigInt(v);
+                    totalValue += value;
+                    return `${k}: ${v} @ ${price.toLocaleString('en-US')} VND = ${value.toLocaleString('en-US')} VND`;
+                });
 
             const member = await message.guild?.members.fetch(targetId).catch(() => null);
             const title = member ? `${member.user.tag} inventory` : (targetId === message.author.id ? 'Your inventory' : `Inventory of ${targetId}`);
@@ -240,7 +246,7 @@ module.exports = new Command({
             const embed = new MessageEmbed()
                 .setColor('#8F8F8F')
                 .setTitle(title)
-                .setDescription(lines.join('\n'));
+                .setDescription(lines.join('\n') + `\n\n**Total value:** ${totalValue.toLocaleString('en-US')} VND`);
 
             return message.channel.send({ embeds: [embed] });
         }
