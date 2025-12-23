@@ -108,7 +108,7 @@ client.on("ready", async () => {
 		fs.writeFileSync(lastPath, JSON.stringify(lastChanges, null, 4), 'utf8');
 		(async () => {
 			try {
-				const channelId = '944835286226051113';
+				const channelId = '1452356894827090013';
 				const channel = await client.channels.fetch(channelId).catch(() => null);
 				if (channel && channel.send) {
 					const description = Object.keys(marketData).length
