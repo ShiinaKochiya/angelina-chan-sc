@@ -8,3 +8,4 @@ src/data/wuwa/psd
 src/data/market.json
 src/data/market_last_hour.json
 src/data/marketInventory.json
+src/data/wallet.json

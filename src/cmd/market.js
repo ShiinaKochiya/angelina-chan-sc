@@ -4,10 +4,15 @@ const fs = require('fs');
 const path = require('path');
 const axios = require("axios");
 const { MessageEmbed } = require("discord.js");
-const { getMoney, updateMoneyCache } = require('../moneySchema.js');
+const { getWallet, setWallet } = require('../walletStore.js');
 const marketPath = path.join(__dirname, '../data/market.json');
 const inventoryPath = path.join(__dirname, '../data/marketInventory.json');
 const allowedRoles = ["939851547590934613"]
+
+function formatBigInt(n){
+    const s = n.toString();
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 module.exports = new Command({
     name: "market",
@@ -136,8 +141,7 @@ module.exports = new Command({
             if (price === 0n) return message.channel.send('Item price is 0, cannot buy.');
 
             const userId = message.author.id;
-            const money = await getMoney(userId);
-            const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
+            const wallet = getWallet(userId);
 
             let qtyBigInt;
             let total;
@@ -158,7 +162,7 @@ module.exports = new Command({
             if (wallet < total) return message.channel.send('Nghèo rồi ông cháu ei');
 
             const newWallet = wallet - total;
-            updateMoneyCache(userId, { wallet: newWallet });
+            setWallet(userId, newWallet);
 
             // update inventory
             let inventory = {};
@@ -169,7 +173,7 @@ module.exports = new Command({
             fs.writeFileSync(inventoryPath, JSON.stringify(inventory, null, 4), 'utf8');
 
             const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
-            return message.channel.send(`Mua thành công: **${qtyBigInt.toString()}x ${name}** - Tổng: ${total.toLocaleString('en-US')} VND. Ví hiện tại: ${newWallet.toLocaleString('en-US')} VND`);
+            return message.channel.send(`Mua thành công: **${qtyBigInt.toString()}x ${name}** - Tổng: ${formatBigInt(total)} VND. Ví hiện tại: ${formatBigInt(newWallet)} VND`);
         }
 
         // sell: a!market sell <name> <quantity>
@@ -200,24 +204,20 @@ module.exports = new Command({
             const price = BigInt(marketData[name]);
             const total = price * BigInt(qty);
 
-            // add money
-            const money = await getMoney(userId);
-            const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
-            const newWallet = wallet + total;
-            updateMoneyCache(userId, { wallet: newWallet });
+            const newWallet = getWallet(userId) + total;
+            setWallet(userId, newWallet);
 
-            // deduct inventory
             if (!inventory[userId]) inventory[userId] = {};
             inventory[userId][name] = have - qty;
             if (inventory[userId][name] <= 0) delete inventory[userId][name];
             fs.writeFileSync(inventoryPath, JSON.stringify(inventory, null, 4), 'utf8');
 
             const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
-            return message.channel.send(`Bán thành công: **${qty}x ${name}** - Tổng: ${total.toLocaleString('en-US')} VND. Ví hiện tại: ${newWallet.toLocaleString('en-US')} VND`);
+            return message.channel.send(`Bán thành công: **${qty}x ${name}** - Tổng: ${formatBigInt(total)} VND. Ví hiện tại: ${formatBigInt(newWallet)} VND`);
         }
 
         // a!market inventory [@user|userId]
-        if (action === 'inventory' || action === 'inv') {
+        if (action === 'inventory' || action === 'inv' || action === 'i') {
             const targetArg = args[2];
             let targetId = message.author.id;
             if (targetArg) {

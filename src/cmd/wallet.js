@@ -1,6 +1,11 @@
 const Command = require("../structures/Command.js");
 const config = require("../data/config.json")
-const { getMoney } = require("../moneySchema.js");
+const { getWallet } = require("../walletStore.js");
+
+function formatBigInt(n){
+    const s = n.toString()
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
 
 module.exports = new Command({
     name: "wallet",
@@ -8,8 +13,7 @@ module.exports = new Command({
 
     async run(message, args, client) {
         const userId = message.author.id;
-        const money = await getMoney(userId);
-        const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.chips || 0);
-        message.reply(`Ví của bạn đang có: ${wallet.toLocaleString('en-US')} VND`)
+        const wallet = getWallet(userId);
+        message.reply(`Ví của bạn đang có: ${formatBigInt(wallet)} VND`)
     }
 });

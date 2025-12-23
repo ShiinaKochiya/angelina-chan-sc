@@ -34,7 +34,7 @@ global.lockdown = false;
 You might wonder "wtf is this line doing here?"
 Well, nothing much. Anyway, if you wanna distribute the code somewhere else, just remember to credit me and my friend
 and for any hour wasted on this code place, increase the interger below to warn the other :)
-Time_wasted_couting_in_hour: 763*/
+Time_wasted_couting_in_hour: 766*/
 
 
 fs.readdirSync("./src/cmd")
@@ -108,7 +108,7 @@ client.on("ready", async () => {
 		fs.writeFileSync(lastPath, JSON.stringify(lastChanges, null, 4), 'utf8');
 		(async () => {
 			try {
-				const channelId = '1452356894827090013';
+				const channelId = '944835286226051113';
 				const channel = await client.channels.fetch(channelId).catch(() => null);
 				if (channel && channel.send) {
 					const description = Object.keys(marketData).length

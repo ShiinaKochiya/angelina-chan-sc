@@ -1,7 +1,7 @@
 const Command = require("../structures/Command.js");
 const config = require("../data/config.json")
 const redeemed = new Set();
-const { getMoney, updateMoneyCache } = require("../moneySchema.js");
+const { getWallet, addWallet } = require("../walletStore.js");
 
 module.exports = new Command({
     name: "anxin",
@@ -15,15 +15,17 @@ module.exports = new Command({
         } else {
 
             const userId = message.author.id;
-            const money = await getMoney(userId);
-            const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
+            const wallet = getWallet(userId);
 
-            const bonus = BigInt(500000);
-            const newWallet = wallet + bonus;
+            const bonus = 500000n;
+            const newWallet = addWallet(userId, bonus);
 
-            updateMoneyCache(userId, { wallet: newWallet });
+            function formatBigInt(n){
+                const s = n.toString();
+                return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
 
-            message.reply(`Đại đế Kamito thấy bạn thật đáng thương, nên Đại đế đã drop cho bạn ${bonus.toLocaleString('en-US')}\nHiện tại bạn có: ${newWallet.toLocaleString('en-US')} VND`);
+            message.reply(`Đại đế Kamito thấy bạn thật đáng thương, nên Đại đế đã drop cho bạn ${formatBigInt(bonus)}\nHiện tại bạn có: ${formatBigInt(newWallet)} VND`);
 
         redeemed.add(message.author.id);
         setTimeout(() => {

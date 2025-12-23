@@ -1,6 +1,11 @@
 const Command = require("../structures/Command.js");
 const config = require("../data/config.json")
-const { getMoney, updateMoneyCache } = require("../moneySchema.js");
+const { setWallet } = require("../walletStore.js");
+
+function formatBigInt(n){
+    const s = n.toString()
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
 
 module.exports = new Command({
     name: "setwallet",
@@ -26,11 +31,11 @@ module.exports = new Command({
         else if (/^\d+$/.test(targetArg)) targetId = targetArg;
         else return message.channel.send('Invalid user id or mention.');
 
-        updateMoneyCache(targetId, { wallet: amount });
+        setWallet(targetId, amount);
 
         const member = await message.guild?.members.fetch(targetId).catch(() => null);
         const name = member ? member.user.tag : targetId;
 
-        return message.channel.send(`Set wallet of **${name}** to ${amount.toLocaleString('en-US')} VND`);
+        return message.channel.send(`Set wallet of **${name}** to ${formatBigInt(amount)} VND`);
     }
 });
