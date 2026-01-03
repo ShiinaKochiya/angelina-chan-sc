@@ -4,13 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const axios = require("axios");
 const { MessageEmbed } = require("discord.js");
-const { getWallet, setWallet } = require('../walletStore.js');
+const { getMoney, updateMoneyCache } = require('../moneySchema.js');
 const marketPath = path.join(__dirname, '../data/market.json');
 const inventoryPath = path.join(__dirname, '../data/marketInventory.json');
 const allowedRoles = ["939851547590934613"]
 
 function formatBigInt(n){
-    const s = n.toString();
+    // Accept BigInt or Number-like values and return with commas
+    const s = n === undefined || n === null ? '0' : n.toString();
     return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -141,7 +142,8 @@ module.exports = new Command({
             if (price === 0n) return message.channel.send('Item price is 0, cannot buy.');
 
             const userId = message.author.id;
-            const wallet = getWallet(userId);
+            const money = await getMoney(userId);
+            const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
 
             let qtyBigInt;
             let total;
@@ -162,7 +164,7 @@ module.exports = new Command({
             if (wallet < total) return message.channel.send('Nghèo rồi ông cháu ei');
 
             const newWallet = wallet - total;
-            setWallet(userId, newWallet);
+            updateMoneyCache(userId, { wallet: newWallet });
 
             // update inventory
             let inventory = {};
@@ -173,7 +175,7 @@ module.exports = new Command({
             fs.writeFileSync(inventoryPath, JSON.stringify(inventory, null, 4), 'utf8');
 
             const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
-            return message.channel.send(`Mua thành công: **${qtyBigInt.toString()}x ${name}** - Tổng: ${formatBigInt(total)} VND. Ví hiện tại: ${formatBigInt(newWallet)} VND`);
+            return message.channel.send(`Mua thành công: **${qtyBigInt.toString()}x ${name}** - Tổng: ${total.toLocaleString('en-US')} VND. Ví hiện tại: ${newWallet.toLocaleString('en-US')} VND`);
         }
 
         // sell: a!market sell <name> <quantity>
@@ -204,9 +206,13 @@ module.exports = new Command({
             const price = BigInt(marketData[name]);
             const total = price * BigInt(qty);
 
-            const newWallet = getWallet(userId) + total;
-            setWallet(userId, newWallet);
+            // add money
+            const money = await getMoney(userId);
+            const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
+            const newWallet = wallet + total;
+            updateMoneyCache(userId, { wallet: newWallet });
 
+            // deduct inventory
             if (!inventory[userId]) inventory[userId] = {};
             inventory[userId][name] = have - qty;
             if (inventory[userId][name] <= 0) delete inventory[userId][name];
@@ -216,8 +222,57 @@ module.exports = new Command({
             return message.channel.send(`Bán thành công: **${qty}x ${name}** - Tổng: ${formatBigInt(total)} VND. Ví hiện tại: ${formatBigInt(newWallet)} VND`);
         }
 
+        // a!market leaderboard [count]  — show top users by inventory value
+        if (action === 'leaderboard' || action === 'lb') {
+            let inventory = {};
+            if (fs.existsSync(inventoryPath)) inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
+            const entries = Object.entries(inventory); // [ [userId, {item:qty}], ... ]
+            if (entries.length === 0) return message.channel.send('No inventory data available.');
+
+            const totals = [];
+            for (const [uid, items] of entries) {
+                let total = 0n;
+                for (const [item, qty] of Object.entries(items)) {
+                    const price = BigInt(marketData[item] || 0);
+                    // Normalize quantity: accept numbers, strings; ignore invalid/zero amounts
+                    let qtyNum = 0;
+                    if (typeof qty === 'bigint') qtyNum = Number(qty);
+                    else qtyNum = Math.floor(Number(qty) || 0);
+                    if (qtyNum <= 0) continue;
+                    total += price * BigInt(qtyNum);
+                }
+                totals.push({ userId: uid, total });
+            }
+
+            totals.sort((a, b) => (a.total > b.total ? -1 : a.total < b.total ? 1 : 0)); // descending
+
+            const countArg = args[2];
+            let limit = 10;
+            if (countArg && /^\d+$/.test(countArg)) {
+                limit = Math.max(1, Math.min(50, Number(countArg)));
+            }
+
+            const top = totals.slice(0, limit);
+            if (top.length === 0) return message.channel.send('No one has any inventory value.');
+
+            const lines = [];
+            for (let i = 0; i < top.length; i++) {
+                const t = top[i];
+                const member = await message.guild?.members.fetch(t.userId).catch(() => null);
+                const name = member ? member.user.tag : t.userId;
+                lines.push(`${i + 1}. ${name} — ${formatBigInt(t.total)} VND`);
+            }
+
+            const embed = new MessageEmbed()
+                .setColor('#8F8F8F')
+                .setTitle(`Inventory leaderboard (top ${top.length})`)
+                .setDescription(lines.join('\n'));
+
+            return message.channel.send({ embeds: [embed] });
+        }
+
         // a!market inventory [@user|userId]
-        if (action === 'inventory' || action === 'inv' || action === 'i') {
+        if (action === 'inventory' || action === 'inv') {
             const targetArg = args[2];
             let targetId = message.author.id;
             if (targetArg) {

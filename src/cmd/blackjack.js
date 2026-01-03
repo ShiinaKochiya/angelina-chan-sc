@@ -19,6 +19,10 @@ module.exports = new Command({
             updateMoneyCache(userId, { chips: updated });
             return updated;
         }
+        async function playerLost(){
+            await modifyChips(-40);
+            try{ collector.stop(); } catch(e){}
+        }
         const chips = await getChips();
         if (chips < 40n){
             return message.channel.send("Not enough bits! Cannot play");
@@ -89,7 +93,7 @@ module.exports = new Command({
                     var play = calTotal(val.slice(0,3));
                     if (play > 21){
                         message.channel.send(`You busted. Total value was ${play}`);
-                        playerLost();
+                        await playerLost();
                         collector.stop()
                     }
                     message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}, ${card[suit2][num2]}\nAngelina: ${card[s[1]][f[1]]}`);;
@@ -98,7 +102,7 @@ module.exports = new Command({
                     var play = calTotal(val.slice(0,4));
                     if (play > 21){
                         message.channel.send(`You busted. Total value was ${play}`);
-                        playerLost();
+                        await playerLost();
                         collector.stop()
                         }
                     message.channel.send(`Your cards: ${card[suit][num]}, ${card[suit1][num1]}, ${card[suit2][num2]}, ${card[suit3][num3]}\nAngelina: ${card[s[1]][f[1]]}`);;

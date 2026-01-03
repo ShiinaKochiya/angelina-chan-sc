@@ -7,7 +7,7 @@ module.exports = new Command({
 
     async run(message, args, client) {
 
-        message.channel.send(charlist.star5[5].res)
+        message.channel.send("Shit I dont know too")
         message.channel.send("https://tenor.com/view/touhou-fumo-reimu-hakurei-spin-sit-gif-18089362")
 
     }
