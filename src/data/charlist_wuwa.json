@@ -60,7 +60,8 @@
         "28": {"res": "Baizhi"},
         "29": {"res": "Danjin"},
         "30": {"res": "Taoqi"},
-        "31": {"res": "Youhu"}
+        "31": {"res": "Youhu"},
+        "32": {"res": "Buling"}
     },
     "star3": {
         "1": {"res": "Sword of Voyager"},
