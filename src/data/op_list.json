@@ -236,6 +236,18 @@
         },
         "80": {
             "opName": "**[★★★★★★]   Lemuen**"
+        },
+        "81": {
+            "opName": "**[★★★★★★]   Tragodia**"
+        },
+        "82": {
+            "opName": "**[★★★★★★]   Leizi the Thunderbringer**"
+        },
+        "83": {
+            "opName": "**[★★★★★★]   Haruka**"
+        },
+        "84": {
+            "opName": "**[★★★★★★]   Mantra**"
         }
     },
     "star5": {
@@ -553,6 +565,15 @@
         },
         "105": {
             "opName": "[★★★★★]       Gracebearer"
+        },
+        "106": {
+            "opName": "[★★★★★]       Tippi"
+        },
+        "107": {
+            "opName": "[★★★★★]       Record Keeper"
+        },
+        "108": {
+            "opName": "[★★★★★]       Matsukiri"
         }
     },
     "star4": {
