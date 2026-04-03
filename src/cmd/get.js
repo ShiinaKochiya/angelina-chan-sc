@@ -16,7 +16,6 @@ module.exports = new Command({
         const url = args[1];
 
         try {
-            // Validate the URL
             new URL(url);
         } catch (error) {
             return message.channel.send("Invalid URL provided. Please provide a valid URL starting with http:// or https://");
@@ -26,10 +25,9 @@ module.exports = new Command({
             const response = await axios.get(url);
             const data = response.data;
 
-            // If data is an object, stringify it; otherwise, send as is
             const content = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
 
-            // Discord has a 2000 character limit, so truncate if necessary
+            //tf u mean discord have a char limit
             const messageContent = content.length > 1900 ? content.substring(0, 1900) + "..." : content;
 
             message.channel.send(`\`\`\`\n${messageContent}\n\`\`\``);
