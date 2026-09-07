@@ -190,6 +190,10 @@ client.on("messageCreate", message => {
 		message.channel.send("https://media.discordapp.net/attachments/1499540915151175771/1546470137979211866/image.png?ex=6a9fe60c&is=6a9e948c&hm=d6e37040b9e50665752eeecf7a518398771085f6e5c38216fe7f3b13b02c5bb3&=&format=webp&quality=lossless")
 	}
 
+	if (message.content == "b!ngheotheohequychieu"){
+		message.channel.send("https://media.discordapp.net/attachments/1499540915151175771/1546512053886521456/Screenshot_20260907_202554_Discord.jpg?ex=6aa00d16&is=6a9ebb96&hm=d99887af7af88824280d6497de3e8265bac031e9702d454cdc22d8ede579a113&=&format=webp")
+	}
+
 	if (message.content == "b!deotin"){
 		message.channel.send(`<@${message.author.id}> đéo tin sự xàm l này`)
 		message.channel.send("https://klipy.com/gifs/deotin-deo-tin-1")
