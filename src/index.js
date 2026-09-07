@@ -186,6 +186,19 @@ client.on("messageCreate", message => {
 		message.channel.send(`<@${message.author.id}> chỉ biết ước`)
 	}
 
+	if (message.content == "b!ngheotheohequychieu"){
+		message.channel.send("https://media.discordapp.net/attachments/1499540915151175771/1546470137979211866/image.png?ex=6a9fe60c&is=6a9e948c&hm=d6e37040b9e50665752eeecf7a518398771085f6e5c38216fe7f3b13b02c5bb3&=&format=webp&quality=lossless")
+	}
+
+	if (message.content == "b!deotin"){
+		message.channel.send(`<@${message.author.id}> đéo tin sự xàm l này`)
+		message.channel.send("https://klipy.com/gifs/deotin-deo-tin-1")
+	}
+
+	if (message.content == "xin 50k" || message.content == "xin"){
+		message.channel.send(`https://cdn.discordapp.com/attachments/1071838413055086592/1352451359663853618/50k.gif`)
+	}
+
 	if(message.content.toLowerCase().includes("t1") && message.guild.id == "939851547590934610"){
 		message.channel.send(`"Đế vương phải có long ngai"\nMấy con gà thì biết cái gì`);
 	}
