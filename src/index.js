@@ -227,7 +227,7 @@ client.on("messageCreate", message => {
 
 	if (!command) var command = client.commands.find(cmd => cmd.alias == args[0]);
 
-	if (!command) return message.reply(`${args[0]} is not a valid command!`);
+	//if (!command) return message.reply(`${args[0]} is not a valid command!`);
 
 	if(global.lockdown == false){command.run(message, args, client);} else {
 		if (message.content == "a!lockdown disabled"){
