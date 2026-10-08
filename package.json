@@ -5,23 +5,32 @@
   "main": "src/index.js",
   "scripts": {
     "test": "node ./src/test.js",
-    "start": "node ./src/index.js"
+    "dev": "node ./src/index.js"
   },
   "author": "Sakura Kaslana",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^6.16.2",
     "axios": "^0.26.0",
     "cron": "^1.8.2",
     "discord.js": "^13.4.0-dev.1636502714.b256ae1",
+    "dotenv": "^17.2.2",
     "extract-urls": "^1.3.2",
     "is-image-url": "^1.1.8",
+    "merge-img": "^2.1.3",
     "moment": "^2.29.1",
+    "mongoose": "^8.18.1",
+    "node-cron": "^3.0.3",
+    "ollama": "^0.5.10",
+    "pokersolver": "^2.1.4",
     "sagiri": "^3.1.1",
-    "saucenao.js": "^1.0.5"
+    "saucenao.js": "^1.0.5",
+    "sharp": "^0.34.3",
+    "twit": "^2.2.11"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SakuraKaslana/angelina-chan-sc.git"
+    "url": "git+https://github.com/ShiinaKochiya/angelina-chan-sc.git"
   },
   "keywords": [
     "discord",
@@ -29,7 +38,12 @@
     "arknights"
   ],
   "bugs": {
-    "url": "https://github.com/SakuraKaslana/angelina-chan-sc/issues"
+    "url": "https://github.com/ShiinaKochiya/angelina-chan-sc/issues"
   },
-  "homepage": "https://github.com/SakuraKaslana/angelina-chan-sc#readme"
+  "homepage": "https://github.com/ShiinaKochiya/angelina-chan-sc#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "globals": "^16.5.0",
+    "prisma": "^6.16.2"
+  }
 }

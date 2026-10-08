@@ -1,0 +1,320 @@
+const Command = require("../structures/Command.js");
+const market = require('../data/market.json');
+const fs = require('fs');
+const path = require('path');
+const axios = require("axios");
+const { MessageEmbed } = require("discord.js");
+const { getMoney, updateMoneyCache } = require('../moneySchema.js');
+const marketPath = path.join(__dirname, '../data/market.json');
+const inventoryPath = path.join(__dirname, '../data/marketInventory.json');
+const allowedRoles = ["939851547590934613"]
+
+function formatBigInt(n){
+    // Accept BigInt or Number-like values and return with commas
+    const s = n === undefined || n === null ? '0' : n.toString();
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+module.exports = new Command({
+    name: "market",
+    description: "its le advent of code",
+
+    async run(message, args, client) {
+        const marketData = market;
+
+        if (args.length <= 1) {
+            const description = Object.keys(marketData).length
+                ? Object.entries(marketData)
+                      .sort((a, b) => Number(b[1]) - Number(a[1]))
+                      .map(([k, v]) => `${k}: ${Number(v).toLocaleString('en-US')} VND`)
+                      .join('\n')
+                : 'No market data available.';
+
+            const embed = new MessageEmbed()
+                .setColor('#8F8F8F')
+                .setTitle('Bảng giá thị trường Phoenix Frontiers')
+                .setURL('')
+                .setDescription(description);
+
+            return message.channel.send({ embeds: [embed] });
+        }
+
+        const action = args[1].toLowerCase();
+
+        // Show last interval fluctuations: a!market last
+        if (action === 'last' || action === 'fluct' || action === 'fluctuate' || action === 'fluctuations') {
+            const lastPath = path.join(__dirname, '../data/market_last_hour.json');
+            if (!fs.existsSync(lastPath)) return message.channel.send('Market chưa đổi đâu, chill');
+            const last = JSON.parse(fs.readFileSync(lastPath, 'utf8'));
+            const lines = Object.keys(last).map(k => {
+                const entry = last[k];
+                const p = Number(entry.percent);
+                const delta = Number(entry.delta);
+                if (p > 0) return `${k} đã tăng ${p}% (+${delta.toLocaleString('en-US')} VND)`;
+                if (p < 0) return `${k} bị giảm ${Math.abs(p)}% (-${Math.abs(delta).toLocaleString('en-US')} VND)`;
+                return `${k} không thay đổi`;
+            });
+            return message.channel.send( `Trong 5 phút vừa qua:\n` + lines.join('\n'));
+        }
+
+        if (action === 'add') {
+            if (!message.member || !message.member.roles || !message.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
+                return message.channel.send('You do not have permission to use this action.');
+            }
+            if (args.length < 3) return message.channel.send('Usage: `a!market add <name> [price]`');
+
+            let tokens = args.slice(2);
+            let price = 0;
+            const last = tokens[tokens.length - 1];
+            if (!isNaN(last)) {
+                price = Number(last);
+                tokens.pop();
+            }
+            const name = tokens.join(' ').trim();
+            if (!name) return message.channel.send('Invalid name.');
+
+            if (Object.prototype.hasOwnProperty.call(marketData, name)) {
+                return message.channel.send(`**${name}** already exists in market.`);
+            }
+
+            marketData[name] = price;
+
+            fs.writeFileSync(marketPath, JSON.stringify(marketData, null, 4), 'utf8');
+
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            console.log(`[${time} Database] Market added ${name}: ${price}`);
+            return message.channel.send(`Added **${name}**: ${price.toLocaleString('en-US')}VND`);
+        }
+
+        if (action === 'change' || action === 'set' || action === 'update') {
+            if (!message.member || !message.member.roles || !message.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
+                return message.channel.send('You do not have permission to use this action.');
+            }
+            if (args.length < 4) return message.channel.send('Usage: `a!market change <name> <price>`');
+
+            const priceToken = args[args.length - 1];
+            if (isNaN(priceToken)) return message.channel.send('Price must be a number.');
+            const price = Number(priceToken);
+            const name = args.slice(2, args.length - 1).join(' ').trim();
+
+            if (!Object.prototype.hasOwnProperty.call(marketData, name)) {
+                return message.channel.send(`**${name}** not found in market.`);
+            }
+
+            marketData[name] = price;
+
+            fs.writeFileSync(marketPath, JSON.stringify(marketData, null, 4), 'utf8');
+
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            console.log(`[${time} Database] Market changed ${name}: ${price}`);
+            return message.channel.send(`Updated **${name}**: ${price.toLocaleString('en-US')}VND`);
+        }
+
+        if (action === 'remove' || action === 'rm' || action === 'delete') {
+            if (!message.member || !message.member.roles || !message.member.roles.cache.some(role => allowedRoles.includes(role.id))) {
+                return message.channel.send('You do not have permission to use this action.');
+            }
+            if (args.length < 3) return message.channel.send('Usage: `a!market remove <name>`');
+
+            const name = args.slice(2).join(' ').trim();
+            if (!name) return message.channel.send('?');
+
+            if (!Object.prototype.hasOwnProperty.call(marketData, name)) {
+                return message.channel.send(`Làm gì có **${name}** đâu bro`);
+            }
+
+            const old = marketData[name];
+            delete marketData[name];
+            fs.writeFileSync(marketPath, JSON.stringify(marketData, null, 4), 'utf8');
+
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            return message.channel.send(`**${name}** đã bị chim cút`);
+        }
+
+        if (action === 'buy') {
+            if (args.length < 4) return message.channel.send('Usage: `a!market buy <name> <quantity|all>`');
+            const qtyToken = String(args[args.length - 1]).toLowerCase();
+            const name = args.slice(2, args.length - 1).join(' ').trim();
+
+            if (!Object.prototype.hasOwnProperty.call(marketData, name)) return message.channel.send(`**${name}** có trên thị trường đâu?`);
+
+            const price = BigInt(marketData[name]);
+            if (price === 0n) return message.channel.send('Item price is 0, cannot buy.');
+
+            const userId = message.author.id;
+            const money = await getMoney(userId);
+            const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
+
+            let qtyBigInt;
+            let total;
+
+            if (qtyToken === 'all') {
+                qtyBigInt = wallet / price; // how many can buy with full wallet
+                if (qtyBigInt <= 0n) return message.channel.send('Nghèo rồi ông cháu ei');
+                const maxQty = BigInt(Number.MAX_SAFE_INTEGER);
+                if (qtyBigInt > maxQty) qtyBigInt = maxQty;
+                total = price * qtyBigInt;
+            } else {
+                if (!/^[0-9]+$/.test(qtyToken)) return message.channel.send('Quantity must be a positive integer or `all`.');
+                const qty = Number(qtyToken);
+                qtyBigInt = BigInt(qty);
+                total = price * qtyBigInt;
+            }
+
+            if (wallet < total) return message.channel.send('Nghèo rồi ông cháu ei');
+
+            const newWallet = wallet - total;
+            updateMoneyCache(userId, { wallet: newWallet });
+
+            // update inventory
+            let inventory = {};
+            if (fs.existsSync(inventoryPath)) inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
+            if (!inventory[userId]) inventory[userId] = {};
+            const qtyNumber = qtyBigInt > 9007199254740991n ? 9007199254740991 : Number(qtyBigInt);
+            inventory[userId][name] = (inventory[userId][name] || 0) + qtyNumber;
+            fs.writeFileSync(inventoryPath, JSON.stringify(inventory, null, 4), 'utf8');
+
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            return message.channel.send(`Mua thành công: **${qtyBigInt.toString()}x ${name}** - Tổng: ${total.toLocaleString('en-US')} VND. Ví hiện tại: ${newWallet.toLocaleString('en-US')} VND`);
+        }
+
+        // sell: a!market sell <name> <quantity>
+        if (action === 'sell') {
+            if (args.length < 4) return message.channel.send('Usage: `a!market sell <name> <quantity|all>`');
+            const qtyTokenRaw = String(args[args.length - 1]);
+            const qtyToken = qtyTokenRaw.toLowerCase();
+            const name = args.slice(2, args.length - 1).join(' ').trim();
+
+            // load inventory
+            let inventory = {};
+            if (fs.existsSync(inventoryPath)) inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
+            const userId = message.author.id;
+            const userInv = inventory[userId] || {};
+            const have = userInv[name] || 0;
+
+            let qty;
+            if (qtyToken === 'all') {
+                qty = have;
+                if (qty <= 0) return message.channel.send(`Bạn không có **${name}** để bán.`);
+            } else {
+                if (!/^[0-9]+$/.test(qtyTokenRaw)) return message.channel.send('Quantity must be a positive integer or `all`.');
+                qty = Number(qtyTokenRaw);
+                if (have < qty) return message.channel.send(`Bạn không có đủ **${name}** để bán.`);
+            }
+
+            if (!Object.prototype.hasOwnProperty.call(marketData, name)) return message.channel.send(`**${name}** not found in market.`);
+            const price = BigInt(marketData[name]);
+            const total = price * BigInt(qty);
+
+            // add money
+            const money = await getMoney(userId);
+            const wallet = typeof money.wallet === 'bigint' ? money.wallet : BigInt(money.wallet || 0);
+            const newWallet = wallet + total;
+            updateMoneyCache(userId, { wallet: newWallet });
+
+            // deduct inventory
+            if (!inventory[userId]) inventory[userId] = {};
+            inventory[userId][name] = have - qty;
+            if (inventory[userId][name] <= 0) delete inventory[userId][name];
+            fs.writeFileSync(inventoryPath, JSON.stringify(inventory, null, 4), 'utf8');
+
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            return message.channel.send(`Bán thành công: **${qty}x ${name}** - Tổng: ${formatBigInt(total)} VND. Ví hiện tại: ${formatBigInt(newWallet)} VND`);
+        }
+
+        // a!market leaderboard [count]  — show top users by inventory value
+        if (action === 'leaderboard' || action === 'lb') {
+            let inventory = {};
+            if (fs.existsSync(inventoryPath)) inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
+            const entries = Object.entries(inventory); // [ [userId, {item:qty}], ... ]
+            if (entries.length === 0) return message.channel.send('No inventory data available.');
+
+            const totals = [];
+            for (const [uid, items] of entries) {
+                let total = 0n;
+                for (const [item, qty] of Object.entries(items)) {
+                    const price = BigInt(marketData[item] || 0);
+                    // Normalize quantity: accept numbers, strings; ignore invalid/zero amounts
+                    let qtyNum = 0;
+                    if (typeof qty === 'bigint') qtyNum = Number(qty);
+                    else qtyNum = Math.floor(Number(qty) || 0);
+                    if (qtyNum <= 0) continue;
+                    total += price * BigInt(qtyNum);
+                }
+                totals.push({ userId: uid, total });
+            }
+
+            totals.sort((a, b) => (a.total > b.total ? -1 : a.total < b.total ? 1 : 0)); // descending
+
+            const countArg = args[2];
+            let limit = 10;
+            if (countArg && /^\d+$/.test(countArg)) {
+                limit = Math.max(1, Math.min(50, Number(countArg)));
+            }
+
+            const top = totals.slice(0, limit);
+            if (top.length === 0) return message.channel.send('No one has any inventory value.');
+
+            const lines = [];
+            for (let i = 0; i < top.length; i++) {
+                const t = top[i];
+                const member = await message.guild?.members.fetch(t.userId).catch(() => null);
+                const name = member ? member.user.tag : t.userId;
+                lines.push(`${i + 1}. ${name} — ${formatBigInt(t.total)} VND`);
+            }
+
+            const embed = new MessageEmbed()
+                .setColor('#8F8F8F')
+                .setTitle(`Inventory leaderboard (top ${top.length})`)
+                .setDescription(lines.join('\n'));
+
+            return message.channel.send({ embeds: [embed] });
+        }
+
+        // a!market inventory [@user|userId]
+        if (action === 'inventory' || action === 'inv') {
+            const targetArg = args[2];
+            let targetId = message.author.id;
+            if (targetArg) {
+                const mentionMatch = targetArg.match(/^<@!?(\d+)>$/);
+                if (mentionMatch) targetId = mentionMatch[1];
+                else if (/^\d+$/.test(targetArg)) targetId = targetArg;
+            }
+
+            let inventory = {};
+            if (fs.existsSync(inventoryPath)) inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
+            const userInv = inventory[targetId] || {};
+
+            if (Object.keys(userInv).length === 0) {
+                if (targetId === message.author.id) return message.channel.send('Bạn chưa có món hàng nào trong kho.');
+                // try to fetch username
+                const member = await message.guild?.members.fetch(targetId).catch(() => null);
+                const name = member ? member.user.tag : targetId;
+                return message.channel.send(`${name} chưa có món hàng nào trong kho.`);
+            }
+
+            // compute per-item values and total value
+            let totalValue = 0n;
+            const lines = Object.entries(userInv)
+                .sort((a, b) => Number(b[1]) - Number(a[1]))
+                .map(([k, v]) => {
+                    const price = BigInt(marketData[k] || 0);
+                    const value = price * BigInt(v);
+                    totalValue += value;
+                    return `${k}: ${v} @ ${price.toLocaleString('en-US')} VND = ${value.toLocaleString('en-US')} VND`;
+                });
+
+            const member = await message.guild?.members.fetch(targetId).catch(() => null);
+            const title = member ? `${member.user.tag} inventory` : (targetId === message.author.id ? 'Your inventory' : `Inventory of ${targetId}`);
+
+            const embed = new MessageEmbed()
+                .setColor('#8F8F8F')
+                .setTitle(title)
+                .setDescription(lines.join('\n') + `\n\n**Total value:** ${totalValue.toLocaleString('en-US')} VND`);
+
+            return message.channel.send({ embeds: [embed] });
+        }
+
+        return message.channel.send('Invalid action. Use `add`, `change`, `remove`, `buy`, `sell` or `inventory`.');
+    }
+});

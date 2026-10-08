@@ -21,7 +21,7 @@ module.exports = new Command({
     var l2 = name2.length
     var name2 = name2.substr(0, l2-l)
 
-    console.log(message.author.username,"used a!ship", name2, name)
+    console.log(message.author.tag,"used a!ship", name2, name)
     if (name2 === 'Angelina'){
         if (name === 'Sakura Kaslana'){
          message.reply(`${name} x ${name2}: 100 %`)

@@ -1,4 +1,16 @@
 node_modules/
 src/data/config.json
+<<<<<<< HEAD
 
 src/data/config.json
+=======
+.env
+src/data/wuwa/out.png
+src/data/wuwa/output.png
+src/data/wuwa/psd
+/src/generated/prisma
+src/data/market.json
+src/data/market_last_hour.json
+src/data/marketInventory.json
+src/data/wallet.json
+>>>>>>> 841d235a4de7bfd7a5b26ec51ea26ec9fc2c066e

@@ -1,15 +1,5 @@
 # Angelina-chan
 
-> An update on the status of this project:
->
-> Shiina Kochiya is currently having problems with life as well as family issues.
->
-> For now, he will temporairly be on hiatus, until at least the later half of 2024.
->
-> During this time, I (giabao06) will lightly maintain this project and do some rewrites.
->
-> Message written on 2023-09-21 10:53 +07
-
 An Arknights operator stats and fun Discord bot by Sakura Kaslana and Giabao06 for some servers. Not intended for global deployment.
 
 Requires Node v17+ to run.
@@ -36,4 +26,10 @@ For more info on creating a bot and obtaining a bot token, go here: https://gith
 
 Thanks to giabao06 for the 24/7 hosting; Hyngwarus, Freelance and others for testing the bot; Akuba for helping me realize how dumb I am; And some guys on StackOverflow for helping me make it work
 
+## Notes
+- ~~As of 2022-04-13, Sakura Kaslana is temporary on hiatus so there will be no feature updates, only bugfixes.~~ he resurrected /s -giabao06
+
+- 2022-05-06, Sakura Kaslana is back on the project, but with limited activities. Seyun Sky is now a part of this too.
+
+- 2022-10-01: Sakura on hiatus again. No new features, only bugfixes.
 

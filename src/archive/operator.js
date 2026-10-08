@@ -1,8 +1,3 @@
-/*
-!!! LEGACY VERSION !!!
-Kept for historical purposes only!
-*/
-
 const { MessageFlags } = require("discord.js");
 const Command = require("../structures/Command.js");
 var op = require('../data/op.json');
