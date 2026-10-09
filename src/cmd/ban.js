@@ -31,7 +31,7 @@ module.exports = new Command({
                                                hour: "numeric",
                                                minute: "numeric",
                                                second: "numeric"})
-      console.log("[",time,"]",message.author.tag,`banned ${mentionedMember} for ${reason}`);
+      console.log("[",time,"]",message.author.username,`banned ${mentionedMember} for ${reason}`);
 
     } catch (err) {
       console.log("[",time,"]",err);

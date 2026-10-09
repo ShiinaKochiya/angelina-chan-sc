@@ -12,7 +12,7 @@ module.exports = new Command({
                                                  hour: "numeric",
                                                  minute: "numeric",
                                                  second: "numeric"})
-        console.log("[",time,"]",message.author.tag,"launched embed");
+        console.log("[",time,"]",message.author.username,"launched embed");
         const embed = new MessageEmbed()
     .setDescription(`ur avatar`)
     .setImage(message.author.displayAvatarURL())

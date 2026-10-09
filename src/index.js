@@ -17,8 +17,9 @@ const cron = require('cron');
 const fs = require("fs");
 const path = require('path');
 
-const axios = require('axios');
+const { updatePetrolPrice } = require("./lib/petrol.js")
 
+const axios = require('axios');
 require('dotenv').config();
 //testing with mongo
 
@@ -70,7 +71,16 @@ client.on("ready", async () => {
 	})
 	console.log(`[${time} INFO] Caching complete. Latest is #${latestxkcd.data.num}`);
 });
-	cachexkcd.start();
+    cachexkcd.start();
+
+  // initialize fuel data
+    if (!fs.existsSync("./src/data/petrolimex.json")) {
+      await updatePetrolPrice()
+  }
+  // fuel price usually updates at 1500 +0700 every day
+  // although in extraordinary circumstances an update cmd must be done.
+  var updatePetrolCronjob = new cron.CronJob("0 15 * * * *", updatePetrolPrice)
+    updatePetrolCronjob.start()
 
 	var marketUpdater = new cron.CronJob('0 */5 * * * *', function(){
 		const marketModulePath = path.join(__dirname, 'data', 'market.json');
@@ -161,7 +171,7 @@ client.on('messageDelete', function(message, channel){
 	client.snipes.set(message.channel.id, {
 		content: message.content,
 		author: message.author,
-		image: message.attachments.first() ? message.attachments.first().proxyURL : null 
+		image: message.attachments.first() ? message.attachments.first().proxyURL : null
 	})
 })
 
@@ -169,7 +179,7 @@ client.on("messageCreate", message => {
 	//console.log(message.author.tag,"in ",message.channel.name,`: `, message.content);
 
 	if (message.author.bot) return;
-	
+
 	if (message.content == "b!kho"){
 		message.channel.send(`<@${message.author.id}> thấy ca này khó`)
 	}
@@ -215,8 +225,8 @@ client.on("messageCreate", message => {
 
 	//if (!message.content.toLowerCase().startsWith(config.prefix)) return;
 
-	
-	
+
+
 	if(message.content.slice(0, config.prefix.length).toLowerCase() !== config.prefix) return;
 
 	if (message.author.bot) return;
@@ -246,5 +256,3 @@ client.on("messageCreate", message => {
 
 
 client.login(config.token);
-
-

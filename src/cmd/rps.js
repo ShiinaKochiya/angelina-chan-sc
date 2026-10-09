@@ -72,7 +72,7 @@ module.exports = new Command ({
                     hour: "numeric",
                     minute: "numeric",
                     second: "numeric"})
-                console.log("[",time,"]",message.author.tag,`played a game of rocks, papers, scissors. ${message.author.tag} played ${UserChoiceRPS}, while Angie played ${BotChoice}`);
+                console.log("[",time,"]",message.author.username,`played a game of rocks, papers, scissors. ${message.author.tag} played ${UserChoiceRPS}, while Angie played ${BotChoice}`);
             } else {
                     const filter = m => m.author.id === message.author.id;
      message.reply('What is your choice? Reply with Rock (R), Paper (P) or Scissor(S)', { fetchReply: true })

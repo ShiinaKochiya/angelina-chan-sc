@@ -10,7 +10,7 @@ module.exports = new Command({
                                                  hour: "numeric",
                                                  minute: "numeric",
                                                  second: "numeric"})
-        console.log("[",time,"]",message.author.tag,"used challenge");
+        console.log("[",time,"]",message.author.username,"used challenge");
         var banner = "standard"
         var i = 0
         let op = ['0']

@@ -14,6 +14,6 @@ module.exports = new Command({
                                                    hour: "numeric",
                                                    minute: "numeric",
                                                    second: "numeric"})
-          console.log("[",time,"]",message.author.tag,"used seggs");
+          console.log("[",time,"]",message.author.username,"used seggs");
     }
 });

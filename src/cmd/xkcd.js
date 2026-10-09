@@ -47,6 +47,6 @@ module.exports = new Command({
             hour: "numeric",
             minute: "numeric",
             second: "numeric"})
-        console.log(`[${time}] ${message.author.tag} wanted to look at some xkcd`);    
+        console.log(`[${time}] ${message.author.username} wanted to look at some xkcd`);    
     }
 })

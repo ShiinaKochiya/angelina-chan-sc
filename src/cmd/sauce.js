@@ -15,7 +15,7 @@ module.exports = new Command({
                 hour: "numeric",
                 minute: "numeric",
                 second: "numeric"})
-        console.log("[",time,"]", message.author.tag,"used sauce")
+        console.log("[",time,"]", message.author.username,"used sauce")
         if (message.attachments.size > 0) {
         message.attachments.forEach(async Attachment => {
             try {
