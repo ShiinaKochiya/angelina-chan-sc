@@ -41,7 +41,7 @@ module.exports = new Command({
         reply += rows.map(formatRow).join("\n");
         reply += `\n\`\`\`\n`;
         const lastModified = new Date(petrolData[0].LastModified);
-        reply = reply + `-# Nguồn: Petrolimex (<https://petrolimex.com.vn>) - Cập nhật: ${lastModified.toLocaleTimeString("vi-VN", {hour: '2-digit', minute: '2-digit'})}, ngày ${lastModified.toLocaleDateString("vi-VN")}\n`
+        reply = reply + `-# Nguồn: [Petrolimex](<https://petrolimex.com.vn>) - Cập nhật: ${lastModified.toLocaleTimeString("vi-VN", {hour: '2-digit', minute: '2-digit'})}, ngày ${lastModified.toLocaleDateString("vi-VN")}\n`
         message.reply(reply);
     }
 });
