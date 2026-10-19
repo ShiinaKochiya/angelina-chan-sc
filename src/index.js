@@ -167,12 +167,36 @@ client.on("ready", async () => {
     client.channels.cache.get('907265493600206950').send(`Welcome ${mn}`);
 });*/
 client.snipes = new Map()
-client.on('messageDelete', function(message, channel){
+client.on('messageDelete', async function(message){
 	client.snipes.set(message.channel.id, {
 		content: message.content,
 		author: message.author,
 		image: message.attachments.first() ? message.attachments.first().proxyURL : null
 	})
+
+	if (message.author?.id !== '685076590811414572') return;
+
+	const deletedAt = new Date();
+	const logChannel = await client.channels.fetch('1561746496263688394').catch(error => {
+		console.error('Failed to fetch deleted message log channel', error);
+		return null;
+	});
+	if (!logChannel || !logChannel.isText()) {
+		console.error('Deleted message log channel is unavailable or not a text channel');
+		return;
+	}
+
+	const embed = new MessageEmbed()
+		.setTitle('Message deleted')
+		.addField('Author', `${message.author.username}\n${message.author.id}`)
+		.addField('Time sent', message.createdAt.toISOString())
+		.addField('Time deleted', deletedAt.toISOString())
+		.setDescription(message.content || '[No message content]')
+		.setTimestamp(deletedAt);
+
+	await logChannel.send({ embeds: [embed] }).catch(error => {
+		console.error('Failed to log deleted message', error);
+	});
 })
 
 client.on("messageCreate", message => {
