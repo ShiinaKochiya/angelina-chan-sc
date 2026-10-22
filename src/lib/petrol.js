@@ -28,12 +28,7 @@ export async function updatePetrolPrice() {
         Zone2Price,
         LastModified
       }));
-    fs.writeFile("./src/data/petrolimex.json", JSON.stringify(petrolData), err => {
-      if (err) {
-        console.log("ERROR: Cannot write to file! Throwing error below");
-        throw(err);
-      }
-    })
+    await fs.promises.writeFile("./src/data/petrolimex.json", JSON.stringify(petrolData));
 
     console.log(`Caching fuelprice complete.`);
 }

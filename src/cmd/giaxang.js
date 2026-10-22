@@ -1,19 +1,33 @@
 const Command = require("../structures/Command.js");
 const { updatePetrolPrice } = require("../lib/petrol.js");
-const petrolData = require("../data/petrolimex.json");
+const fs = require("fs");
+const path = require("path");
+
+const petrolDataPath = path.join(__dirname, "..", "data", "petrolimex.json");
 
 module.exports = new Command({
-    name: "giaxang",
-    description: "xem gia xang",
+  name: "giaxang",
+  description: "xem gia xang",
 
-    async run(message, args, client) {
-        if (message.author.bot) return;
-        console.log(message.author.tag, "used a!giaxang");
+  async run(message, args, client) {
+    if (message.author.bot) return;
+    console.log(message.author.tag, "used a!giaxang");
 
-        if (args[1] == "update") {
-          updatePetrolPrice()
-        }
+    let reply = "";
 
+    if (args[1] == "update" || !fs.existsSync(petrolDataPath)) {
+      await updatePetrolPrice();
+    }
+
+    const petrolData = JSON.parse(
+      fs.readFileSync(petrolDataPath, "utf8")
+    );
+
+    const lastModified = new Date(petrolData[0].LastModified);
+
+    if (args[1] == "update") {
+      reply += `Đã làm mới dữ liệu giá xăng dầu. Dữ liệu mới cập nhật lúc **${lastModified.toLocaleTimeString("vi-VN", {hour: '2-digit', minute: '2-digit'})}, ngày ${lastModified.toLocaleDateString("vi-VN")}.\n\n**`
+    }
         // too lazy to filter out the data, let's just show everything first
         const headers = ["Loại xăng/dầu", "Giá vùng 1", "Giá vùng 2"];
         const rows = petrolData.map((data) => [
@@ -37,10 +51,10 @@ module.exports = new Command({
                 .join(" | ")} |`;
         const separator = "-".repeat(widths.reduce((total, width) => total + width, 0) + 10);
 
-        let reply = `\`\`\`\n${formatRow(headers)}\n${separator}\n`;
+        reply += `\`\`\`\n${formatRow(headers)}\n${separator}\n`;
         reply += rows.map(formatRow).join("\n");
         reply += `\n\`\`\`\n`;
-        const lastModified = new Date(petrolData[0].LastModified);
+
         reply = reply + `-# Nguồn: [Petrolimex](<https://petrolimex.com.vn>) - Cập nhật: ${lastModified.toLocaleTimeString("vi-VN", {hour: '2-digit', minute: '2-digit'})}, ngày ${lastModified.toLocaleDateString("vi-VN")}\n`
         message.reply(reply);
     }
