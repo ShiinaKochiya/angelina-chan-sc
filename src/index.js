@@ -79,7 +79,7 @@ client.on("ready", async () => {
   }
   // fuel price usually updates at 1500 +0700 every day
   // although in extraordinary circumstances an update cmd must be done.
-  var updatePetrolCronjob = new cron.CronJob("0 15 * * * *", updatePetrolPrice)
+  var updatePetrolCronjob = new cron.CronJob("0 0 15 * * *", updatePetrolPrice)
     updatePetrolCronjob.start()
 
 	var marketUpdater = new cron.CronJob('0 */5 * * * *', function(){
