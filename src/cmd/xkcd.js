@@ -3,7 +3,10 @@
 const Command = require("../structures/Command");
 const {MessageEmbed} = require('discord.js');
 const axios = require(`axios`);
-const latest=require ("../data/xkcd.json");
+const fs = require("fs");
+
+
+const xkcdPath = path.join(__dirname, "..", "data", "xkcd.json");
 
 module.exports = new Command({
     name: "xkcd",
@@ -11,7 +14,8 @@ module.exports = new Command({
 
     async run(message, args, client){
         if (message.author.bot) return;
-        var type=args.slice(1).join(" "); 
+      var type = args.slice(1).join(" ");
+      const latest = JSON.parse(fs.readFileSync(xkcdPath))
         if (type === '' || type === 'latest') {
             const embed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -47,6 +51,6 @@ module.exports = new Command({
             hour: "numeric",
             minute: "numeric",
             second: "numeric"})
-        console.log(`[${time}] ${message.author.username} wanted to look at some xkcd`);    
+        console.log(`[${time}] ${message.author.username} wanted to look at some xkcd`);
     }
 })
