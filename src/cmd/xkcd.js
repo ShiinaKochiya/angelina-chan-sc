@@ -4,6 +4,7 @@ const Command = require("../structures/Command");
 const {MessageEmbed} = require('discord.js');
 const axios = require(`axios`);
 const fs = require("fs");
+const path = require("path");
 
 
 const xkcdPath = path.join(__dirname, "..", "data", "xkcd.json");

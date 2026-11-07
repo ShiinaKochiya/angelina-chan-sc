@@ -16,6 +16,7 @@ const cron = require('cron');
 
 const fs = require("fs");
 const path = require('path');
+const gamesPath = path.join(__dirname, "data", "games.json");
 
 const { updatePetrolPrice } = require("./lib/petrol.js")
 
@@ -199,7 +200,7 @@ client.on('messageDelete', async function(message){
 	});
 })
 
-client.on("messageCreate", message => {
+client.on("messageCreate", async message => {
 	//console.log(message.author.tag,"in ",message.channel.name,`: `, message.content);
 
 	if (message.author.bot) return;
@@ -250,6 +251,29 @@ client.on("messageCreate", message => {
 	//if (!message.content.toLowerCase().startsWith(config.prefix)) return;
 
 
+	if (message.content.toLowerCase().includes("hôm nay chơi gì")){
+		const curMes = await message.reply("Để Angelina chọn nha")
+		setTimeout(() => {curMes.edit("Để Angelina chọn nha.")},1000)
+		setTimeout(() => {curMes.edit("Để Angelina chọn nha..")},1500)
+		setTimeout(() => {curMes.edit("Để Angelina chọn nha...")},2000)
+		setTimeout(() => {curMes.edit("Để Angelina chọn nha....")},2500)
+		setTimeout(() => {
+			let games;
+			try {
+				games = JSON.parse(fs.readFileSync(gamesPath, "utf8"));
+			} catch (err) {
+				console.error("Failed to read games.json:", err);
+				return curMes.edit("Không đọc được danh sách game nha.");
+			}
+
+			if (!Array.isArray(games) || games.length === 0) {
+				return curMes.edit("Chưa có game nào trong danh sách nha.");
+			}
+
+			const randomGame = games[Math.floor(Math.random() * games.length)];
+			curMes.edit(`Hôm nay chơi ${randomGame} nha!`);
+		}, 3000);
+	}
 
 	if(message.content.slice(0, config.prefix.length).toLowerCase() !== config.prefix) return;
 
