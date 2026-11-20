@@ -187,6 +187,9 @@ client.on('messageDelete', async function(message){
 		return;
 	}
 
+	const attachmentLinks = message.attachments.map(attachment =>
+		`[${attachment.name || 'Attachment'}](${attachment.url})`
+	);
 	const embed = new MessageEmbed()
 		.setTitle('Message deleted')
 		.addField('Author', `${message.author.username}\n${message.author.id}`)
@@ -194,6 +197,13 @@ client.on('messageDelete', async function(message){
 		.addField('Time deleted', deletedAt.toISOString())
 		.setDescription(message.content || '[No message content]')
 		.setTimestamp(deletedAt);
+
+	for (let index = 0; index < attachmentLinks.length; index += 10) {
+		embed.addField(
+			'Attachments',
+			attachmentLinks.slice(index, index + 10).join('\n').slice(0, 1024)
+		);
+ 	}
 
 	await logChannel.send({ embeds: [embed] }).catch(error => {
 		console.error('Failed to log deleted message', error);
